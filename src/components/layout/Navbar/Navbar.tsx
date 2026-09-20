@@ -12,11 +12,11 @@ import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const { isIntroComplete, introProgress } = useIntro();
+  const { isIntroComplete, isNavbarVisible } = useIntro();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const showNavbar = pathname !== '/' || isIntroComplete || introProgress >= 0.94;
+  const showNavbar = pathname !== '/' || isIntroComplete || isNavbarVisible;
 
   useEffect(() => {
     const handleScroll = () => {

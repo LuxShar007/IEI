@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 interface IntroContextValue {
   isIntroActive: boolean;
   isIntroComplete: boolean;
+  isNavbarVisible: boolean;
   introProgress: number;
   setIntroProgress: (progress: number) => void;
   skipIntro: () => void;
@@ -14,6 +15,7 @@ interface IntroContextValue {
 const IntroContext = createContext<IntroContextValue>({
   isIntroActive: false,
   isIntroComplete: true,
+  isNavbarVisible: true,
   introProgress: 1,
   setIntroProgress: () => {},
   skipIntro: () => {},
@@ -27,47 +29,87 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const [isIntroActive, setIsIntroActive] = useState(isHome);
   const [isIntroComplete, setIsIntroComplete] = useState(!isHome);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(!isHome);
   const [introProgress, setIntroProgressState] = useState(isHome ? 0 : 1);
+
+  // Store continuous progress in ref for instant non-render access
+  const progressRef = React.useRef(isHome ? 0 : 1);
+  const activeRef = React.useRef(isHome);
+  const completeRef = React.useRef(!isHome);
+  const navbarRef = React.useRef(!isHome);
 
   // Reset when navigating away or back to home
   useEffect(() => {
     if (!isHome) {
+      activeRef.current = false;
+      completeRef.current = true;
+      navbarRef.current = true;
+      progressRef.current = 1;
       setIsIntroActive(false);
       setIsIntroComplete(true);
+      setIsNavbarVisible(true);
       setIntroProgressState(1);
     } else {
       if (typeof window !== 'undefined' && window.scrollY > 100) {
         const introThreshold = window.innerHeight * 7.2;
-        if (window.scrollY >= introThreshold) {
-          setIsIntroActive(false);
-          setIsIntroComplete(true);
-          setIntroProgressState(1);
-        } else {
-          setIsIntroActive(true);
-          setIsIntroComplete(false);
-        }
+        const pastIntro = window.scrollY >= introThreshold;
+        activeRef.current = !pastIntro;
+        completeRef.current = pastIntro;
+        navbarRef.current = pastIntro;
+        progressRef.current = pastIntro ? 1 : 0;
+        setIsIntroActive(!pastIntro);
+        setIsIntroComplete(pastIntro);
+        setIsNavbarVisible(pastIntro);
+        setIntroProgressState(pastIntro ? 1 : 0);
       } else {
+        activeRef.current = true;
+        completeRef.current = false;
+        navbarRef.current = false;
+        progressRef.current = 0;
         setIsIntroActive(true);
         setIsIntroComplete(false);
+        setIsNavbarVisible(false);
         setIntroProgressState(0);
       }
     }
   }, [isHome]);
 
+  // High-performance threshold-only state updater:
+  // ZERO re-renders during continuous scrolling. Only updates React state when
+  // crossing key discrete thresholds (0.94 for navbar, 0.98 for completion, 0.99 for release).
   const setIntroProgress = useCallback((progress: number) => {
-    setIntroProgressState(progress);
-    const complete = progress >= 0.98;
-    setIsIntroComplete(complete);
-    setIsIntroActive(progress < 0.99);
+    progressRef.current = progress;
+
+    const newActive = progress < 0.99;
+    const newComplete = progress >= 0.98;
+    const newNavbar = progress >= 0.94;
+
+    if (newActive !== activeRef.current) {
+      activeRef.current = newActive;
+      setIsIntroActive(newActive);
+    }
+    if (newComplete !== completeRef.current) {
+      completeRef.current = newComplete;
+      setIsIntroComplete(newComplete);
+      setIntroProgressState(newComplete ? 1 : 0);
+    }
+    if (newNavbar !== navbarRef.current) {
+      navbarRef.current = newNavbar;
+      setIsNavbarVisible(newNavbar);
+    }
   }, []);
 
   const skipIntro = useCallback(() => {
     if (typeof window !== 'undefined') {
-      // Smoothly scroll to the release position of the intro track (7.5 × innerHeight)
       const targetScroll = window.innerHeight * 7.5;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      activeRef.current = false;
+      completeRef.current = true;
+      navbarRef.current = true;
+      progressRef.current = 1;
       setIsIntroComplete(true);
       setIsIntroActive(false);
+      setIsNavbarVisible(true);
       setIntroProgressState(1);
     }
   }, []);
@@ -77,6 +119,7 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       value={{
         isIntroActive,
         isIntroComplete,
+        isNavbarVisible,
         introProgress,
         setIntroProgress,
         skipIntro,

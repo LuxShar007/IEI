@@ -36,12 +36,12 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ mode = 'auto' }) => {
   const { theme } = useTheme();
-  const { isIntroActive, introProgress } = useIntro();
+  const { isIntroActive } = useIntro();
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
   // In auto mode, behave as backdrop when intro is active, normal when released
-  const isBackdrop = mode === 'backdrop' || (mode === 'auto' && isIntroActive && introProgress < 0.98);
+  const isBackdrop = mode === 'backdrop' || (mode === 'auto' && isIntroActive);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
