@@ -12,14 +12,14 @@
   overflow: hidden;
 }
 
-.svgCanvas {
+.draftingRings {
   position: absolute;
-  width: min(90vw, 560px);
-  height: min(90vw, 560px);
-  max-width: 560px;
-  max-height: 560px;
+  width: 316px;
+  height: 316px;
+  pointer-events: none;
   overflow: visible;
 }
+
 
 /* Background Technical Blueprint Grid */
 .blueprintGrid {

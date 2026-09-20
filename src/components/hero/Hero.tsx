@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '@/lib/theme/ThemeContext';
+import { useIntro } from '@/lib/intro/IntroContext';
 import { HeroVisualBlueprint } from './HeroVisualBlueprint';
 import { HeroVisualGuardian } from './HeroVisualGuardian';
 import styles from './Hero.module.css';
@@ -31,6 +32,7 @@ const fadeVariant = {
 
 export const Hero: React.FC = () => {
   const { theme } = useTheme();
+  const { isIntroActive } = useIntro();
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -39,10 +41,23 @@ export const Hero: React.FC = () => {
     offset: ['start start', 'end start'],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, shouldReduceMotion ? 1 : 0]);
-  const visualY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 120]);
-  const visualOpacity = useTransform(scrollYProgress, [0, 0.85], [1, shouldReduceMotion ? 1 : 0.1]);
+  // Decoupled: remain in pristine resting state during intro!
+  const textY = useTransform(scrollYProgress, (p) => {
+    if (isIntroActive || shouldReduceMotion) return 0;
+    return p * 80;
+  });
+  const textOpacity = useTransform(scrollYProgress, (p) => {
+    if (isIntroActive || shouldReduceMotion) return 1;
+    return p >= 0.7 ? 0 : 1 - (p / 0.7);
+  });
+  const visualY = useTransform(scrollYProgress, (p) => {
+    if (isIntroActive || shouldReduceMotion) return 0;
+    return p * 120;
+  });
+  const visualOpacity = useTransform(scrollYProgress, (p) => {
+    if (isIntroActive || shouldReduceMotion) return 1;
+    return p >= 0.85 ? 0.1 : 1 - ((p / 0.85) * 0.9);
+  });
 
   return (
     <section ref={sectionRef} className={styles.hero} aria-label="IEI SIES GST — Hero">

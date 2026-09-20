@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion, MotionValue, useTransform } from 'framer-motion';
+import { EMBLEM_DATA } from './emblemData';
 import styles from './IEI3DStack.module.css';
 
 interface IEI3DStackProps {
@@ -14,57 +14,60 @@ export const IEI3DStack: React.FC<IEI3DStackProps> = ({
   progress,
   reducedMotion = false,
 }) => {
-  // Overall visibility of this stage: 0.20 -> 0.58
+  // STAGE 03 & 04 & 05: 0.26 -> 0.58
+  // 0.26 -> 0.30: Fade in from 2D vector
+  // 0.28 -> 0.38: Layer separation along Z-axis & subtle perspective tilt
+  // 0.38 -> 0.48: Convergence into unified 3D emblem with edge highlight & depth
+  // 0.48 -> 0.58: Shift upward gently as Live Helvetica text arrives below
   const stackOpacity = useTransform(
     progress,
-    [0.20, 0.24, 0.50, 0.58],
+    [0.26, 0.30, 0.52, 0.58],
     [0, 1, 1, 0]
   );
 
-  // Subtle 3D perspective tilts: tilts to showcase depth (0.24-0.34), then squares up (0.34-0.42)
+  // Restrained physical rotation showcasing dimensional depth
   const rotateX = useTransform(
     progress,
-    [0.20, 0.28, 0.38, 0.44],
-    [0, reducedMotion ? 0 : 12, 0, 0]
+    [0.26, 0.34, 0.44, 0.50],
+    [0, reducedMotion ? 0 : 10, 0, 0]
   );
   const rotateY = useTransform(
     progress,
-    [0.20, 0.28, 0.38, 0.44],
-    [0, reducedMotion ? 0 : -8, 0, 0]
+    [0.26, 0.34, 0.44, 0.50],
+    [0, reducedMotion ? 0 : -6, 0, 0]
   );
 
-  // Z-Axis Layer Separation & Convergence (Stage 03 -> Stage 04)
-  // At 0.28, peak separation; by 0.38, fully converged into a unified 3D object
-  const zL1 = useTransform(progress, [0.22, 0.29, 0.38], [0, reducedMotion ? 0 : -55, 0]);
-  const zL2 = useTransform(progress, [0.22, 0.29, 0.38], [0, reducedMotion ? 0 : -25, 0]);
-  const zL4 = useTransform(progress, [0.22, 0.29, 0.38], [0, reducedMotion ? 0 : 28, 0]);
-  const zL5 = useTransform(progress, [0.22, 0.29, 0.38], [0, reducedMotion ? 0 : 56, 0]);
-  const zL6 = useTransform(progress, [0.22, 0.29, 0.38], [0, reducedMotion ? 0 : 85, 0]);
+  // True Z-axis physical layer separation & convergence
+  // Peak separation at 0.34, smoothly converging into unified 3D object by 0.44
+  const zL1 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : -45, 0]);
+  const zL2 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : -20, 0]);
+  const zL4 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 25, 0]);
+  const zL5 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 48, 0]);
+  const zL6 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 70, 0]);
 
-  // Layer opacity during expansion
-  const secondaryLayerOpacity = useTransform(
+  const layerSeparationAlpha = useTransform(
     progress,
-    [0.22, 0.26, 0.36, 0.42],
-    [0, 1, 1, 0]
+    [0.28, 0.32, 0.42, 0.48],
+    [0, 0.85, 0.85, 0]
   );
 
-  // Converged 3D emblem shadow appearance
+  // Soft ambient depth shadow
   const shadowOpacity = useTransform(
     progress,
-    [0.34, 0.40, 0.50, 0.58],
-    [0, 1, 1, 0]
+    [0.34, 0.42, 0.52, 0.58],
+    [0, 0.6, 0.6, 0]
   );
 
-  // Y-shift as text arrives beneath it: moves gently upward to frame the composition
+  // Upward elevation as Stage 06 Live Typography enters below
   const stackY = useTransform(
     progress,
-    [0.42, 0.50, 0.58],
-    [0, -50, -80]
+    [0.44, 0.52, 0.58],
+    [0, -45, -75]
   );
 
   const stackScale = useTransform(
     progress,
-    [0.20, 0.28, 0.44, 0.54],
+    [0.26, 0.34, 0.44, 0.54],
     [0.96, 1, 1, 0.88]
   );
 
@@ -85,76 +88,110 @@ export const IEI3DStack: React.FC<IEI3DStackProps> = ({
           rotateY,
         }}
       >
-        {/* Converged ambient shadow */}
+        {/* Converged ambient depth shadow */}
         <motion.div
           className={styles.convergedShadow}
           style={{ opacity: shadowOpacity }}
         />
 
-        {/* LAYER 01 — Base Datum Plane (Z = -55px) */}
+        {/* ====================================================================
+            LAYER 01 — Base Datum Plane (Z = -45px to 0)
+            ==================================================================== */}
         <motion.div
           className={`${styles.layer} ${styles.layer1}`}
           style={{
             z: zL1,
-            opacity: secondaryLayerOpacity,
+            opacity: layerSeparationAlpha,
           }}
         >
-          <span className={styles.layerBadge}>Z-BASE // 01</span>
+          <svg viewBox="0 0 316 316" className={styles.layerSvg}>
+            {EMBLEM_DATA['outer-border']?.map((p, i) => (
+              <path key={`l1-${i}`} d={p.d} transform={p.transform} fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
+            ))}
+          </svg>
         </motion.div>
 
-        {/* LAYER 02 — Outer Cogwheel Mechanism Ring (Z = -25px) */}
+        {/* ====================================================================
+            LAYER 02 — Outer Rope Border Ring (Z = -20px to 0)
+            ==================================================================== */}
         <motion.div
           className={`${styles.layer} ${styles.layer2}`}
           style={{
             z: zL2,
-            opacity: secondaryLayerOpacity,
+            opacity: layerSeparationAlpha,
           }}
         >
-          <span className={styles.layerBadge}>GEAR // 02</span>
+          <svg viewBox="0 0 316 316" className={styles.layerSvg}>
+            {EMBLEM_DATA['rope-border']?.map((p, i) => (
+              <path key={`l2-${i}`} d={p.d} transform={p.transform} fill="currentColor" opacity="0.4" />
+            ))}
+          </svg>
         </motion.div>
 
-        {/* LAYER 03 — Official Emblem Foundation (Central Primary: Z = 0px) */}
+        {/* ====================================================================
+            LAYER 03 — Core Vector Foundation (Datum Baseline Z = 0)
+            ==================================================================== */}
         <div className={`${styles.layer} ${styles.layer3}`}>
-          <Image
-            src="/assets/brand/iei-emblem.png"
-            alt="Official IEI Emblem 3D"
-            width={316}
-            height={316}
-            className={styles.officialEmblemImg}
-          />
+          <svg viewBox="0 0 316 316" className={styles.layerSvg} fill="currentColor">
+            {Object.entries(EMBLEM_DATA).map(([group, paths]) => (
+              <g key={`l3-${group}`}>
+                {paths.map((p, i) => (
+                  <path key={`l3-${group}-${i}`} d={p.d} transform={p.transform} />
+                ))}
+              </g>
+            ))}
+          </svg>
         </div>
 
-        {/* LAYER 04 — Internal Engineering Instruments Elevation (Z = +28px) */}
+        {/* ====================================================================
+            LAYER 04 — Circular Typography Elevation (Z = +25px to 0)
+            ==================================================================== */}
         <motion.div
           className={`${styles.layer} ${styles.layer4}`}
           style={{
             z: zL4,
-            opacity: secondaryLayerOpacity,
+            opacity: layerSeparationAlpha,
           }}
         >
-          <span className={styles.layerBadge}>CREST // 04</span>
+          <svg viewBox="0 0 316 316" className={styles.layerSvg} fill="currentColor">
+            {EMBLEM_DATA['circular-text']?.map((p, i) => (
+              <path key={`l4-${i}`} d={p.d} transform={p.transform} />
+            ))}
+          </svg>
         </motion.div>
 
-        {/* LAYER 05 — Precision Specular Highlight Rim (Z = +56px) */}
+        {/* ====================================================================
+            LAYER 05 — Central Figure & Engineering Objects (Z = +48px to 0)
+            ==================================================================== */}
         <motion.div
           className={`${styles.layer} ${styles.layer5}`}
           style={{
             z: zL5,
-            opacity: secondaryLayerOpacity,
+            opacity: layerSeparationAlpha,
           }}
         >
-          <span className={styles.layerBadge}>BEVEL // 05</span>
+          <svg viewBox="0 0 316 316" className={styles.layerSvg} fill="currentColor">
+            {EMBLEM_DATA['central-artwork']?.map((p, i) => (
+              <path key={`l5-${i}`} d={p.d} transform={p.transform} />
+            ))}
+          </svg>
         </motion.div>
 
-        {/* LAYER 06 — Floating Datum Callouts & Ring (Z = +85px) */}
+        {/* ====================================================================
+            LAYER 06 — Specular Bevel & Precision Rim Highlight (Z = +70px to 0)
+            ==================================================================== */}
         <motion.div
           className={`${styles.layer} ${styles.layer6}`}
           style={{
             z: zL6,
-            opacity: secondaryLayerOpacity,
+            opacity: layerSeparationAlpha,
           }}
         >
-          <span className={styles.layerBadge}>DATUM // 06</span>
+          <svg viewBox="0 0 316 316" className={styles.layerSvg}>
+            {EMBLEM_DATA['inner-ring']?.map((p, i) => (
+              <path key={`l6-${i}`} d={p.d} transform={p.transform} fill="none" stroke="var(--accent)" strokeWidth="1.5" />
+            ))}
+          </svg>
         </motion.div>
       </motion.div>
     </motion.div>

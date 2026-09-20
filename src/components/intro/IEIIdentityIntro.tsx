@@ -18,36 +18,41 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
   const shouldReduceMotion = useReducedMotion();
   const { setIntroProgress, skipIntro } = useIntro();
 
-  // Scroll tracking across the pinned track
+  // Scroll tracking across the finite pinned track
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ['start start', 'end start'],
   });
 
-  // Heavy, physical spring damping for smooth cinematic camera physics
+  // Master smooth physical spring for cinematic camera physics
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 90,
     damping: 20,
     restDelta: 0.001,
   });
 
-  const [stageText, setStageText] = useState('STAGE 01 // EMBLEM GEOMETRY');
+  const [currentProgress, setCurrentProgress] = useState(0);
+  const [currentScene, setCurrentScene] = useState('LINE DRAW');
+  const [isQAMode, setIsQAMode] = useState(false);
+  const isDev = process.env.NODE_ENV === 'development';
 
-  // Report progress to IntroContext and update stage label
+  // Report master progress to IntroContext and update debug telemetry
   useEffect(() => {
     const unsubscribe = smoothProgress.on('change', (val) => {
+      setCurrentProgress(val);
       setIntroProgress(val);
-      if (val < 0.22) setStageText('STAGE 01 // EMBLEM GEOMETRY');
-      else if (val < 0.44) setStageText('STAGE 02 // 3D LAYER STACK');
-      else if (val < 0.60) setStageText('STAGE 03 // INSTITUTIONAL DECOMPOSITION');
-      else if (val < 0.90) setStageText('STAGE 04 // 3D PORTAL ENTRY');
-      else setStageText('STAGE 05 // HOMEPAGE PASS-THROUGH');
+      if (val < 0.22) setCurrentScene('LINE DRAW');
+      else if (val < 0.32) setCurrentScene('2D EMBLEM');
+      else if (val < 0.52) setCurrentScene('3D STACK');
+      else if (val < 0.70) setCurrentScene('TYPOGRAPHY');
+      else if (val < 0.95) setCurrentScene('PORTAL ENTRY');
+      else setCurrentScene('HOMEPAGE');
     });
     return () => unsubscribe();
   }, [smoothProgress, setIntroProgress]);
 
-  // HUD & UI Opacity: fades out cleanly as portal opens (0.80 -> 0.90)
-  const hudOpacity = useTransform(
+  // Skip Intro button fades out cleanly as portal opens (0.80 -> 0.90)
+  const skipBtnOpacity = useTransform(
     smoothProgress,
     [0, 0.05, 0.78, 0.88],
     [0, 1, 1, 0]
@@ -66,43 +71,18 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
       aria-label="IEI SIES GST — Cinematic Identity Intro"
     >
       <div className={styles.stickyStage}>
-        {/* Subtle Vignette & Environmental Tone */}
+        {/* Ambient Environmental Tone */}
         <div className={styles.ambientVignette} />
 
-        {/* ACCESSIBILITY: Skip Button for Fast Navigation */}
+        {/* ACCESSIBILITY: Skip Intro Button */}
         <motion.button
           className={styles.skipIntroBtn}
-          style={{ opacity: hudOpacity }}
+          style={{ opacity: skipBtnOpacity }}
           onClick={skipIntro}
           aria-label="Skip cinematic introduction and proceed to homepage content"
         >
           Skip Intro [↓]
         </motion.button>
-
-        {/* HUD TOP-LEFT: Technical Chapter Coordinates */}
-        <motion.div
-          className={styles.hudTopLeft}
-          style={{ opacity: hudOpacity }}
-          aria-hidden="true"
-        >
-          <span className={styles.hudMonoText}>
-            IEI SIES GST <span className={styles.hudAccentText}>ECS DEPT</span>
-          </span>
-          <span className={styles.hudMonoText}>
-            MH-04 // NAVI MUMBAI // EST. 1920
-          </span>
-        </motion.div>
-
-        {/* HUD BOTTOM-RIGHT: Dynamic Stage Tracker */}
-        <motion.div
-          className={styles.hudBottomRight}
-          style={{ opacity: hudOpacity }}
-          aria-hidden="true"
-        >
-          <span className={`${styles.hudMonoText} ${styles.hudAccentText}`}>
-            {stageText}
-          </span>
-        </motion.div>
 
         {/* INITIAL SCROLL CUE */}
         <motion.div
@@ -117,15 +97,16 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
         </motion.div>
 
         {/* ====================================================================
-            STAGE 01 & 02: Blueprint Engineering Linework & Official 2D Emblem
+            STAGE 01 & 02: Programmatic Vector Line Construction & Official 2D Emblem
             ==================================================================== */}
         <IEIConstruction
           progress={smoothProgress}
           reducedMotion={Boolean(shouldReduceMotion)}
+          isQAMode={isQAMode}
         />
 
         {/* ====================================================================
-            STAGE 03, 04, 05: 3D Precision Layer Stacking & Physical Convergence
+            STAGE 03, 04, 05: True 3D Vector Layer Stacking & Physical Convergence
             ==================================================================== */}
         <IEI3DStack
           progress={smoothProgress}
@@ -142,7 +123,7 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
 
         {/* ====================================================================
             STAGE 08 - 14: 3D I E I Typographic Portal & Camera Pass-Through
-            (Wraps the Homepage Hero Environment inside the letter portal!)
+            (Wraps the Homepage Environment inside the letter portal!)
             ==================================================================== */}
         <IEIPortal
           progress={smoothProgress}
@@ -150,6 +131,44 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
         >
           {children}
         </IEIPortal>
+
+        {/* ====================================================================
+            DEVELOPMENT-ONLY DEBUG HUD (Not shown in production)
+            ==================================================================== */}
+        {isDev && (
+          <div className={styles.debugOverlay} aria-label="Development Debug Overlay">
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>INTRO PROGRESS:</span>
+              <span>{currentProgress.toFixed(3)}</span>
+            </div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>PIN STATE:</span>
+              <span>{currentProgress < 0.98 ? 'ACTIVE' : 'RELEASED'}</span>
+            </div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>CURRENT SCENE:</span>
+              <span>{currentScene}</span>
+            </div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>HEADER STATE:</span>
+              <span>{currentProgress >= 0.88 ? 'REVEALED' : 'HIDDEN'}</span>
+            </div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>HOMEPAGE REVEAL:</span>
+              <span>
+                {currentProgress < 0.64
+                  ? '0.00'
+                  : Math.min(1, (currentProgress - 0.64) / 0.32).toFixed(2)}
+              </span>
+            </div>
+            <button
+              className={styles.qaToggleBtn}
+              onClick={() => setIsQAMode((prev) => !prev)}
+            >
+              {isQAMode ? 'DISABLE VECTOR QA' : 'ENABLE VECTOR QA [50%]'}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

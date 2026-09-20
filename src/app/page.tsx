@@ -16,8 +16,12 @@ export default function HomePage() {
         <Hero />
       </IEIIdentityIntro>
 
-      {/* 02 — CHAPTER PHILOSOPHY (M3-inspired principle-led) */}
-      <ChapterPhilosophy />
+      {/* 01 — HOMEPAGE HERO (Document Flow Release Point) */}
+      <main id="homepage-main">
+        <Hero />
+
+        {/* 02 — CHAPTER PHILOSOPHY (M3-inspired principle-led) */}
+        <ChapterPhilosophy />
 
       {/* 03 — ABOUT COMPOSITION (editorial asymmetric spread) */}
       <AboutComposition />
@@ -31,8 +35,9 @@ export default function HomePage() {
       {/* 06 — EVENTS PREVIEW (M3-numbered event list) */}
       <EventsPreview />
 
-      {/* 07 — FINAL CTA */}
-      <FinalCTA />
+        {/* 07 — FINAL CTA */}
+        <FinalCTA />
+      </main>
     </>
   );
 }

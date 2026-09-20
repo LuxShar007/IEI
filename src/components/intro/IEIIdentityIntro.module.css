@@ -170,3 +170,54 @@
     font-size: 0.625rem;
   }
 }
+
+/* Development Debug Overlay */
+.debugOverlay {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(10, 10, 15, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: #00FF88;
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.debugRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.debugLabel {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.qaToggleBtn {
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: #002B7F;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.qaToggleBtn:hover {
+  background: #003eb3;
+}
+
