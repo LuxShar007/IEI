@@ -1,4 +1,5 @@
 import React from 'react';
+import { IEIIdentityIntro } from '@/components/intro/IEIIdentityIntro';
 import { Hero } from '@/components/hero/Hero';
 import { ChapterPhilosophy } from '@/components/home/ChapterPhilosophy/ChapterPhilosophy';
 import { AboutComposition } from '@/components/home/AboutComposition/AboutComposition';
@@ -10,8 +11,10 @@ import { FinalCTA } from '@/components/home/FinalCTA/FinalCTA';
 export default function HomePage() {
   return (
     <>
-      {/* 01 — CINEMATIC HERO */}
-      <Hero />
+      {/* 00-14 — CINEMATIC IDENTITY INTRO -> 3D PORTAL -> HOMEPAGE HERO */}
+      <IEIIdentityIntro>
+        <Hero />
+      </IEIIdentityIntro>
 
       {/* 02 — CHAPTER PHILOSOPHY (M3-inspired principle-led) */}
       <ChapterPhilosophy />

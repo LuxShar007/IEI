@@ -1,0 +1,149 @@
+/* ==========================================================================
+   IEI 3D STACK — Stage 03, 04, 05 Precision Layer Stacking & 3D Emblem
+   ========================================================================== */
+
+.stackWrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.scene3D {
+  position: relative;
+  width: min(55vw, 260px);
+  height: min(55vw, 260px);
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Common Spatial Layer Shell */
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: filter var(--duration-normal) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+/* Layer 1: Base Datum Plane */
+.layer1 {
+  border: 1px dashed var(--accent);
+  background: radial-gradient(circle, var(--accent-subtle) 0%, transparent 70%);
+  opacity: 0.5;
+}
+
+/* Layer 2: Outer Cogwheel Gear Ring */
+.layer2 {
+  border: 1.5px solid var(--accent);
+  border-style: double;
+  opacity: 0.7;
+}
+
+/* Layer 3: Official Emblem Foundation (Central Primary) */
+.layer3 {
+  z-index: 10;
+}
+
+.officialEmblemImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+:global([data-theme="default"]) .officialEmblemImg {
+  filter: drop-shadow(0 6px 20px rgba(0, 102, 204, 0.22));
+}
+
+:global([data-theme="alternative"]) .officialEmblemImg {
+  filter: drop-shadow(0 0 20px rgba(102, 78, 234, 0.5)) brightness(0) invert(1);
+}
+
+/* Layer 4: Shield & Internal Instruments Elevation */
+.layer4 {
+  width: 78%;
+  height: 78%;
+  border: 1px solid var(--accent);
+  opacity: 0.85;
+}
+
+/* Layer 5: Precision Specular Highlight Rim */
+.layer5 {
+  width: 96%;
+  height: 96%;
+  border: 1px solid var(--fg-inverse);
+  box-shadow: inset 0 0 12px var(--accent-subtle);
+  opacity: 0.6;
+}
+
+:global([data-theme="default"]) .layer5 {
+  border-color: rgba(0, 102, 204, 0.4);
+}
+
+:global([data-theme="alternative"]) .layer5 {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Layer 6: Floating Datum Callouts & Ring */
+.layer6 {
+  width: 114%;
+  height: 114%;
+  border: 1px dotted var(--signal);
+  opacity: 0.5;
+}
+
+.layerBadge {
+  position: absolute;
+  top: -18px;
+  right: -10px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  padding: 2px 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
+  color: var(--accent);
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* Subtle 3D Edge Bevel Shading for Converged State */
+.convergedShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+:global([data-theme="default"]) .convergedShadow {
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 24px 64px rgba(0, 102, 204, 0.16);
+}
+
+:global([data-theme="alternative"]) .convergedShadow {
+  box-shadow:
+    0 0 40px rgba(102, 78, 234, 0.35),
+    0 24px 70px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 768px) {
+  .scene3D {
+    width: 180px;
+    height: 180px;
+  }
+}

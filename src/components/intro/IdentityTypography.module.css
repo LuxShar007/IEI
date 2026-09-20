@@ -1,0 +1,108 @@
+/* ==========================================================================
+   IDENTITY TYPOGRAPHY — Stage 06 Institutional Name & Stage 07 Decomposition
+   ========================================================================== */
+
+.typographyWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 15;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  text-align: center;
+}
+
+/* Full Institutional Header (Stage 06) */
+.fullTitleGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: clamp(140px, 26vw, 240px);
+}
+
+.subHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 1vw, 0.8125rem);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-ultra);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.subDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.mainTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--line-height-tight);
+  color: var(--fg-primary);
+  max-width: 900px;
+}
+
+/* Stage 07 — Typographic Decomposition Container */
+.decompositionContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 4rem);
+}
+
+.wordBlock {
+  display: flex;
+  align-items: baseline;
+  overflow: visible;
+}
+
+.initialLetter {
+  font-family: var(--font-sans);
+  font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--fg-primary);
+  letter-spacing: -0.02em;
+}
+
+.trailingLetters {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 2.4vw, 2.2rem);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+  white-space: nowrap;
+  margin-left: 1px;
+}
+
+@media (max-width: 768px) {
+  .fullTitleGroup {
+    margin-top: 170px;
+  }
+  .mainTitle {
+    font-size: 1.25rem;
+  }
+  .decompositionContainer {
+    gap: 0.75rem;
+  }
+  .initialLetter {
+    font-size: 2.75rem;
+  }
+  .trailingLetters {
+    font-size: 0.875rem;
+  }
+}

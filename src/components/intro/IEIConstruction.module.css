@@ -1,0 +1,158 @@
+/* ==========================================================================
+   IEI CONSTRUCTION — Stage 01 & 02 Blueprint & Linework Reveal
+   ========================================================================== */
+
+.constructionWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.svgCanvas {
+  position: absolute;
+  width: min(90vw, 560px);
+  height: min(90vw, 560px);
+  max-width: 560px;
+  max-height: 560px;
+  overflow: visible;
+}
+
+/* Background Technical Blueprint Grid */
+.blueprintGrid {
+  position: absolute;
+  inset: 0;
+  background-size: 40px 40px;
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+:global([data-theme="default"]) .blueprintGrid {
+  background-image:
+    linear-gradient(to right, rgba(0, 102, 204, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 102, 204, 0.05) 1px, transparent 1px);
+}
+
+:global([data-theme="alternative"]) .blueprintGrid {
+  background-image:
+    linear-gradient(to right, rgba(102, 78, 234, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(102, 78, 234, 0.06) 1px, transparent 1px);
+}
+
+/* Construction Vector Styles */
+.circlePrimary {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.circleSecondary {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: 0.65;
+  vector-effect: non-scaling-stroke;
+}
+
+.circleOuterTicks {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 2 8;
+  opacity: 0.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.axisLine {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+  opacity: 0.45;
+  vector-effect: non-scaling-stroke;
+}
+
+.radialSpoke {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+
+.gearTooth {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: square;
+  vector-effect: non-scaling-stroke;
+}
+
+.specTick {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.technicalText {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  fill: var(--accent);
+  opacity: 0.75;
+  user-select: none;
+}
+
+.datumCallout {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  fill: var(--fg-muted);
+  user-select: none;
+}
+
+/* Central Emblem Layer */
+.emblemContainer {
+  position: absolute;
+  width: min(50vw, 240px);
+  height: min(50vw, 240px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.officialEmblem {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter var(--duration-normal) var(--ease-out);
+  user-select: none;
+  pointer-events: none;
+}
+
+:global([data-theme="alternative"]) .officialEmblem {
+  filter: drop-shadow(0 0 16px rgba(102, 78, 234, 0.45)) brightness(0) invert(1);
+}
+
+:global([data-theme="default"]) .officialEmblem {
+  filter: drop-shadow(0 4px 18px rgba(0, 102, 204, 0.18));
+}
+
+@media (max-width: 768px) {
+  .svgCanvas {
+    width: 320px;
+    height: 320px;
+  }
+  .emblemContainer {
+    width: 160px;
+    height: 160px;
+  }
+  .technicalText, .datumCallout {
+    font-size: 6.5px;
+  }
+}

@@ -17,6 +17,7 @@ export const viewport: Viewport = {
 };
 
 import { ThemeProvider } from '@/lib/theme/ThemeContext';
+import { IntroProvider } from '@/lib/intro/IntroContext';
 
 export default function RootLayout({
   children,
@@ -28,12 +29,14 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <SmoothScrollProvider>
-            <SkipLink />
-            <CustomCursor />
-            <GlobalBackground />
-            <Navbar />
-            <main id="main-content">{children}</main>
-            <Footer />
+            <IntroProvider>
+              <SkipLink />
+              <CustomCursor />
+              <GlobalBackground />
+              <Navbar />
+              <main id="main-content">{children}</main>
+              <Footer />
+            </IntroProvider>
           </SmoothScrollProvider>
         </ThemeProvider>
       </body>

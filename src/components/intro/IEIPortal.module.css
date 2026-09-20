@@ -1,0 +1,141 @@
+/* ==========================================================================
+   IEI PORTAL — Stage 08 through Stage 14 (3D I E I -> Portal -> Homepage)
+   ========================================================================== */
+
+.portalContainer {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* 3D Camera Stage */
+.cameraStage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* BACKGROUND HOMEPAGE LAYER (Exists behind/inside letter portal) */
+.homepagePortalLayer {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  background-color: var(--bg-primary);
+  will-change: transform, opacity;
+}
+
+/* Portal Aperture Glow / Light Spill */
+.portalGlow {
+  position: absolute;
+  width: min(70vw, 500px);
+  height: min(70vw, 500px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 6;
+  filter: blur(80px);
+  opacity: 0.35;
+  transition: background-color var(--duration-normal) var(--ease-out);
+}
+
+:global([data-theme="default"]) .portalGlow {
+  background: radial-gradient(circle, rgba(0, 102, 204, 0.4) 0%, rgba(255, 107, 0, 0.15) 50%, transparent 70%);
+}
+
+:global([data-theme="alternative"]) .portalGlow {
+  background: radial-gradient(circle, rgba(102, 78, 234, 0.5) 0%, rgba(136, 116, 250, 0.2) 50%, transparent 70%);
+}
+
+/* FOREGROUND 3D I E I TYPOGRAPHIC MONOLITH */
+.monolithGroup {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 8vw, 8rem);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* Individual 3D Monolith Letter */
+.letter3D {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  font-family: var(--font-sans);
+  font-size: clamp(8rem, 24vw, 22rem);
+  font-weight: 800;
+  line-height: 0.85;
+  user-select: none;
+  color: var(--fg-primary);
+  letter-spacing: -0.04em;
+}
+
+/* 3D Extrusion Stack Layers */
+.extrusionFront {
+  position: relative;
+  z-index: 5;
+  color: var(--fg-primary);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.extrusionLayer {
+  position: absolute;
+  inset: 0;
+  user-select: none;
+  pointer-events: none;
+  color: var(--fg-secondary);
+  opacity: 0.7;
+}
+
+.ext1 { transform: translateZ(-8px); opacity: 0.85; }
+.ext2 { transform: translateZ(-16px); opacity: 0.7; }
+.ext3 { transform: translateZ(-24px); opacity: 0.55; }
+.ext4 { transform: translateZ(-32px); opacity: 0.4; color: var(--accent); }
+
+/* Central Letter E — The Portal Gateway */
+.letterEWrapper {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Architectural Edge Bevel Highlight */
+.letterBevel {
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  opacity: 0.4;
+  transition: border-color var(--duration-normal) var(--ease-out);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .monolithGroup {
+    gap: 1.5rem;
+  }
+  .letter3D {
+    font-size: clamp(5.5rem, 26vw, 9rem);
+  }
+  .ext3, .ext4 {
+    display: none; /* Reduce 3D layers on mobile for performance */
+  }
+}
