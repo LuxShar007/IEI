@@ -457,3 +457,37 @@
     justify-content: flex-start;
   }
 }
+
+@media (max-width: 640px) {
+  .archiveRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-5) 0;
+  }
+
+  .rowNum {
+    display: none;
+  }
+
+  .rowMain {
+    width: 100%;
+  }
+
+  .rowHeader {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .rowAction {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  .rowAction a,
+  .rowAction button {
+    width: 100%;
+    justify-content: center;
+  }
+}

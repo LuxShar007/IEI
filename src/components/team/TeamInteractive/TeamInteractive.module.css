@@ -320,11 +320,31 @@
 }
 
 @media (max-width: 640px) {
-  .targetTag {
-    display: none;
+  .photographFrame {
+    aspect-ratio: 16 / 12;
+  }
+
+  .hotspotBtn {
+    padding-bottom: 6px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .targetIndicator {
-    padding: 3px;
+    padding: 3px 8px;
+    min-height: 26px;
+  }
+
+  .targetTag {
+    display: inline-block;
+    font-size: 0.5625rem;
+  }
+
+  .chipRow {
+    gap: var(--space-2);
+    justify-content: flex-start;
+  }
+
+  .profileCard {
+    padding: var(--space-5) var(--space-4);
   }
 }

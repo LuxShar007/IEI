@@ -18,6 +18,7 @@ export const viewport: Viewport = {
 
 import { ThemeProvider } from '@/lib/theme/ThemeContext';
 import { IntroProvider } from '@/lib/intro/IntroContext';
+import { PageTransition } from '@/components/layout/PageTransition/PageTransition';
 
 export default function RootLayout({
   children,
@@ -34,7 +35,9 @@ export default function RootLayout({
               <CustomCursor />
               <GlobalBackground />
               <Navbar />
-              <main id="main-content">{children}</main>
+              <main id="main-content">
+                <PageTransition>{children}</PageTransition>
+              </main>
               <Footer />
             </IntroProvider>
           </SmoothScrollProvider>

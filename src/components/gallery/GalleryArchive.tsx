@@ -57,6 +57,30 @@ export const GalleryArchive: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeItem, closeLightbox, navigateLightbox]);
 
+  const touchStartXRef = React.useRef<number | null>(null);
+  const touchStartYRef = React.useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        navigateLightbox('next');
+      } else {
+        navigateLightbox('prev');
+      }
+    }
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+  };
+
   return (
     <div className={styles.archiveContainer}>
       {/* FILTER CONTROLS */}
@@ -140,6 +164,8 @@ export const GalleryArchive: React.FC = () => {
           aria-modal="true"
           aria-label={activeItem.title}
           onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <div
             className={styles.lightboxContent}
@@ -170,7 +196,7 @@ export const GalleryArchive: React.FC = () => {
                 <Camera size={56} className={styles.modalCameraIcon} />
                 <div className={styles.modalTitleText}>{activeItem.title}</div>
                 <div className={styles.modalSubText}>
-                  High-resolution photographic asset reserved for institutional archive.
+                  Swipe horizontally or use arrow buttons to navigate archive.
                 </div>
               </div>
 
@@ -197,12 +223,30 @@ export const GalleryArchive: React.FC = () => {
                 <h2 className={styles.footerTitle}>{activeItem.title}</h2>
                 <span className={styles.footerLocation}>{activeItem.location}</span>
               </div>
-              <div className={styles.lightboxCounter}>
-                {String(
-                  filteredItems.findIndex((it) => it.id === activeItem.id) + 1
-                ).padStart(2, '0')}{' '}
-                /{' '}
-                {String(filteredItems.length).padStart(2, '0')}
+
+              {/* ONE-HANDED THUMB CONTROLS FOR MOBILE */}
+              <div className={styles.mobileThumbNav}>
+                <button
+                  className={styles.thumbBtn}
+                  onClick={() => navigateLightbox('prev')}
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <span className={styles.lightboxCounter}>
+                  {String(
+                    filteredItems.findIndex((it) => it.id === activeItem.id) + 1
+                  ).padStart(2, '0')}{' '}
+                  /{' '}
+                  {String(filteredItems.length).padStart(2, '0')}
+                </span>
+                <button
+                  className={styles.thumbBtn}
+                  onClick={() => navigateLightbox('next')}
+                  aria-label="Next photo"
+                >
+                  <ChevronRight size={18} />
+                </button>
               </div>
             </div>
           </div>

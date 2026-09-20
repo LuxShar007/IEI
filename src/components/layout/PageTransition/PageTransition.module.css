@@ -1,0 +1,29 @@
+/* ==========================================================================
+   PAGE TRANSITION — Hardware-accelerated smooth route switching
+   ========================================================================== */
+
+.pageTransitionWrapper {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100dvh - var(--navbar-height));
+  will-change: opacity, transform;
+}
+
+/* Institutional Accent Route Progress Indicator */
+.routeIndicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 50%,
+    var(--signal) 100%
+  );
+  z-index: 9999;
+  pointer-events: none;
+  transform-origin: 0% 50%;
+}

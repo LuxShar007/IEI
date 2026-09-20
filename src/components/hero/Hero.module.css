@@ -262,10 +262,14 @@
   }
 
   .ctaGroup {
-    gap: var(--space-4);
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: var(--space-3);
   }
 
-  .ctaPrimary {
+  .ctaGroup a,
+  .ctaGroup button {
     width: 100%;
     justify-content: center;
   }

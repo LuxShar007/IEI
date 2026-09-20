@@ -514,3 +514,43 @@
     transform: rotate(360deg);
   }
 }
+
+/* ==========================================================================
+   MOBILE ERGONOMICS & TOUCH COMPLIANCE
+   ========================================================================== */
+@media (max-width: 768px) {
+  .sm {
+    height: 2.375rem;
+    min-height: 38px;
+    padding: 0 1.25rem;
+    font-size: 0.78125rem;
+  }
+
+  .md {
+    height: 2.75rem;
+    min-height: 44px;
+    padding: 0 1.5rem;
+  }
+
+  .lg {
+    height: 3.125rem;
+    min-height: 48px;
+  }
+}
+
+/* Eliminate sticky hover on touch-only devices */
+@media (hover: none) {
+  .button:hover:not(:disabled):not(.loading) {
+    transform: none;
+  }
+  .button:hover:not(:disabled):not(.loading) .ambientShadow {
+    filter: blur(6px);
+    transform: translateY(3px);
+  }
+  .button:hover:not(:disabled):not(.loading)::after {
+    --angle-1: -75deg;
+  }
+  .button:hover:not(:disabled):not(.loading) .sheen {
+    background-position: 0% 50%;
+  }
+}

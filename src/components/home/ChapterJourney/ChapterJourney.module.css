@@ -563,11 +563,11 @@
 
 @media (max-width: 768px) {
   .journeyContainer {
-    height: 500vh; /* Scaled scroll distance on mobile */
+    height: 480vh; /* Scaled scroll distance on mobile */
   }
 
   .stickyViewport {
-    padding: var(--space-4) var(--space-4);
+    padding: var(--space-3) var(--space-4);
   }
 
   .sectionSubtitle {
@@ -578,26 +578,62 @@
     display: none; /* Show concise numbers on small screens to prevent overflow */
   }
 
+  .navItem {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 4px 2px;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .navMarkerWrap {
+    margin-top: 0;
+  }
+
+  .navNum {
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+
   .presentationBody {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3);
     align-items: start;
-    overflow-y: auto;
+    min-height: 0;
   }
 
   .visualCol {
-    min-height: 220px;
+    min-height: 130px;
+    max-height: 155px;
     order: 1; /* Visual first on mobile */
   }
 
   .visualViewport {
     aspect-ratio: 16 / 9;
-    max-height: 240px;
+    max-height: 150px;
+    border-radius: var(--radius-md);
   }
 
   .textStoryCol {
     order: 2;
     max-height: none;
+    min-height: 310px;
+  }
+
+  .textStageContainer {
+    position: relative;
+    min-height: 290px;
+    width: 100%;
+  }
+
+  .stageTextLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    gap: 0.35rem;
   }
 
   .stageHeadlineRow {
@@ -605,20 +641,48 @@
   }
 
   .stageGiantNum {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
 
   .stageMainTitle {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+
+  .stageSubtitle {
+    font-size: 0.85rem;
+    line-height: 1.25;
   }
 
   .stageDescription {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    max-width: none;
+  }
+
+  .tagsRow {
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .techTag {
+    padding: 2px 7px;
+    font-size: 0.625rem;
   }
 
   .stageMetadataList {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-2);
+    gap: 4px;
+    padding-top: 6px;
+    margin-top: 2px;
+  }
+
+  .metaLabel {
+    font-size: 0.58rem;
+  }
+
+  .metaValue {
+    font-size: 0.72rem;
   }
 
   .bottomStatus {

@@ -251,4 +251,49 @@
   .archiveTrack {
     grid-template-columns: 1fr;
   }
+
+  .itemLink {
+    padding: var(--space-5) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  /* Strict vertical hierarchy: Date -> Title -> Category -> Image -> Action */
+  .metaLine {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .itemTitle {
+    order: 2;
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .itemTop {
+    order: 3;
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+
+  .itemTagline {
+    order: 3;
+    font-size: 0.82rem;
+  }
+
+  .imageFrame {
+    order: 4;
+    aspect-ratio: 16 / 9;
+    max-height: 180px;
+    border-radius: var(--radius-xs);
+    margin: var(--space-2) 0;
+  }
+
+  .itemFooter {
+    order: 5;
+    padding-top: var(--space-3);
+    min-height: 44px;
+  }
 }

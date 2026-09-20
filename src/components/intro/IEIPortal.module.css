@@ -133,12 +133,20 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .monolithGroup {
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   .letter3D {
-    font-size: clamp(5.5rem, 26vw, 9rem);
+    font-size: clamp(4.5rem, 24vw, 7.5rem);
   }
+  .portalGlow {
+    width: min(60vw, 260px);
+    height: min(60vw, 260px);
+    filter: blur(24px); /* Light GPU composite cost on mobile chips */
+    opacity: 0.25;
+  }
+  .ext1 { transform: translateZ(-4px); }
+  .ext2 { transform: translateZ(-8px); }
   .ext3, .ext4 {
-    display: none; /* Reduce 3D layers on mobile for performance */
+    display: none; /* Strip deep 3D layers on mobile for maximum touch performance */
   }
 }

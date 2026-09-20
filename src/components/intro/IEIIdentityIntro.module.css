@@ -166,8 +166,16 @@
   .skipIntroBtn {
     top: 14px;
     right: 16px;
-    padding: 4px 10px;
-    font-size: 0.625rem;
+    min-height: 44px;
+    padding: 8px 16px;
+    font-size: 0.6875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .skipIntroBtn:active {
+    transform: scale(0.94);
   }
 }
 
