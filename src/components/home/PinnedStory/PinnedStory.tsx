@@ -28,7 +28,7 @@ const STORY_BEATS = [
   },
   {
     num: '03',
-    title: 'The Student Chapter MH-04',
+    title: 'The ECS Student Chapter',
     subtitle: 'Chapter Governance',
     icon: Award,
     lead: 'Student-led chapter council operating under national accreditation and verified credentials.',

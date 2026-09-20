@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { ArrowRight, Download, FileText } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
+import { ArrowRight, Download } from 'lucide-react';
 import styles from './ResourcesPreview.module.css';
 
 interface ResourceLink {
@@ -63,10 +63,14 @@ export const ResourcesPreview: React.FC = () => {
           </div>
           <div className={styles.headerSplit}>
             <h2 className={styles.sectionTitle}>Resources</h2>
-            <Link href="/resources" className={styles.viewAllLink}>
-              <span>Access Complete Library</span>
-              <ArrowRight size={16} />
-            </Link>
+            <Button
+              href="/resources"
+              variant="outline"
+              size="sm"
+              rightIcon={<ArrowRight size={14} />}
+            >
+              Access Complete Library
+            </Button>
           </div>
         </div>
 
@@ -87,14 +91,15 @@ export const ResourcesPreview: React.FC = () => {
               </div>
 
               <div className={styles.resAction}>
-                <Link
+                <Button
                   href="/resources"
-                  className={styles.downloadLink}
+                  variant="outline"
+                  size="sm"
+                  leftIcon={<Download size={13} />}
                   aria-label={`Download ${res.title}`}
                 >
-                  <Download size={14} />
-                  <span>Download</span>
-                </Link>
+                  Download
+                </Button>
               </div>
             </div>
           ))}

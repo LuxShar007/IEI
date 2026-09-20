@@ -3,6 +3,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { useIntro } from '@/lib/intro/IntroContext';
 import { HeroVisualBlueprint } from './HeroVisualBlueprint';
@@ -130,13 +132,12 @@ export const Hero: React.FC<HeroProps> = ({ mode = 'auto' }) => {
             variants={fadeVariant}
             className={styles.ctaGroup}
           >
-            <Link href="/about" className={styles.ctaPrimary}>
+            <Button href="/about" variant="primary" size="lg">
               Explore the Chapter
-            </Link>
-            <Link href="/team" className={styles.ctaSecondary}>
+            </Button>
+            <Button href="/team" variant="outline" size="lg" rightIcon={<ArrowRight size={16} />}>
               Meet the Team
-              <span className={styles.ctaArrow} aria-hidden="true">→</span>
-            </Link>
+            </Button>
           </motion.div>
 
           {/* METADATA STRIP */}
@@ -149,7 +150,7 @@ export const Hero: React.FC<HeroProps> = ({ mode = 'auto' }) => {
             <span className={styles.metaSep} aria-hidden="true" />
             <span className={styles.metaItem}>Navi Mumbai</span>
             <span className={styles.metaSep} aria-hidden="true" />
-            <span className={styles.metaItem}>MH-04</span>
+            <span className={styles.metaItem}>ECS Chapter</span>
           </motion.div>
         </motion.div>
 

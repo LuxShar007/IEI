@@ -82,7 +82,7 @@ export const AboutComposition: React.FC = () => {
             { label: 'Institution', value: 'SIES Graduate School of Technology' },
             { label: 'Department', value: 'Electronics & Computer Science Engineering' },
             { label: 'Chapter Body', value: 'Institution of Engineers (India)' },
-            { label: 'Chapter Code', value: 'MH-04' },
+            { label: 'Collegiate Session', value: '2024–2025' },
           ].map((item) => (
             <div key={item.label} className={styles.metaItem}>
               <span className={styles.metaLabel}>{item.label}</span>

@@ -7,6 +7,7 @@ import {
   type ResourceCategory,
 } from '@/data/resources';
 import { FileText, Download, Search } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './ResourceDirectory.module.css';
 
 export const ResourceDirectory: React.FC = () => {
@@ -43,15 +44,16 @@ export const ResourceDirectory: React.FC = () => {
           {resourceCategories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
-              <button
+              <Button
                 key={cat}
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveCategory(cat)}
-                className={`${styles.filterBtn} ${isActive ? styles.activeFilter : ''}`}
+                variant={isActive ? 'primary' : 'outline'}
+                size="sm"
               >
                 {cat}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -87,18 +89,19 @@ export const ResourceDirectory: React.FC = () => {
 
               <div className={styles.rowActions}>
                 <span className={styles.fileSize}>{item.fileSize}</span>
-                <a
+                <Button
                   href={item.url}
-                  className={styles.downloadLink}
+                  variant="outline"
+                  size="sm"
+                  leftIcon={<Download size={14} />}
                   aria-label={`Download ${item.title}`}
                   onClick={(e) => {
                     e.preventDefault();
                     alert(`Placeholder document: ${item.title}`);
                   }}
                 >
-                  <Download size={14} />
-                  <span>DOWNLOAD</span>
-                </a>
+                  DOWNLOAD
+                </Button>
               </div>
             </div>
           ))

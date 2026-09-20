@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader/PageHeader';
 import { ArrowRight, BookOpen, Cpu, Shield, Award, Users, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './about.module.css';
 
 export const metadata: Metadata = {
@@ -22,9 +23,9 @@ export default function AboutPage() {
         description="The official student chapter of the Institution of Engineers (India) at SIES Graduate School of Technology, anchored within the Department of Electronics & Computer Science Engineering."
         breadcrumbs={[{ label: 'About' }]}
         metadataItems={[
-          { label: 'Parent Body Est.', value: '1920' },
-          { label: 'Chapter Code', value: 'MH-04' },
-          { label: 'Location', value: 'Navi Mumbai' },
+          { label: 'Founded', value: 'National Body 1920' },
+          { label: 'Department', value: 'ECS Engineering' },
+          { label: 'Campus', value: 'SIES GST Navi Mumbai' },
         ]}
       />
 
@@ -73,7 +74,7 @@ export default function AboutPage() {
                 bridges hardware telemetry, firmware kernels, distributed software, and algorithmic intelligence.
               </p>
               <p className={styles.bodyPara}>
-                Charter MH-04 connects the academic curriculum directly with institutional engineering practice. 
+                The ECS student chapter connects the academic curriculum directly with institutional engineering practice. 
                 Under faculty leadership, student engineers learn to think beyond syllabus boundaries — mastering real 
                 developer toolchains, laboratory testbenches, and professional documentation standards.
               </p>
@@ -142,10 +143,9 @@ export default function AboutPage() {
                 campus event is planned, executed, and archived with professional discipline.
               </p>
               <div className={styles.linkRow}>
-                <Link href="/team" className={styles.inlineAction}>
-                  <span>Inspect the 7 Domain Wings</span>
-                  <ArrowRight size={14} />
-                </Link>
+                <Button href="/team" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+                  Inspect the 7 Domain Wings
+                </Button>
               </div>
             </div>
           </div>
@@ -195,14 +195,12 @@ export default function AboutPage() {
                 and collegiate hackathons, our activity calendar is designed for continuous engagement.
               </p>
               <div className={styles.linkRow}>
-                <Link href="/activities" className={styles.inlineAction}>
-                  <span>Explore Stage-by-Stage Activities</span>
-                  <ArrowRight size={14} />
-                </Link>
-                <Link href="/events" className={styles.inlineAction}>
-                  <span>View Event Calendar</span>
-                  <ArrowRight size={14} />
-                </Link>
+                <Button href="/activities" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+                  Explore Stage-by-Stage Activities
+                </Button>
+                <Button href="/events" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+                  View Event Calendar
+                </Button>
               </div>
             </div>
           </div>
@@ -225,17 +223,12 @@ export default function AboutPage() {
                 Interested in collaborating on technical symposia, research projects, or institutional verification?
               </p>
               <div className={styles.closingActions}>
-                <Link href="/contact" className={styles.primaryBtn}>
-                  <span>Contact Headquarters</span>
-                  <ArrowRight size={15} />
-                </Link>
-                <Link href="/verify" className={styles.secondaryBtn}>
-                  <span>Verify Credentials</span>
-                </Link>
-                <Link href="/team" className={styles.textLink}>
-                  <span>Meet Leadership</span>
-                  <span aria-hidden="true"> →</span>
-                </Link>
+                <Button href="/contact" variant="primary" size="md" rightIcon={<ArrowRight size={15} />}>
+                  Contact Headquarters
+                </Button>
+                <Button href="/team" variant="outline" size="md" rightIcon={<ArrowRight size={14} />}>
+                  Meet Leadership
+                </Button>
               </div>
             </div>
           </div>

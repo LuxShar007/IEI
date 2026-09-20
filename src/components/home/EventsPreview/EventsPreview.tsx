@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { placeholderEvents } from '@/data/events';
 import { formatDate } from '@/lib/utils/format';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './EventsPreview.module.css';
 
 export const EventsPreview: React.FC = () => {
@@ -22,10 +23,9 @@ export const EventsPreview: React.FC = () => {
           </div>
           <div className={styles.headerSplit}>
             <h2 className={styles.sectionTitle}>Featured Events</h2>
-            <Link href="/events" className={styles.viewAllLink}>
-              <span>View Complete Archive</span>
-              <ArrowRight size={16} />
-            </Link>
+            <Button href="/events" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+              View Complete Archive
+            </Button>
           </div>
         </div>
 

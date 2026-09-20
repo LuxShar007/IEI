@@ -1,0 +1,627 @@
+/* ==========================================================================
+   IEI CHAPTER JOURNEY — LINUSBIO PLATFORM-INSPIRED SHOWCASE
+   Pinned scroll architecture, 6-stage horizontal navigation,
+   synchronized visual transitions, release back to document flow.
+   ========================================================================== */
+
+/* ─── SCROLL TRACK CONTAINER (Pinned Territory) ─────────────────────────── */
+.journeyContainer {
+  position: relative;
+  width: 100%;
+  height: 600vh; /* 100vh per stage for unhurried editorial pacing */
+  background-color: var(--bg-primary);
+  /* Boundary markers for Lenis and viewport intersection */
+  contain: paint layout;
+}
+
+/* ─── STICKY VIEWPORT WRAPPER ───────────────────────────────────────────── */
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  padding: clamp(1.25rem, 2.5vw, 2.5rem) clamp(1.5rem, 4vw, 4.5rem);
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+/* Background Atmospheric Canvas Grid */
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.35;
+}
+
+/* ─── TOP BAR: SECTION HEADER & BREADCRUMBS ─────────────────────────────── */
+.topBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.headerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sectionTag {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.sectionTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.telemetryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-secondary);
+}
+
+.telemetryIndicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* ─── STAGE NAVIGATION TRACK (Horizontal 6-Stage Line) ──────────────────── */
+.stageNav {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: clamp(0.75rem, 1.2vw, 1.5rem);
+  margin-bottom: clamp(1rem, 2vw, 2rem);
+}
+
+.navTrackLine {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.navProgressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--signal-accent, #ff6b00));
+  border-radius: 2px;
+}
+
+.navItemsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.navItem {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  position: relative;
+  padding: 4px 6px;
+  user-select: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  outline: none;
+}
+
+.navItem:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-primary);
+  border-radius: 4px;
+}
+
+.navMarkerWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-top: -17px; /* Align precisely over the 2px track line */
+}
+
+.navPip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-strong);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navItem:hover .navPip {
+  border-color: var(--fg-primary);
+  transform: scale(1.2);
+}
+
+.navItemActive .navPip {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.35);
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.activeMarkerPulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-primary);
+  opacity: 0.6;
+  animation: markerPulse 1.8s ease-out infinite;
+}
+
+@keyframes markerPulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.navTextWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  opacity: 0.45;
+  transition: opacity 220ms ease, color 220ms ease;
+}
+
+.navItem:hover .navTextWrap {
+  opacity: 0.8;
+}
+
+.navItemActive .navTextWrap {
+  opacity: 1;
+}
+
+.navItemPassed .navTextWrap {
+  opacity: 0.65;
+}
+
+.navNum {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fg-muted);
+}
+
+.navItemActive .navNum {
+  color: var(--accent-primary);
+}
+
+.navTitle {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fg-primary);
+}
+
+/* ─── STAGE PRESENTATION BODY (Editorial Split) ─────────────────────────── */
+.presentationBody {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(320px, 42%) 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  min-height: 0; /* Important for flex child overflow */
+}
+
+/* ─── LEFT COLUMN: TEXT & METADATA STORYTELLING ─────────────────────────── */
+.textStoryCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  max-height: 520px;
+}
+
+.textStageContainer {
+  position: relative;
+  width: 100%;
+}
+
+.stageTextLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+}
+
+.stageEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.stageHeadlineRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.stageGiantNum {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tightest);
+  color: var(--border-strong);
+  user-select: none;
+}
+
+.stageMainTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: var(--tracking-tighter);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+.stageSubtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--fg-secondary);
+}
+
+.stageDescription {
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1.05vw, 1.02rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--fg-muted);
+  max-width: 52ch;
+}
+
+/* Metadata Strip below description */
+.stageMetadataList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-2);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.metaValue {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--fg-primary);
+  line-height: 1.25;
+}
+
+/* Technical Tags in Liquid Glass Style */
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.techTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--fg-secondary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ─── RIGHT COLUMN: MAIN VISUAL COMPOSITION ─────────────────────────────── */
+.visualCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+}
+
+.visualViewport {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  box-shadow:
+    0 12px 36px -8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.coordinateGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gridTelemetry {
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+  display: flex;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  opacity: 0.75;
+}
+
+.stageLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: clamp(1rem, 2vw, 2rem);
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.stageSvg {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* ─── BOTTOM STATUS & CONTROLS ──────────────────────────────────────────── */
+.bottomStatus {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: clamp(0.5rem, 1vw, 1rem);
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+}
+
+.scrollHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.scrollPipAnimation {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: bounceDot 1.4s infinite ease-in-out;
+}
+
+@keyframes bounceDot {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(4px); opacity: 1; }
+}
+
+.stageCounter {
+  font-weight: 600;
+  color: var(--fg-primary);
+}
+
+/* ─── ALTERNATIVE THEME (#050508 & #664EEA) ─────────────────────────────── */
+[data-theme="alternative"] .journeyContainer {
+  background-color: #050508;
+}
+
+[data-theme="alternative"] .stickyViewport {
+  background-color: #050508;
+  color: #ffffff;
+}
+
+[data-theme="alternative"] .backgroundGrid {
+  opacity: 0.2;
+}
+
+[data-theme="alternative"] .visualViewport {
+  background: #0b0b12;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 20px 48px -12px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(102, 78, 234, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="alternative"] .navProgressFill {
+  background: linear-gradient(90deg, #664eea, #a48fff);
+}
+
+[data-theme="alternative"] .navItemActive .navPip {
+  background-color: #664eea;
+  border-color: #664eea;
+  box-shadow: 0 0 12px #664eea;
+}
+
+[data-theme="alternative"] .activeMarkerPulse {
+  border-color: #664eea;
+}
+
+[data-theme="alternative"] .navItemActive .navNum {
+  color: #664eea;
+}
+
+/* ─── RESPONSIVE: TABLET & MOBILE VIEWPORTS ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .presentationBody {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .stageGiantNum {
+    font-size: 3rem;
+  }
+
+  .stageMainTitle {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .journeyContainer {
+    height: 500vh; /* Scaled scroll distance on mobile */
+  }
+
+  .stickyViewport {
+    padding: var(--space-4) var(--space-4);
+  }
+
+  .sectionSubtitle {
+    display: none;
+  }
+
+  .navTitle {
+    display: none; /* Show concise numbers on small screens to prevent overflow */
+  }
+
+  .presentationBody {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    overflow-y: auto;
+  }
+
+  .visualCol {
+    min-height: 220px;
+    order: 1; /* Visual first on mobile */
+  }
+
+  .visualViewport {
+    aspect-ratio: 16 / 9;
+    max-height: 240px;
+  }
+
+  .textStoryCol {
+    order: 2;
+    max-height: none;
+  }
+
+  .stageHeadlineRow {
+    gap: var(--space-2);
+  }
+
+  .stageGiantNum {
+    font-size: 2.2rem;
+  }
+
+  .stageMainTitle {
+    font-size: 1.6rem;
+  }
+
+  .stageDescription {
+    font-size: 0.85rem;
+  }
+
+  .stageMetadataList {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  .bottomStatus {
+    display: none;
+  }
+}

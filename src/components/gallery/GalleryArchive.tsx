@@ -8,6 +8,7 @@ import {
   type GalleryCategory,
 } from '@/data/gallery';
 import { Camera, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './GalleryArchive.module.css';
 
 export const GalleryArchive: React.FC = () => {
@@ -65,15 +66,16 @@ export const GalleryArchive: React.FC = () => {
           {galleryCategories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
-              <button
+              <Button
                 key={cat}
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveCategory(cat)}
-                className={`${styles.filterBtn} ${isActive ? styles.activeFilter : ''}`}
+                variant={isActive ? 'primary' : 'outline'}
+                size="sm"
               >
                 {cat}
-              </button>
+              </Button>
             );
           })}
         </div>

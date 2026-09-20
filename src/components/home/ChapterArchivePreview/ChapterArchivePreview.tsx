@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/Button/Button';
 import { ArrowRight, Camera } from 'lucide-react';
 import styles from './ChapterArchivePreview.module.css';
 
@@ -17,10 +18,14 @@ export const ChapterArchivePreview: React.FC = () => {
           </div>
           <div className={styles.headerSplit}>
             <h2 className={styles.sectionTitle}>Chapter Archive</h2>
-            <Link href="/gallery" className={styles.viewAllLink}>
-              <span>Enter Photographic Archive</span>
-              <ArrowRight size={16} />
-            </Link>
+            <Button
+              href="/gallery"
+              variant="outline"
+              size="sm"
+              rightIcon={<ArrowRight size={14} />}
+            >
+              Enter Photographic Archive
+            </Button>
           </div>
         </div>
 

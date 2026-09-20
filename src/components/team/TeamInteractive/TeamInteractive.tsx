@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { placeholderMembers } from '@/data/members';
 import type { Member } from '@/lib/types/member';
 import { ArrowRight, ShieldCheck, User } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './TeamInteractive.module.css';
 
 // Coordinates and silhouette hot-spots for the 4 council members in the group photo
@@ -204,27 +205,30 @@ export const TeamInteractive: React.FC = () => {
               <p className={styles.memberBio}>{currentMember.bio}</p>
 
               {/* ACTION LINK TO DEDICATED PROFILE */}
-              <Link
-                href={`/team/${currentMember.memberId}`}
-                className={styles.viewProfileBtn}
-              >
-                <span>View Full Profile & Credentials</span>
-                <ArrowRight size={14} />
-              </Link>
+              <div style={{ marginTop: 'var(--space-4)' }}>
+                <Button
+                  href={`/team/${currentMember.memberId}`}
+                  variant="primary"
+                  size="md"
+                  rightIcon={<ArrowRight size={14} />}
+                >
+                  View Full Profile & Credentials
+                </Button>
+              </div>
             </motion.div>
           </AnimatePresence>
 
           {/* QUICK SELECTOR CHIPS */}
           <div className={styles.chipRow}>
             {placeholderMembers.map((m) => (
-              <button
+              <Button
                 key={m.memberId}
-                type="button"
+                variant={activeMemberId === m.memberId ? 'primary' : 'outline'}
+                size="sm"
                 onClick={() => setActiveMemberId(m.memberId)}
-                className={`${styles.chipBtn} ${activeMemberId === m.memberId ? styles.chipActive : ''}`}
               >
                 {m.designation.replace(' [Placeholder]', '')}
-              </button>
+              </Button>
             ))}
           </div>
         </aside>

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Users } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './ThePeoplePreview.module.css';
 
 export const ThePeoplePreview: React.FC = () => {
@@ -74,14 +75,12 @@ export const ThePeoplePreview: React.FC = () => {
 
             {/* ACTION TO FULL INTERACTIVE TEAM EXPERIENCE */}
             <div className={styles.actionRow}>
-              <Link href="/team" className={styles.primaryAction}>
-                <span>Explore Leadership Roster & Domains</span>
-                <ArrowRight size={16} />
-              </Link>
-              <Link href="/verify" className={styles.verifyAction}>
-                <ShieldCheck size={14} className={styles.verifyIcon} />
-                <span>Verify Credential</span>
-              </Link>
+              <Button href="/team" variant="primary" size="md" rightIcon={<ArrowRight size={15} />}>
+                Explore Leadership Roster & Domains
+              </Button>
+              <Button href="/team" variant="outline" size="md" leftIcon={<Users size={14} />}>
+                View Directory
+              </Button>
             </div>
           </div>
         </div>

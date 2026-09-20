@@ -4,6 +4,7 @@ import { Hero } from '@/components/hero/Hero';
 import { AboutComposition } from '@/components/home/AboutComposition/AboutComposition';
 import { ChapterPhilosophy } from '@/components/home/ChapterPhilosophy/ChapterPhilosophy';
 import { WhatWeDo } from '@/components/home/WhatWeDo/WhatWeDo';
+import { ChapterJourney } from '@/components/home/ChapterJourney';
 import { ActivitiesSummary } from '@/components/home/ActivitiesSummary/ActivitiesSummary';
 import { EventsPreview } from '@/components/home/EventsPreview/EventsPreview';
 import { ThePeoplePreview } from '@/components/home/ThePeoplePreview/ThePeoplePreview';
@@ -30,7 +31,10 @@ export default function HomePage() {
         {/* 04 — WHAT WE DO (Interactive Editorial List & Dynamic Detail Panel) */}
         <WhatWeDo />
 
-        {/* 05 — FEATURED ACTIVITIES (Large Visual Summary & Program Tracks) */}
+        {/* 05 — IEI CHAPTER JOURNEY (LinusBio Platform-Style Pinned Sequential Showcase) */}
+        <ChapterJourney />
+
+        {/* 06 — FEATURED ACTIVITIES (Large Visual Summary & Program Tracks) */}
         <ActivitiesSummary />
 
         {/* 06 — FEATURED EVENTS (Numbered Chronological Archive Grid) */}

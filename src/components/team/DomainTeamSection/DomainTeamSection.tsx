@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { domainDefinitions } from '@/data/team';
 import type { DomainId, DomainDefinition } from '@/lib/types/team';
 import { MemberCard } from '@/components/members/MemberCard';
+import { Button } from '@/components/ui/Button/Button';
 import { CheckCircle, Shield, Award, Users, ChevronRight, Sparkles } from 'lucide-react';
 import styles from './DomainTeamSection.module.css';
 
@@ -36,16 +37,17 @@ export const DomainTeamSection: React.FC = () => {
         {domainDefinitions.map((domain) => {
           const isActive = domain.id === activeDomainId;
           return (
-            <button
+            <Button
               key={domain.id}
               role="tab"
               aria-selected={isActive}
-              className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ''}`}
+              variant={isActive ? 'primary' : 'outline'}
+              size="sm"
               onClick={() => setActiveDomainId(domain.id)}
             >
-              <span className={styles.tabCode}>{domain.shortCode}</span>
-              <span className={styles.tabName}>{domain.name}</span>
-            </button>
+              <span style={{ opacity: 0.7, marginRight: 6 }}>{domain.shortCode}</span>
+              <span>{domain.name}</span>
+            </Button>
           );
         })}
       </div>

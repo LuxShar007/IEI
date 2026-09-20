@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './ActivitiesSummary.module.css';
 
 interface ActivityItem {
@@ -68,10 +69,9 @@ export const ActivitiesSummary: React.FC = () => {
           </div>
           <div className={styles.headerSplit}>
             <h2 className={styles.sectionTitle}>Featured Activities</h2>
-            <Link href="/activities" className={styles.viewAllLink}>
-              <span>Explore All 6 Stages</span>
-              <ArrowRight size={16} />
-            </Link>
+            <Button href="/activities" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+              Explore All 6 Stages
+            </Button>
           </div>
         </div>
 
@@ -96,10 +96,11 @@ export const ActivitiesSummary: React.FC = () => {
               <div className={styles.featuredNum}>{activeActivity.num}</div>
               <h3 className={styles.featuredTitle}>{activeActivity.title}</h3>
               <p className={styles.featuredDesc}>{activeActivity.description}</p>
-              <Link href="/activities" className={styles.featuredAction}>
-                <span>View Full Curriculum & Outcomes</span>
-                <ArrowRight size={16} />
-              </Link>
+              <div style={{ marginTop: 'var(--space-4)' }}>
+                <Button href="/activities" variant="primary" size="md" rightIcon={<ArrowRight size={15} />}>
+                  View Full Curriculum & Outcomes
+                </Button>
+              </div>
             </div>
           </div>
 

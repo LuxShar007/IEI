@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { Button } from '@/components/ui/Button/Button';
 import { ArrowRight } from 'lucide-react';
 import styles from './FinalCTA.module.css';
 
@@ -28,20 +28,17 @@ export const FinalCTA: React.FC = () => {
 
           {/* INFORMATIONAL CTAs (NO JOIN BUTTONS, NO VERIFY BUTTONS) */}
           <div className={styles.actionGrid}>
-            <Link href="/events" className={styles.ctaButton}>
-              <span>Explore Events</span>
-              <ArrowRight size={15} />
-            </Link>
+            <Button href="/events" variant="primary" size="md" rightIcon={<ArrowRight size={15} />}>
+              Explore Events
+            </Button>
 
-            <Link href="/team" className={styles.ctaButton}>
-              <span>Meet the Team</span>
-              <ArrowRight size={15} />
-            </Link>
+            <Button href="/team" variant="outline" size="md" rightIcon={<ArrowRight size={15} />}>
+              Meet the Team
+            </Button>
 
-            <Link href="/contact" className={styles.ctaButtonSecondary}>
-              <span>Contact the Chapter</span>
-              <ArrowRight size={15} />
-            </Link>
+            <Button href="/contact" variant="outline" size="md" rightIcon={<ArrowRight size={15} />}>
+              Contact Chapter
+            </Button>
           </div>
         </div>
       </div>

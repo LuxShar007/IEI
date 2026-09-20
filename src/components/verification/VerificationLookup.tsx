@@ -67,22 +67,22 @@ export const VerificationLookup: React.FC = () => {
         <div className={styles.quickFillSection}>
           <span className={styles.quickFillLabel}>SAMPLE TEST CREDENTIALS:</span>
           <div className={styles.chipRow}>
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="sm"
               onClick={() => handleQuickFill('IEI-GST-2025-001')}
-              className={styles.chipButton}
-              data-cursor="button"
             >
               IEI-GST-2025-001 (Executive)
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
+              size="sm"
               onClick={() => handleQuickFill('IEI-GST-2025-042')}
-              className={styles.chipButton}
-              data-cursor="button"
             >
               IEI-GST-2025-042 (Tech Lead)
-            </button>
+            </Button>
           </div>
         </div>
       </Card>

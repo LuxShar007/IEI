@@ -13,7 +13,9 @@ import {
   Building,
   Award,
   Users,
+  ArrowRight,
 } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import { useShowcaseScroll } from '@/lib/scroll/useShowcaseScroll';
 import styles from './activities.module.css';
 
@@ -190,8 +192,13 @@ export default function ActivitiesPage() {
         metadataItems={[
           { label: 'Active Tracks', value: '06 Specialized Stages' },
           { label: 'Department', value: 'ECS Engineering' },
-          { label: 'Oversight', value: 'SIES GST Chapter MH-04' },
+          { label: 'Oversight', value: 'SIES GST Chapter' },
         ]}
+        actions={
+          <Button href="/events" variant="outline" size="sm" rightIcon={<ArrowRight size={14} />}>
+            View Event Calendar
+          </Button>
+        }
       />
 
       {/* =================================================================
@@ -312,16 +319,16 @@ export default function ActivitiesPage() {
 
                       {/* ACCESSIBILITY NAVIGATION — keyboard / mobile */}
                       <div className={styles.stageNavControls}>
-                        <button
-                          type="button"
+                        <Button
+                          variant="outline"
+                          size="sm"
                           disabled={activeIndex === 0}
                           onClick={() => goToStage(Math.max(0, activeIndex - 1))}
-                          className={styles.prevBtn}
+                          leftIcon={<ChevronLeft size={15} />}
                           aria-label="Previous Stage"
                         >
-                          <ChevronLeft size={15} />
-                          <span>Previous</span>
-                        </button>
+                          Previous
+                        </Button>
 
                         {/* MINI PROGRESS RAIL */}
                         <div className={styles.miniRail} aria-hidden="true">
@@ -333,21 +340,18 @@ export default function ActivitiesPage() {
                           ))}
                         </div>
 
-                        <button
-                          type="button"
+                        <Button
+                          variant="primary"
+                          size="sm"
                           disabled={activeIndex === STAGE_COUNT - 1}
                           onClick={() => goToStage(Math.min(STAGE_COUNT - 1, activeIndex + 1))}
-                          className={styles.nextBtn}
+                          rightIcon={<ChevronRight size={15} />}
                           aria-label="Next Stage"
                         >
-                          <span>
-                            Next
-                            {activeIndex < STAGE_COUNT - 1
-                              ? ` — ${STAGES[activeIndex + 1].num}`
-                              : ''}
-                          </span>
-                          <ChevronRight size={15} />
-                        </button>
+                          {activeIndex < STAGE_COUNT - 1
+                            ? `Next — ${STAGES[activeIndex + 1].num}`
+                            : 'Final Stage'}
+                        </Button>
                       </div>
                     </div>
                   </motion.div>

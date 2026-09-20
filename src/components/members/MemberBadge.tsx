@@ -33,7 +33,7 @@ export const MemberBadge: React.FC<MemberBadgeProps> = ({ member, className }) =
             <span className={styles.instAcronym}>IEI</span>
             <div className={styles.instMeta}>
               <span className={styles.instName}>THE INSTITUTION OF ENGINEERS (INDIA)</span>
-              <span className={styles.chapterName}>SIES GST STUDENT CHAPTER • MH-04</span>
+              <span className={styles.chapterName}>SIES GST STUDENT CHAPTER • ECS</span>
             </div>
           </div>
           <Badge variant="verified" size="sm" showPing>

@@ -5,6 +5,7 @@ import { placeholderMembers } from '@/data/members';
 import { domainDefinitions } from '@/data/team';
 import { MemberCard } from '@/components/members/MemberCard';
 import { Search, Filter, ShieldCheck, X } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './DirectoryFallback.module.css';
 
 export const DirectoryFallback: React.FC = () => {
@@ -66,35 +67,35 @@ export const DirectoryFallback: React.FC = () => {
         </div>
 
         <div className={styles.filterChips} role="group" aria-label="Filter roster by category">
-          <button
-            type="button"
-            className={`${styles.filterBtn} ${selectedRole === 'all' ? styles.filterBtnActive : ''}`}
+          <Button
+            variant={selectedRole === 'all' ? 'primary' : 'outline'}
+            size="sm"
             onClick={() => setSelectedRole('all')}
           >
             All Members ({placeholderMembers.length})
-          </button>
-          <button
-            type="button"
-            className={`${styles.filterBtn} ${selectedRole === 'verified' ? styles.filterBtnActive : ''}`}
+          </Button>
+          <Button
+            variant={selectedRole === 'verified' ? 'primary' : 'outline'}
+            size="sm"
+            leftIcon={<ShieldCheck size={13} />}
             onClick={() => setSelectedRole('verified')}
           >
-            <ShieldCheck size={13} />
             Verified Only
-          </button>
-          <button
-            type="button"
-            className={`${styles.filterBtn} ${selectedRole === 'core' ? styles.filterBtnActive : ''}`}
+          </Button>
+          <Button
+            variant={selectedRole === 'core' ? 'primary' : 'outline'}
+            size="sm"
             onClick={() => setSelectedRole('core')}
           >
             Executive Officers
-          </button>
-          <button
-            type="button"
-            className={`${styles.filterBtn} ${selectedRole === 'tech' ? styles.filterBtnActive : ''}`}
+          </Button>
+          <Button
+            variant={selectedRole === 'tech' ? 'primary' : 'outline'}
+            size="sm"
             onClick={() => setSelectedRole('tech')}
           >
             Technical Wing
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -118,16 +119,17 @@ export const DirectoryFallback: React.FC = () => {
           <p className={styles.noResultsDesc}>
             No chapter member matches the query &quot;{searchQuery}&quot;. Please adjust your filter or check the member ID format (e.g. IEI-GST-2025-001).
           </p>
-          <button
+          <Button
             type="button"
-            className={styles.resetBtn}
+            variant="outline"
+            size="sm"
             onClick={() => {
               setSearchQuery('');
               setSelectedRole('all');
             }}
           >
             Reset Filters
-          </button>
+          </Button>
         </div>
       )}
     </div>

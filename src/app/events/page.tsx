@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/Button/Button';
 import { PageHeader } from '@/components/layout/PageHeader/PageHeader';
 import { placeholderEvents } from '@/data/events';
 import { formatDate } from '@/lib/utils/format';
@@ -39,7 +40,7 @@ export default function EventsPage() {
         metadataItems={[
           { label: 'Academic Term', value: '2024–2025' },
           { label: 'Venue', value: 'SIES GST Navi Mumbai' },
-          { label: 'Chapter Code', value: 'MH-04' },
+          { label: 'Department', value: 'ECS Engineering' },
         ]}
       />
 
@@ -75,10 +76,14 @@ export default function EventsPage() {
                 <p className={styles.featuredSummary}>{featuredEvent.description}</p>
 
                 <div className={styles.actionRow}>
-                  <Link href={`/events/${featuredEvent.slug}`} className={styles.primaryAction}>
-                    <span>Access Event Dossier & Schedule</span>
-                    <ArrowRight size={15} />
-                  </Link>
+                  <Button
+                    href={`/events/${featuredEvent.slug}`}
+                    variant="primary"
+                    size="md"
+                    rightIcon={<ArrowRight size={15} />}
+                  >
+                    Access Event Dossier & Schedule
+                  </Button>
                 </div>
               </div>
             </div>
@@ -92,16 +97,16 @@ export default function EventsPage() {
             {categories.map((cat) => {
               const isActive = cat.id === selectedCategory;
               return (
-                <button
+                <Button
                   key={cat.id}
-                  type="button"
+                  variant={isActive ? 'primary' : 'outline'}
+                  size="sm"
                   role="tab"
                   aria-selected={isActive}
-                  className={`${styles.filterBtn} ${isActive ? styles.filterActive : ''}`}
                   onClick={() => setSelectedCategory(cat.id)}
                 >
                   {cat.label}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -133,14 +138,15 @@ export default function EventsPage() {
                   </div>
 
                   <div className={styles.rowAction}>
-                    <Link
+                    <Button
                       href={`/events/${event.slug}`}
-                      className={styles.rowInspectLink}
+                      variant="outline"
+                      size="sm"
+                      rightIcon={<ArrowRight size={14} />}
                       aria-label={`View dossier: ${event.title}`}
                     >
-                      <span>View Dossier</span>
-                      <ArrowRight size={14} />
-                    </Link>
+                      View Dossier
+                    </Button>
                   </div>
                 </article>
               );

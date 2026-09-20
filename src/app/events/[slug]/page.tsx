@@ -8,6 +8,7 @@ import { Container } from '@/components/layout/Container/Container';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { formatDate } from '@/lib/utils/format';
 import { Calendar, MapPin, Clock, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
 import styles from './eventDetail.module.css';
 
 interface EventPageProps {
@@ -64,10 +65,9 @@ export default async function EventDetailPage({ params }: EventPageProps) {
           { label: 'Status', value: event.status.toUpperCase() },
         ]}
         actions={
-          <Link href="/events" className={styles.backLink}>
-            <ArrowLeft size={14} />
-            <span>Return to Events Archive</span>
-          </Link>
+          <Button href="/events" variant="outline" size="sm" leftIcon={<ArrowLeft size={14} />}>
+            Return to Events Archive
+          </Button>
         }
       />
 
@@ -144,10 +144,9 @@ export default async function EventDetailPage({ params }: EventPageProps) {
 
                 <div className={styles.regBlock}>
                   {event.registrationOpen ? (
-                    <button type="button" className={styles.regBtn}>
-                      <span>Registration Open</span>
-                      <ArrowRight size={14} />
-                    </button>
+                    <Button type="button" variant="primary" size="md" rightIcon={<ArrowRight size={14} />} fullWidth>
+                      Registration Open
+                    </Button>
                   ) : (
                     <div className={styles.closedPill}>Registration Closed</div>
                   )}

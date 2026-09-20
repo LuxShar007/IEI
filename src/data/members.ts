@@ -33,7 +33,7 @@ export const placeholderMembers: Member[] = [
     metadata: {
       joinDate: '2023-08-01',
       termSession: '2024-2025',
-      chapterBranch: 'SIES GST Student Chapter (MH-04)',
+      chapterBranch: 'SIES GST Student Chapter (ECS)',
       rolesHeld: ['Technical Lead (2023)', 'President (2024)'],
     },
   },
@@ -64,7 +64,7 @@ export const placeholderMembers: Member[] = [
     metadata: {
       joinDate: '2023-09-10',
       termSession: '2024-2025',
-      chapterBranch: 'SIES GST Student Chapter (MH-04)',
+      chapterBranch: 'SIES GST Student Chapter (ECS)',
     },
   },
   {
@@ -94,7 +94,7 @@ export const placeholderMembers: Member[] = [
     metadata: {
       joinDate: '2023-08-01',
       termSession: '2024-2025',
-      chapterBranch: 'SIES GST Student Chapter (MH-04)',
+      chapterBranch: 'SIES GST Student Chapter (ECS)',
       rolesHeld: ['Event Lead (2023)', 'Vice President (2024)'],
     },
   },
@@ -124,7 +124,7 @@ export const placeholderMembers: Member[] = [
     metadata: {
       joinDate: '2023-08-15',
       termSession: '2024-2025',
-      chapterBranch: 'SIES GST Student Chapter (MH-04)',
+      chapterBranch: 'SIES GST Student Chapter (ECS)',
     },
   },
 ];
