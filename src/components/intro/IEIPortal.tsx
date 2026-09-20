@@ -15,11 +15,14 @@ export const IEIPortal: React.FC<IEIPortalProps> = ({
   reducedMotion = false,
   children,
 }) => {
-  // STAGE 08 — Monolith I E I Opacity (0.58 -> 0.98)
+  // STAGE 08 — Monolith I E I Opacity:
+  // 0.60 -> 0.70: Solidifies and scales up
+  // 0.86 -> 0.96: Opacity decreases progressively as camera enters
+  // 0.98 -> 1.00: Completely disappears
   const monolithOpacity = useTransform(
     progress,
-    [0.58, 0.64, 0.92, 0.98],
-    [0, 1, 1, 0]
+    [0.58, 0.65, 0.86, 0.96, 0.99],
+    [0, 1, 1, 0.2, 0]
   );
 
   // STAGE 09 & 10 — Camera Physics (Scale, TranslateZ, Perspective, Parallax)
@@ -68,16 +71,19 @@ export const IEIPortal: React.FC<IEIPortalProps> = ({
 
   // STAGE 12 & 13 — Background Homepage Reveal
   // Exists behind/inside the letter before pass-through!
+  // 0.75: begins appearing behind IEI
+  // 0.88: strongly visible
+  // 0.98 -> 1.00: 100% full takeover
   const homepageOpacity = useTransform(
     progress,
-    [0.64, 0.75, 0.88, 0.96],
-    [0, 0.35, 0.85, 1]
+    [0.72, 0.82, 0.92, 0.98],
+    [0, 0.3, 0.85, 1.0]
   );
 
   const homepageScale = useTransform(
     progress,
-    [0.72, 0.90, 0.98],
-    [reducedMotion ? 1 : 0.88, reducedMotion ? 1 : 0.96, 1]
+    [0.75, 0.92, 0.99],
+    [reducedMotion ? 1 : 0.92, reducedMotion ? 1 : 0.98, 1.0]
   );
 
   // Portal atmospheric light glow

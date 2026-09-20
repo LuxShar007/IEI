@@ -11,6 +11,17 @@
   overflow: hidden;
 }
 
+.hero.backdropMode {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
 .layout {
   flex: 1;
   display: grid;

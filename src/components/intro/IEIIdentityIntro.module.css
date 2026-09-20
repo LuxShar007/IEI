@@ -221,3 +221,48 @@
   background: #003eb3;
 }
 
+/* Visual Markers for Intro Start and End in Development */
+.debugMarkerStart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #00FF88;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.debugMarkerStart::after {
+  content: '▼ INTRO START (0%)';
+  position: absolute;
+  top: 4px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: #00FF88;
+  letter-spacing: 0.14em;
+}
+
+.debugMarkerEnd {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #FF0055;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.debugMarkerEnd::after {
+  content: '▲ INTRO END / HOMEPAGE RELEASE (100%)';
+  position: absolute;
+  bottom: 4px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: #FF0055;
+  letter-spacing: 0.14em;
+}
+

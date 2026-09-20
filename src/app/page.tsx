@@ -11,14 +11,14 @@ import { FinalCTA } from '@/components/home/FinalCTA/FinalCTA';
 export default function HomePage() {
   return (
     <>
-      {/* 00-14 — CINEMATIC IDENTITY INTRO -> 3D PORTAL -> HOMEPAGE HERO */}
+      {/* 00-14 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) */}
       <IEIIdentityIntro>
-        <Hero />
+        <Hero mode="backdrop" />
       </IEIIdentityIntro>
 
-      {/* 01 — HOMEPAGE HERO (Document Flow Release Point) */}
+      {/* 01-07 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow) */}
       <main id="homepage-main">
-        <Hero />
+        <Hero mode="normal" />
 
         {/* 02 — CHAPTER PHILOSOPHY (M3-inspired principle-led) */}
         <ChapterPhilosophy />

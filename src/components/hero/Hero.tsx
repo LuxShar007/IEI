@@ -30,7 +30,11 @@ const fadeVariant = {
   }),
 };
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  mode?: 'normal' | 'backdrop';
+}
+
+export const Hero: React.FC<HeroProps> = ({ mode = 'normal' }) => {
   const { theme } = useTheme();
   const { isIntroActive } = useIntro();
   const sectionRef = useRef<HTMLElement>(null);
@@ -41,26 +45,32 @@ export const Hero: React.FC = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Decoupled: remain in pristine resting state during intro!
+  // Decoupled: remain in pristine resting state during intro or in backdrop mode!
+  const isLockedResting = isIntroActive || mode === 'backdrop' || shouldReduceMotion;
+
   const textY = useTransform(scrollYProgress, (p) => {
-    if (isIntroActive || shouldReduceMotion) return 0;
+    if (isLockedResting) return 0;
     return p * 80;
   });
   const textOpacity = useTransform(scrollYProgress, (p) => {
-    if (isIntroActive || shouldReduceMotion) return 1;
+    if (isLockedResting) return 1;
     return p >= 0.7 ? 0 : 1 - (p / 0.7);
   });
   const visualY = useTransform(scrollYProgress, (p) => {
-    if (isIntroActive || shouldReduceMotion) return 0;
+    if (isLockedResting) return 0;
     return p * 120;
   });
   const visualOpacity = useTransform(scrollYProgress, (p) => {
-    if (isIntroActive || shouldReduceMotion) return 1;
+    if (isLockedResting) return 1;
     return p >= 0.85 ? 0.1 : 1 - ((p / 0.85) * 0.9);
   });
 
   return (
-    <section ref={sectionRef} className={styles.hero} aria-label="IEI SIES GST — Hero">
+    <section
+      ref={sectionRef}
+      className={`${styles.hero} ${mode === 'backdrop' ? styles.backdropMode : ''}`}
+      aria-label="IEI SIES GST — Hero"
+    >
       <div className={styles.layout}>
         {/* LEFT — EDITORIAL TEXT */}
         <motion.div
