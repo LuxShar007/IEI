@@ -1,0 +1,64 @@
+.eventsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .eventsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  height: 100%;
+}
+
+.cardInner {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dateText {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+}
+
+.eventTitle {
+  font-size: var(--text-heading-md);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+}
+
+.eventTagline {
+  font-size: var(--text-body-sm);
+  color: var(--fg-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.venueRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+  margin-top: auto;
+}
+
+.cardFooter {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}

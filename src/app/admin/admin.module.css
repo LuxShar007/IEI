@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.noticeCard {
+  padding: var(--space-6);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.noticeHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.lockIcon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--accent-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.noticeTitle {
+  font-size: var(--text-heading-md);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  margin-bottom: var(--space-1);
+}
+
+.noticeDesc {
+  font-size: var(--text-body-sm);
+  color: var(--fg-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.noticeDesc code {
+  color: var(--accent-bright);
+}
+
+.entityGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .entityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.entityCard {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.entityHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconBox {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-bright);
+}
+
+.entityTitle {
+  font-size: var(--text-heading-md);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+}
+
+.entityMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+}
+
+.metaLabel {
+  font-size: 0.6rem;
+  letter-spacing: var(--tracking-wider);
+}
+
+.entityMeta code {
+  color: var(--accent-bright);
+}
+
+.entityFooter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.checkIcon {
+  color: var(--accent-verified);
+}
+
+.statusText {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--fg-secondary);
+}

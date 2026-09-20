@@ -1,0 +1,62 @@
+.switcherContainer {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+  user-select: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.switchBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.btnLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  transition: color 0.25s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.switchBtn.active .btnLabel {
+  color: var(--fg-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.activePill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .switchBtn {
+    padding: 3px 8px;
+  }
+
+  .btnLabel {
+    font-size: var(--text-micro);
+  }
+}

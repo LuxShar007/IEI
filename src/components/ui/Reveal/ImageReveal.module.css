@@ -1,0 +1,13 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-elevated);
+  width: 100%;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}

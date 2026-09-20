@@ -1,0 +1,111 @@
+.section {
+  padding: var(--section-padding-lg) 0;
+}
+
+.inner {
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.sectionLabel {
+  margin-bottom: var(--space-20);
+}
+
+/* ==========================================================================
+   PRINCIPLES STACK
+   ========================================================================== */
+.principlesStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.principle {
+  will-change: opacity, transform;
+}
+
+.principleLayout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: start;
+  gap: var(--space-12);
+  padding: var(--space-16) 0;
+}
+
+/* Horizontal divider line */
+.dividerLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* NUMBER — oversized, muted */
+.num {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-md);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  letter-spacing: var(--tracking-tighter);
+  color: var(--fg-subtle);
+  padding-top: var(--space-2);
+}
+
+/* CONTENT */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 640px;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--fg-primary);
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--fg-secondary);
+  max-width: 52ch;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+  .principleLayout {
+    grid-template-columns: 72px 1fr;
+    gap: var(--space-6);
+    padding: var(--space-12) 0;
+  }
+
+  .num {
+    font-size: var(--text-display-md);
+  }
+
+  .title {
+    font-size: var(--text-display-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .principleLayout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .num {
+    font-size: var(--text-heading-xl);
+    color: var(--accent);
+  }
+}

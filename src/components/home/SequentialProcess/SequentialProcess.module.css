@@ -1,0 +1,262 @@
+/* ==========================================================================
+   SEQUENTIAL PROCESS — LinusBio-inspired pinned scroll section
+   ========================================================================== */
+
+/* The section is tall to provide scroll-driven interaction space */
+.section {
+  position: relative;
+  /* 6 stages × 100vh each — provides scroll-driven triggering */
+  height: calc(var(--stage-count, 6) * 100vh);
+  background: var(--bg-secondary);
+}
+
+.topLabel {
+  position: absolute;
+  top: var(--space-16);
+  left: clamp(1.25rem, 4vw, 3rem);
+  z-index: 10;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   STICKY VIEWPORT COMPOSITION
+   ========================================================================== */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.stageLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 5rem);
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  padding-top: calc(var(--navbar-height) + var(--space-8));
+}
+
+/* ==========================================================================
+   LEFT — STAGE IDENTITY
+   ========================================================================== */
+.stageIdentity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.identityInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bigNum {
+  font-family: var(--font-sans);
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tightest);
+  color: var(--accent);
+  user-select: none;
+}
+
+.stageTitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-md);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--fg-primary);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   CENTER — VISUAL AREA
+   ========================================================================== */
+.visualArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  max-height: 70vh;
+}
+
+.svgWrap {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.stageSvg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   RIGHT — DESCRIPTION + NAV
+   ========================================================================== */
+.stageDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.stageDesc {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--fg-secondary);
+  max-width: 44ch;
+}
+
+/* STAGE NAV */
+.stageNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.stageNavItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.stageNavItem:hover .stageNavNum,
+.stageNavItem:hover .stageNavTitle {
+  color: var(--fg-primary);
+}
+
+.stageNavActive .stageNavNum {
+  color: var(--accent);
+}
+
+.stageNavActive .stageNavTitle {
+  color: var(--fg-primary);
+}
+
+.stageNavNum {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-subtle);
+  min-width: 28px;
+  transition: color var(--duration-normal) var(--ease-out);
+}
+
+.stageNavTitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--fg-muted);
+  transition: color var(--duration-normal) var(--ease-out);
+}
+
+.stageNavBar {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
+
+/* PROGRESS */
+.progressTrack {
+  height: 1px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
+
+/* ==========================================================================
+   RESPONSIVE — Mobile: no pinning, stacked
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .section {
+    height: auto;
+  }
+
+  .topLabel {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: var(--space-16) clamp(1.25rem, 4vw, 3rem) var(--space-8);
+  }
+
+  .sticky {
+    position: relative;
+    height: auto;
+    padding: var(--space-12) 0;
+  }
+
+  .stageLayout {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .stageIdentity {
+    min-height: auto;
+  }
+
+  .bigNum {
+    font-size: clamp(4rem, 16vw, 7rem);
+  }
+
+  .visualArea {
+    max-height: 300px;
+  }
+
+  .stageDesc {
+    max-width: none;
+  }
+
+  /* Show manual nav on mobile instead of scroll-driven */
+  .stageNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .stageNavItem {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+  }
+
+  .stageNavBar {
+    display: none;
+  }
+
+  .stageNavActive {
+    border-color: var(--accent-border);
+    background: var(--accent-subtle);
+  }
+}
