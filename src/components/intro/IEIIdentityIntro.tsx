@@ -3,7 +3,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, useMotionValue, useTransform, useReducedMotion } from 'framer-motion';
 import { useIntro } from '@/lib/intro/IntroContext';
-import { useSmoothScroll } from '@/components/layout/SmoothScrollProvider';
 import { IEIConstruction } from './IEIConstruction';
 import { IEI3DStack } from './IEI3DStack';
 import { IdentityTypography } from './IdentityTypography';
@@ -18,20 +17,14 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
   const trackRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { setIntroProgress, skipIntro } = useIntro();
-  const { pauseLenis, resumeLenis } = useSmoothScroll();
 
-  // MotionValue driven by native scroll — no Lenis interference
+  // MotionValue driven by native window scroll — 100% unblocked mouse wheel
   const scrollYProgress = useMotionValue(0);
 
   const [currentProgress, setCurrentProgress] = useState(0);
-  const [currentScene, setCurrentScene] = useState('LINE DRAW');
+  const [currentScene, setCurrentScene] = useState('00 INITIAL IDENTITY');
   const [isQAMode, setIsQAMode] = useState(false);
   const isDev = process.env.NODE_ENV === 'development';
-
-  // Pause Lenis on mount. The scroll listener will re-enable it once intro is done.
-  useEffect(() => {
-    pauseLenis();
-  }, [pauseLenis]);
 
   // Core native scroll handler — 1:1 physical continuity, zero lag
   const handleScroll = useCallback(() => {
@@ -69,15 +62,7 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
     else if (progress < 0.98) setCurrentScene('15 IEI DISAPPEARS');
     else if (progress < 1.00) setCurrentScene('16 HOMEPAGE FULL TAKEOVER');
     else setCurrentScene('17 INTRO RELEASE');
-
-    // Handoff: re-enable Lenis when scroll exits the intro track (World 2 begin)
-    if (progress >= 0.99) {
-      resumeLenis();
-    } else {
-      // If scrolling back into intro zone, pause Lenis so intro remains 1:1 deterministic
-      pauseLenis();
-    }
-  }, [scrollYProgress, setIntroProgress, pauseLenis, resumeLenis]);
+  }, [scrollYProgress, setIntroProgress]);
 
   useEffect(() => {
     handleScroll(); // Set initial state immediately
@@ -85,9 +70,8 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      resumeLenis(); // Always restore Lenis on unmount
     };
-  }, [handleScroll, resumeLenis]);
+  }, [handleScroll]);
 
   // Derived opacity values for UI chrome
   const skipBtnOpacity = useTransform(scrollYProgress, [0, 0.05, 0.78, 0.88], [0, 1, 1, 0]);
@@ -160,7 +144,15 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
 
         {isDev && (
           <div className={styles.debugOverlay} aria-label="Development Debug Overlay">
-            <div className={styles.debugHeader}>INTRO</div>
+            <div className={styles.debugHeader}>INTRO DIAGNOSTICS</div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>scroll:</span>
+              <span style={{ color: '#00FF88' }}>ENABLED (window)</span>
+            </div>
+            <div className={styles.debugRow}>
+              <span className={styles.debugLabel}>lenis:</span>
+              <span>ACTIVE</span>
+            </div>
             <div className={styles.debugRow}>
               <span className={styles.debugLabel}>progress:</span>
               <span>{currentProgress.toFixed(2)}</span>

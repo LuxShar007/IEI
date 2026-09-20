@@ -59,13 +59,9 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
     };
   }, []);
 
-  const pauseLenis = () => {
-    if (lenisRef.current) lenisRef.current.stop();
-  };
-
-  const resumeLenis = () => {
-    if (lenisRef.current) lenisRef.current.start();
-  };
+  // Never stop Lenis as that cancels wheel input via preventDefault() and locks document overflow
+  const pauseLenis = () => {};
+  const resumeLenis = () => {};
 
   return (
     <SmoothScrollContext.Provider value={{ lenis: lenisInstance, pauseLenis, resumeLenis }}>

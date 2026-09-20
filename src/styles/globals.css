@@ -26,10 +26,10 @@ html[data-theme="alternative"] {
   color-scheme: dark;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+/* Ensure default document permits continuous vertical scrolling without conflict */
+html {
+  overflow-x: clip;
+  overflow-y: auto;
 }
 
 body {
@@ -40,6 +40,7 @@ body {
   font-size: var(--text-body-md);
   line-height: var(--line-height-normal);
   overflow-x: clip;
+  overflow-y: visible;
   position: relative;
   font-feature-settings: 'kern' 1, 'liga' 1, 'tnum' 0;
   transition: background-color 450ms cubic-bezier(0.16, 1, 0.3, 1),

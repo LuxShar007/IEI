@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 /* 3D Camera Stage */
@@ -24,6 +25,7 @@
   transform-style: preserve-3d;
   z-index: 3;
   will-change: transform;
+  pointer-events: none;
 }
 
 /* BACKGROUND HOMEPAGE LAYER (Exists behind/inside letter portal) */

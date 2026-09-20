@@ -20,7 +20,7 @@ export default function HomePage() {
       </IEIIdentityIntro>
 
       {/* 01-09 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow after Intro Release) */}
-      <main id="homepage-main">
+      <div id="homepage-main">
         {/* 02 — ABOUT IEI SIES GST (Asymmetrical Editorial Split) */}
         <AboutComposition />
 
@@ -47,7 +47,7 @@ export default function HomePage() {
 
         {/* 10 — FINAL CTA / CONTACT (Institutional Statement & 4 Informational CTAs) */}
         <FinalCTA />
-      </main>
+      </div>
     </>
   );
 }
