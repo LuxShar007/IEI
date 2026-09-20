@@ -1,40 +1,68 @@
 /* ==========================================================================
-   ACTIVITIES PAGE — LinusBio-Inspired Stage-Based Sequential Architecture
+   ACTIVITIES PAGE — Type B Sequential Showcase Scroll Architecture
+   Outer scroll track + inner sticky viewport-locked stage.
+   All original editorial styles preserved exactly.
    ========================================================================== */
 
 .page {
   background-color: var(--bg-primary);
 }
 
-.inner {
-  max-width: var(--container-2xl);
-  margin: 0 auto;
-  padding: 0 clamp(1.25rem, 4vw, 3rem);
+/* ==========================================================================
+   SCROLL ARCHITECTURE
+   ========================================================================== */
+.showcaseTrack {
+  position: relative;
+  height: var(--scroll-vh, 800vh);
+  background-color: var(--bg-primary);
+}
+
+.stickyStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-primary);
 }
 
 /* ==========================================================================
-   STAGE SECTION & NAVIGATION RAIL
+   STAGE SECTION (fits inside sticky stage)
    ========================================================================== */
 .stageSection {
-  padding: clamp(3rem, 6vw, 6rem) 0;
-  border-bottom: 1px solid var(--border-default);
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
+.inner {
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3vh, 3rem) clamp(1.25rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.5vh, 2.5rem);
+}
+
+/* ==========================================================================
+   STAGE INDEX RAIL (progress indicators + click-to-navigate)
+   ========================================================================== */
 .stageRail {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 1px;
   background-color: var(--border-default);
   border: 1px solid var(--border-default);
-  margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .railItem {
   background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-4);
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-3);
   text-align: left;
   border: none;
   cursor: pointer;
@@ -50,6 +78,10 @@
 
 .railActive {
   background-color: var(--surface-card);
+}
+
+.railPast {
+  background-color: var(--surface-base);
 }
 
 .railTop {
@@ -69,6 +101,10 @@
   color: var(--accent);
 }
 
+.railPast .railNum {
+  color: var(--fg-subtle);
+}
+
 .railCategory {
   font-family: var(--font-sans);
   font-size: 0.5625rem;
@@ -80,7 +116,7 @@
 
 .railTitle {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-medium);
   color: var(--fg-secondary);
   line-height: 1.4;
@@ -101,16 +137,17 @@
 }
 
 /* ==========================================================================
-   ACTIVE STAGE IMMERSIVE COMPOSITION
+   ACTIVE STAGE COMPOSITION
    ========================================================================== */
 .activeStageWrapper {
-  min-height: 520px;
+  flex: 1;
+  min-height: 0;
 }
 
 .stageGrid {
   display: grid;
   grid-template-columns: 1.15fr 1.35fr;
-  gap: clamp(2.5rem, 6vw, 6rem);
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
 
@@ -119,6 +156,7 @@
   position: relative;
   aspect-ratio: 4/3;
   width: 100%;
+  max-height: 52vh;
   background-color: var(--surface-card);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-xs);
@@ -221,7 +259,8 @@
 .stageContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
+  overflow: hidden;
 }
 
 .contentHeader {
@@ -247,7 +286,7 @@
 
 .stageTitle {
   font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
   color: var(--fg-primary);
@@ -256,7 +295,7 @@
 
 .leadStatement {
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--fg-primary);
   font-weight: var(--font-weight-medium);
@@ -264,7 +303,7 @@
 
 .stageDescription {
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: var(--fg-secondary);
 }
@@ -299,7 +338,7 @@
   align-items: flex-start;
   gap: var(--space-3);
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--fg-secondary);
   line-height: 1.5;
 }
@@ -307,7 +346,7 @@
 .checkIcon {
   color: var(--status-verified);
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 /* TOOLCHAIN */
@@ -351,12 +390,15 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding-top: var(--space-6);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--border-default);
-  margin-top: var(--space-2);
+  margin-top: auto;
 }
 
 .prevBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: var(--font-weight-medium);
@@ -365,7 +407,7 @@
   color: var(--fg-secondary);
   background: none;
   border: 1px solid var(--border-default);
-  padding: 0.45rem 0.9rem;
+  padding: 0.4rem 0.85rem;
   border-radius: var(--radius-xs);
   cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-out);
@@ -381,6 +423,34 @@
   color: var(--fg-primary);
 }
 
+/* MINI PROGRESS RAIL */
+.miniRail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.miniDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-strong);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    width var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.miniDotActive {
+  background-color: var(--accent);
+  width: 18px;
+  border-radius: 3px;
+}
+
+.miniDotPast {
+  background-color: var(--fg-subtle);
+}
+
 .nextBtn {
   display: inline-flex;
   align-items: center;
@@ -393,7 +463,7 @@
   color: var(--bg-primary);
   background-color: var(--fg-primary);
   border: 1px solid var(--fg-primary);
-  padding: 0.45rem 1rem;
+  padding: 0.4rem 0.95rem;
   border-radius: var(--radius-xs);
   cursor: pointer;
   transition:
@@ -413,6 +483,99 @@
 }
 
 /* ==========================================================================
+   SCROLL CUES
+   ========================================================================== */
+.scrollCue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.scrollCueText {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.scrollCueLine {
+  width: 1px;
+  height: 28px;
+  background: var(--border-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollCueFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: scrollDown 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.releaseCue {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  pointer-events: none;
+}
+
+.releaseCueText {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ==========================================================================
+   DEVELOPMENT DEBUG OVERLAY
+   ========================================================================== */
+.debugOverlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(10, 10, 15, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: #00FF88;
+  pointer-events: none;
+}
+
+.debugRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.debugLabel {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -422,13 +585,39 @@
 
   .stageGrid {
     grid-template-columns: 1fr;
-    gap: var(--space-8);
+    gap: var(--space-6);
+  }
+
+  .stageVisualFrame {
+    aspect-ratio: 16/7;
+    max-height: 28vh;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  /* Collapse scroll track — mobile uses prev/next nav, no pinning */
+  .showcaseTrack {
+    height: auto;
+  }
+
+  .stickyStage {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .stageSection {
+    max-height: none;
+    overflow: visible;
+  }
+
   .stageRail {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stageGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
 
   .stageNavControls {
@@ -439,5 +628,25 @@
   .nextBtn,
   .prevBtn {
     justify-content: center;
+  }
+
+  .scrollCue,
+  .releaseCue,
+  .debugOverlay {
+    display: none;
+  }
+
+  .stageVisualFrame {
+    aspect-ratio: 16/7;
+  }
+}
+
+@media (max-width: 480px) {
+  .stageRail {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .railTitle {
+    display: none;
   }
 }

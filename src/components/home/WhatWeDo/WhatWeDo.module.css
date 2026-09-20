@@ -1,11 +1,43 @@
 /* ==========================================================================
-   WHAT WE DO — Section 04 Interactive Editorial List
+   WHAT WE DO — Section 04 — Type B Sequential Showcase
+   Scroll Architecture: outer track (height = scroll budget) +
+   inner sticky stage (viewport-locked). All existing editorial
+   styles preserved exactly.
+   ========================================================================== */
+
+/* ==========================================================================
+   SCROLL ARCHITECTURE — OUTER TRACK & STICKY STAGE
+   ========================================================================== */
+
+.showcaseTrack {
+  position: relative;
+  /* CSS custom property set via React inline style: --scroll-vh */
+  height: var(--scroll-vh, 700vh);
+  background-color: var(--bg-primary);
+}
+
+.stickyStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-default);
+}
+
+/* ==========================================================================
+   SECTION WRAPPER (fits inside sticky stage)
    ========================================================================== */
 
 .section {
-  padding: var(--section-padding-md) 0;
-  border-bottom: 1px solid var(--border-default);
-  background-color: var(--bg-primary);
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  padding: clamp(2rem, 3.5vh, 3.5rem) 0;
 }
 
 .inner {
@@ -14,7 +46,7 @@
   padding: 0 clamp(1.25rem, 4vw, 3rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 4rem);
+  gap: clamp(1.75rem, 3vh, 3rem);
 }
 
 /* ==========================================================================
@@ -85,7 +117,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-6);
-  padding: var(--space-6) 0;
+  padding: var(--space-5) 0;
   border-bottom: 1px solid var(--border-subtle);
   background: transparent;
   border-left: none;
@@ -127,7 +159,7 @@
 
 .rowTitle {
   font-family: var(--font-sans);
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.375rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.01em;
   color: var(--fg-secondary);
@@ -166,16 +198,17 @@
 
 /* DISPLAY COLUMN */
 .displayColumn {
-  position: sticky;
-  top: calc(var(--navbar-height) + var(--space-8));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
 }
 
 .displayCard {
   border: 1px solid var(--border-default);
-  padding: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5);
   background-color: var(--surface-card);
   border-radius: var(--radius-xs);
 }
@@ -209,7 +242,7 @@
 
 .cardTitle {
   font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
   color: var(--fg-primary);
@@ -227,7 +260,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding-top: var(--space-6);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -256,10 +289,151 @@
   border-radius: var(--radius-xs);
 }
 
+/* PROGRESS DOT RAIL */
+.progressRail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: flex-start;
+}
+
+.progressDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    width var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.progressDotActive {
+  background-color: var(--accent);
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* SCROLL CUE */
+.scrollCue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.scrollCueText {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.scrollCueLine {
+  width: 1px;
+  height: 28px;
+  background: var(--border-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollCueFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: scrollDown 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* RELEASE CUE */
+.releaseCue {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  pointer-events: none;
+}
+
+.releaseCueText {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
 /* ==========================================================================
-   RESPONSIVE
+   DEVELOPMENT DEBUG OVERLAY
    ========================================================================== */
-@media (max-width: 960px) {
+.debugOverlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(10, 10, 15, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: #00FF88;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.debugRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.debugLabel {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   MOBILE — < 768px: no pinning, stacked layout, click to navigate
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Collapse the scroll track to natural height on mobile */
+  .showcaseTrack {
+    height: auto;
+  }
+
+  /* Unstick on mobile */
+  .stickyStage {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: var(--section-padding-sm) 0;
+  }
+
+  .section {
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+  }
+
   .splitLayout {
     grid-template-columns: 1fr;
     gap: var(--space-8);
@@ -267,5 +441,11 @@
 
   .displayColumn {
     position: static;
+  }
+
+  .scrollCue,
+  .releaseCue,
+  .debugOverlay {
+    display: none;
   }
 }
