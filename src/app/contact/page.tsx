@@ -2,16 +2,16 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { PageHeader } from '@/components/layout/PageHeader/PageHeader';
 import { Section } from '@/components/layout/Section/Section';
-import { Card } from '@/components/ui/Card/Card';
 import { Button } from '@/components/ui/Button/Button';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { siteConfig } from '@/data/site';
-import { Mail, MapPin, Building2, Send } from 'lucide-react';
+import { Mail, MapPin, Building2, Send, Clock, Globe } from 'lucide-react';
 import styles from './contact.module.css';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Contact Chapter',
-  description: 'Reach out to the IEI SIES GST student council, faculty advisors, or administrative wing.',
+  title: 'Contact IEI SIES GST Chapter Office',
+  description:
+    'Official correspondence channels for student inquiries, inter-college symposium collaborations, and institutional verification.',
   path: '/contact',
 });
 
@@ -19,67 +19,80 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader
-        eyebrow="COMMUNICATION CHANNELS"
-        title="Contact IEI SIES GST"
-        description="Official correspondence channels for student inquiries, inter-college symposium collaborations, and institutional verification."
-        badge="HEADQUARTERS"
+        number="07 / 07"
+        eyebrow="INSTITUTIONAL DIRECTORY • CONTACT CHANNELS"
+        title="Contact Chapter Administration"
+        description="Official correspondence channels for academic partnerships, symposium inquiries, technical collaborations, and institutional verification."
+        badge="CAMPUS HQ"
         breadcrumbs={[{ label: 'Contact' }]}
       />
 
-      <Section id="contact-details" padding="lg" hasGridBackground>
+      <Section id="contact-details" padding="lg">
         <div className={styles.layoutGrid}>
           {/* CONTACT INFO */}
           <div className={styles.infoCol}>
-            <span className="overline">CAMPUS HEADQUARTERS</span>
-            <h2 className={styles.infoTitle}>Connect with Chapter Officers</h2>
+            <span className={styles.colOverline}>OFFICIAL COMMUNICATIONS</span>
+            <h2 className={styles.infoTitle}>Connect with Chapter Officers & Faculty</h2>
             <p className={styles.infoLead}>
-              We welcome inquiries regarding upcoming technical events, project partnerships, and chapter membership.
+              We welcome inquiries regarding collegiate engineering workshops, state-level technical symposia, research collaborations, and credential verification.
             </p>
 
             <div className={styles.channelsList}>
-              <Card variant="default" hasCornerAccents className={styles.channelCard}>
+              <div className={styles.channelTile}>
                 <MapPin className={styles.channelIcon} />
-                <div>
+                <div className={styles.tileContent}>
                   <span className={styles.channelLabel}>CAMPUS LOCATION</span>
                   <span className={styles.channelValue}>
-                    SIES Graduate School of Technology, Sri Chandrasekarendra Saraswati Vidyapuram, Sector-V, Nerul, Navi Mumbai - 400706
+                    SIES Graduate School of Technology, Sri Chandrasekarendra Saraswati Vidyapuram, Sector-V, Nerul, Navi Mumbai – 400706, Maharashtra, India
                   </span>
                 </div>
-              </Card>
+              </div>
 
-              <Card variant="default" hasCornerAccents className={styles.channelCard}>
+              <div className={styles.channelTile}>
                 <Building2 className={styles.channelIcon} />
-                <div>
-                  <span className={styles.channelLabel}>CHAPTER OFFICE</span>
+                <div className={styles.tileContent}>
+                  <span className={styles.channelLabel}>DEPARTMENT HEADQUARTERS</span>
                   <span className={styles.channelValue}>
-                    IEI Student Chapter Room, Department of Computer Engineering
+                    Department of Electronics & Computer Science Engineering (ECS), Ground Floor Engineering Annex
                   </span>
                 </div>
-              </Card>
+              </div>
 
-              <Card variant="default" hasCornerAccents className={styles.channelCard}>
+              <div className={styles.channelTile}>
                 <Mail className={styles.channelIcon} />
-                <div>
-                  <span className={styles.channelLabel}>OFFICIAL CORRESPONDENCE</span>
-                  <span className={styles.channelValue}>{siteConfig.links.email}</span>
+                <div className={styles.tileContent}>
+                  <span className={styles.channelLabel}>OFFICIAL CHAPTER CORRESPONDENCE</span>
+                  <a href={`mailto:${siteConfig.links.email}`} className={styles.emailLink}>
+                    {siteConfig.links.email}
+                  </a>
                 </div>
-              </Card>
+              </div>
+
+              <div className={styles.channelTile}>
+                <Clock className={styles.channelIcon} />
+                <div className={styles.tileContent}>
+                  <span className={styles.channelLabel}>OFFICIAL INQUIRY HOURS</span>
+                  <span className={styles.channelValue}>
+                    Monday – Friday: 09:00 to 17:00 IST (During Academic Sessions)
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* INQUIRY FORM SHELL */}
           <div className={styles.formCol}>
-            <Card variant="elevated" hasCornerAccents className={styles.formCard}>
-              <span className="overline">DIRECT INQUIRY</span>
-              <h3 className={styles.formTitle}>Send a Message</h3>
+            <div className={styles.formContainer}>
+              <span className={styles.colOverline}>DIRECT CORRESPONDENCE</span>
+              <h3 className={styles.formTitle}>Institutional Inquiry Form</h3>
               <p className={styles.formSubtitle}>
-                Leave your details and message for the executive committee.
+                Submit academic and technical correspondence directly to chapter administration.
               </p>
 
               <form className={styles.form}>
                 <div className={styles.fieldGroup}>
                   <label htmlFor="contactName" className={styles.label}>
-                    Your Name
+                    FULL NAME
                   </label>
                   <input
                     id="contactName"
@@ -91,47 +104,47 @@ export default function ContactPage() {
 
                 <div className={styles.fieldGroup}>
                   <label htmlFor="contactEmail" className={styles.label}>
-                    Email Address
+                    INSTITUTIONAL EMAIL
                   </label>
                   <input
                     id="contactEmail"
                     type="email"
                     required
-                    placeholder="your.email@example.com"
+                    placeholder="student@siesgst.ac.in"
                     className={styles.input}
                   />
                 </div>
 
                 <div className={styles.fieldGroup}>
                   <label htmlFor="contactSubject" className={styles.label}>
-                    Subject
+                    SUBJECT / NATURE OF INQUIRY
                   </label>
                   <input
                     id="contactSubject"
                     required
-                    placeholder="e.g. Workshop Inquiry"
+                    placeholder="e.g. Technical Workshop Inquiry"
                     className={styles.input}
                   />
                 </div>
 
                 <div className={styles.fieldGroup}>
                   <label htmlFor="contactMessage" className={styles.label}>
-                    Message
+                    COMMUNICATION DETAILS
                   </label>
                   <textarea
                     id="contactMessage"
-                    rows={4}
+                    rows={5}
                     required
-                    placeholder="State your query or collaboration proposal..."
+                    placeholder="Detail your query or collegiate initiative..."
                     className={styles.textarea}
                   />
                 </div>
 
                 <Button type="button" variant="primary" size="md" rightIcon={<Send size={15} />}>
-                  Dispatch Message
+                  Dispatch Inquiry
                 </Button>
               </form>
-            </Card>
+            </div>
           </div>
         </div>
       </Section>

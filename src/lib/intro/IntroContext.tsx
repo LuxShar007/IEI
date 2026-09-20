@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
-import { useSmoothScroll } from '@/components/layout/SmoothScrollProvider';
 
 interface IntroContextValue {
   isIntroActive: boolean;
@@ -24,7 +23,6 @@ export const useIntro = () => useContext(IntroContext);
 
 export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
-  const { lenis } = useSmoothScroll();
   const isHome = pathname === '/';
 
   const [isIntroActive, setIsIntroActive] = useState(isHome);
@@ -38,9 +36,7 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setIsIntroComplete(true);
       setIntroProgressState(1);
     } else {
-      // Check current scroll position
       if (typeof window !== 'undefined' && window.scrollY > 100) {
-        // If user navigated or refreshed mid-page, intro might be completed
         const introThreshold = window.innerHeight * 3.5;
         if (window.scrollY >= introThreshold) {
           setIsIntroActive(false);
@@ -67,17 +63,14 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const skipIntro = useCallback(() => {
     if (typeof window !== 'undefined') {
-      const targetScroll = window.innerHeight * 4.0;
-      if (lenis) {
-        lenis.scrollTo(targetScroll, { duration: 1.2 });
-      } else {
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-      }
+      // Scroll to the end of the intro track (480vh)
+      const targetScroll = window.innerHeight * 4.85;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
       setIsIntroComplete(true);
       setIsIntroActive(false);
       setIntroProgressState(1);
     }
-  }, [lenis]);
+  }, []);
 
   return (
     <IntroContext.Provider

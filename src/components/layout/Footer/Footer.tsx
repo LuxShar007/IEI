@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { navigationConfig } from '@/data/navigation';
+import { ShieldCheck } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
@@ -8,51 +8,82 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={styles.footer} aria-label="Site Footer">
-      {/* TOP RULE */}
       <div className={styles.topRule} />
 
       <div className={styles.inner}>
-        {/* IDENTITY BLOCK */}
-        <div className={styles.identityBlock}>
-          <div className={styles.wordmark}>IEI SIES GST</div>
-          <p className={styles.tagline}>
-            Institution of Engineers (India)<br />
-            Student Chapter · SIES Graduate School of Technology
-          </p>
-          <p className={styles.department}>
-            Electronics & Computer Science Engineering<br />
-            Navi Mumbai · Chapter MH-04
-          </p>
+        {/* MASSIVE INSTITUTIONAL STATEMENT BANNER */}
+        <div className={styles.headlineFrame}>
+          <div className={styles.largeWordmark}>IEI SIES GST</div>
+          <div className={styles.subHeadline}>
+            Official Students' Chapter · Department of Electronics & Computer Science Engineering · MH-04
+          </div>
         </div>
 
-        {/* NAV COLUMNS */}
-        <div className={styles.navColumns}>
-          {navigationConfig.footerNav.map((group) => (
-            <div key={group.title} className={styles.navGroup}>
-              <span className={styles.groupTitle}>{group.title}</span>
-              <ul className={styles.groupList}>
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className={styles.footerLink}>
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        {/* STRUCTURED EDITORIAL COLUMNS */}
+        <div className={styles.columnsGrid}>
+          {/* COL 1: CHAPTER IDENTIFICATION */}
+          <div className={styles.col}>
+            <div className={styles.colHeader}>Institution</div>
+            <div className={styles.orgText}>
+              Institution of Engineers (India)<br />
+              SIES Graduate School of Technology<br />
+              Sri Chandrasekarendra Saraswati Vidyapuram<br />
+              Sector-V, Nerul, Navi Mumbai - 400706
             </div>
-          ))}
-        </div>
-      </div>
+            <div className={styles.charterTag}>Charter Est. 1920 · National Chapter Body</div>
+          </div>
 
-      {/* BOTTOM BAR */}
-      <div className={styles.bottomBar}>
-        <span className={styles.copyright}>
-          © {currentYear} IEI SIES GST Student Chapter. All rights reserved.
-        </span>
-        <div className={styles.bottomLinks}>
-          <Link href="/verify" className={styles.bottomLink}>Verify Member</Link>
-          <span className={styles.bottomSep}>·</span>
-          <Link href="/contact" className={styles.bottomLink}>Contact</Link>
+          {/* COL 2: MAIN DIRECTORY */}
+          <div className={styles.col}>
+            <div className={styles.colHeader}>Directory</div>
+            <ul className={styles.linkList}>
+              <li><Link href="/about" className={styles.footerLink}>About the Chapter</Link></li>
+              <li><Link href="/activities" className={styles.footerLink}>Activities & Domains</Link></li>
+              <li><Link href="/events" className={styles.footerLink}>Events & Symposia</Link></li>
+              <li><Link href="/gallery" className={styles.footerLink}>Photographic Archive</Link></li>
+            </ul>
+          </div>
+
+          {/* COL 3: GOVERNANCE & ACADEMICS */}
+          <div className={styles.col}>
+            <div className={styles.colHeader}>People & Governance</div>
+            <ul className={styles.linkList}>
+              <li><Link href="/team" className={styles.footerLink}>Faculty Leadership</Link></li>
+              <li><Link href="/team#domains" className={styles.footerLink}>7 Domain Wings</Link></li>
+              <li><Link href="/team#council" className={styles.footerLink}>Executive Council</Link></li>
+              <li><Link href="/resources" className={styles.footerLink}>Student Resources</Link></li>
+            </ul>
+          </div>
+
+          {/* COL 4: CREDENTIALS & CONTACT */}
+          <div className={styles.col}>
+            <div className={styles.colHeader}>Authentication & Contact</div>
+            <ul className={styles.linkList}>
+              <li>
+                <Link href="/verify" className={styles.verifyBadgeLink}>
+                  <ShieldCheck size={14} className={styles.verifyIcon} />
+                  <span>Verify Member Registry</span>
+                  <span className={styles.statusDot} />
+                </Link>
+              </li>
+              <li><Link href="/contact" className={styles.footerLink}>Campus Headquarters</Link></li>
+              <li><a href="mailto:iei@siesgst.ac.in" className={styles.footerLink}>iei@siesgst.ac.in</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* BOTTOM METADATA BAR */}
+        <div className={styles.bottomBar}>
+          <div className={styles.copyright}>
+            © {currentYear} The Institution of Engineers (India) · SIES GST Student Chapter. All rights reserved.
+          </div>
+          <div className={styles.bottomMetaLinks}>
+            <span className={styles.legalText}>Institutional Non-Profit Student Body</span>
+            <span className={styles.dotSep} aria-hidden="true">·</span>
+            <Link href="/verify" className={styles.legalLink}>Registry Protocol</Link>
+            <span className={styles.dotSep} aria-hidden="true">·</span>
+            <Link href="/contact" className={styles.legalLink}>Contact</Link>
+          </div>
         </div>
       </div>
     </footer>

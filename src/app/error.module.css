@@ -5,7 +5,7 @@
   justify-content: center;
   padding: var(--space-16) var(--space-4);
   position: relative;
-  background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+  background: var(--bg-primary);
 }
 
 .card {
@@ -15,14 +15,17 @@
   align-items: center;
   text-align: center;
   gap: var(--space-4);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
 }
 
 .iconCircle {
   width: 4rem;
   height: 4rem;
-  border-radius: 50%;
-  background-color: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-xs);
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-default);
   color: var(--accent-error);
   display: flex;
   align-items: center;
@@ -31,9 +34,10 @@
 }
 
 .title {
-  font-size: var(--text-display-md);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.02em;
 }
 
 .description {
@@ -48,4 +52,5 @@
   flex-wrap: wrap;
   gap: var(--space-4);
   margin-top: var(--space-4);
+  justify-content: center;
 }

@@ -1,41 +1,54 @@
 import React from 'react';
 import { IEIIdentityIntro } from '@/components/intro/IEIIdentityIntro';
 import { Hero } from '@/components/hero/Hero';
-import { ChapterPhilosophy } from '@/components/home/ChapterPhilosophy/ChapterPhilosophy';
 import { AboutComposition } from '@/components/home/AboutComposition/AboutComposition';
-import { SequentialProcess } from '@/components/home/SequentialProcess/SequentialProcess';
-import { ActivitiesEditorial } from '@/components/home/ActivitiesEditorial/ActivitiesEditorial';
+import { ChapterPhilosophy } from '@/components/home/ChapterPhilosophy/ChapterPhilosophy';
+import { WhatWeDo } from '@/components/home/WhatWeDo/WhatWeDo';
+import { ActivitiesSummary } from '@/components/home/ActivitiesSummary/ActivitiesSummary';
 import { EventsPreview } from '@/components/home/EventsPreview/EventsPreview';
+import { ThePeoplePreview } from '@/components/home/ThePeoplePreview/ThePeoplePreview';
+import { ChapterArchivePreview } from '@/components/home/ChapterArchivePreview/ChapterArchivePreview';
+import { ResourcesPreview } from '@/components/home/ResourcesPreview/ResourcesPreview';
 import { FinalCTA } from '@/components/home/FinalCTA/FinalCTA';
 
 export default function HomePage() {
   return (
     <>
-      {/* 00-14 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) */}
+      {/* 00-14 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) - STRICTLY FROZEN */}
       <IEIIdentityIntro>
         <Hero mode="backdrop" />
       </IEIIdentityIntro>
 
-      {/* 01-07 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow) */}
+      {/* 01-10 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow) */}
       <main id="homepage-main">
+        {/* 01 — IDENTITY / STATEMENT (Oversized Helvetica Statement & Negative Space) */}
         <Hero mode="normal" />
 
-        {/* 02 — CHAPTER PHILOSOPHY (M3-inspired principle-led) */}
+        {/* 02 — ABOUT IEI SIES GST (Asymmetrical Editorial Split) */}
+        <AboutComposition />
+
+        {/* 03 — CHAPTER PRINCIPLES (01 LEARN, 02 BUILD, 03 LEAD) */}
         <ChapterPhilosophy />
 
-      {/* 03 — ABOUT COMPOSITION (editorial asymmetric spread) */}
-      <AboutComposition />
+        {/* 04 — WHAT WE DO (Interactive Editorial List & Dynamic Detail Panel) */}
+        <WhatWeDo />
 
-      {/* 04 — SEQUENTIAL CHAPTER JOURNEY (LinusBio-inspired pinned) */}
-      <SequentialProcess />
+        {/* 05 — FEATURED ACTIVITIES (Large Visual Summary & Program Tracks) */}
+        <ActivitiesSummary />
 
-      {/* 05 — ACTIVITIES (editorial numbered list) */}
-      <ActivitiesEditorial />
+        {/* 06 — FEATURED EVENTS (Numbered Chronological Archive Grid) */}
+        <EventsPreview />
 
-      {/* 06 — EVENTS PREVIEW (M3-numbered event list) */}
-      <EventsPreview />
+        {/* 07 — THE PEOPLE (Governance Preview with Links to Council & Domains) */}
+        <ThePeoplePreview />
 
-        {/* 07 — FINAL CTA */}
+        {/* 08 — CHAPTER ARCHIVE / GALLERY (Asymmetric Photographic Grid) */}
+        <ChapterArchivePreview />
+
+        {/* 09 — RESOURCES (Restrained Link-Based Document Directory) */}
+        <ResourcesPreview />
+
+        {/* 10 — FINAL CTA / CONTACT (Institutional Statement & 4 Informational CTAs) */}
         <FinalCTA />
       </main>
     </>

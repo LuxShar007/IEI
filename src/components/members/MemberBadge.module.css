@@ -1,30 +1,28 @@
 .badgeWrapper {
   position: relative;
-  max-width: 440px;
+  max-width: 420px;
   width: 100%;
   margin: 0 auto;
 }
 
 .punchHole {
-  width: 50px;
-  height: 10px;
+  width: 48px;
+  height: 8px;
   border-radius: var(--radius-pill);
   background-color: var(--bg-primary);
   border: 1px solid var(--border-default);
-  margin: 0 auto -6px;
+  margin: 0 auto -4px;
   position: relative;
   z-index: 3;
 }
 
 .cardFrame {
   position: relative;
-  background: linear-gradient(160deg, #131722 0%, #0c0f16 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-lg);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   padding: var(--space-6);
-  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.8),
-              0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 0 30px -10px rgba(16, 185, 129, 0.15);
+  box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -37,8 +35,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 50%, #10b981 100%);
+  height: 2px;
+  background: var(--accent);
 }
 
 /* HEADER */
@@ -58,13 +56,13 @@
 
 .instAcronym {
   font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 0.85rem;
+  font-weight: 700;
+  font-size: 0.82rem;
   color: var(--accent-bright);
   padding: 2px 6px;
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid var(--border-default);
+  background: var(--surface-elevated);
 }
 
 .instMeta {
@@ -76,7 +74,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: var(--tracking-wider);
-  color: #ffffff;
+  color: var(--fg-primary);
 }
 
 .chapterName {
@@ -99,9 +97,9 @@
 }
 
 .photoPlaceholder {
-  width: 4rem;
-  height: 4.5rem;
-  border-radius: var(--radius-sm);
+  width: 4.25rem;
+  height: 4.75rem;
+  border-radius: var(--radius-xs);
   background: var(--surface-elevated);
   border: 1px solid var(--border-default);
   display: flex;
@@ -113,7 +111,7 @@
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--accent-bright);
+  color: var(--fg-primary);
 }
 
 .verifiedWatermark {
@@ -128,7 +126,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .identityDetails {
@@ -139,14 +136,15 @@
 
 .memberName {
   font-size: var(--text-heading-md);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.01em;
 }
 
 .memberDesignation {
   font-size: var(--text-body-sm);
   color: var(--accent-bright);
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
 }
 
 .deptText {
@@ -165,9 +163,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   padding: var(--space-2) var(--space-3);
 }
 
@@ -189,7 +187,7 @@
   font-size: var(--text-body-sm);
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #ffffff;
+  color: var(--fg-primary);
 }
 
 .copyButton {
@@ -202,12 +200,14 @@
   color: var(--fg-secondary);
   border: 1px solid transparent;
   transition: all var(--duration-fast) ease;
+  background: transparent;
+  cursor: pointer;
 }
 
 .copyButton:hover {
-  background-color: var(--surface-elevated);
+  background-color: var(--surface-primary);
   border-color: var(--border-default);
-  color: #ffffff;
+  color: var(--fg-primary);
 }
 
 .checkIcon {
@@ -220,9 +220,9 @@
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-3);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-elevated);
   border: 1px dashed var(--border-default);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
 }
 
 .qrPlaceholder {
@@ -237,8 +237,8 @@
 }
 
 .qrGraphic {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
 }
 
 .qrDetails {
@@ -283,7 +283,11 @@
 }
 
 .hashLabel {
-  color: var(--fg-subtle);
+  color: var(--fg-muted);
+}
+
+.hashValue {
+  color: var(--fg-secondary);
 }
 
 .issuerTag {

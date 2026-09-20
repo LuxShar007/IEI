@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EVENTS PREVIEW — Section 06 Numbered Archive
+   CHAPTER ARCHIVE PREVIEW — Section 08
    ========================================================================== */
 
 .section {
@@ -83,51 +83,93 @@
 }
 
 /* ==========================================================================
-   HORIZONTAL ARCHIVE TRACK
+   ASYMMETRICAL GALLERY GRID
    ========================================================================== */
-.archiveTrack {
+.galleryGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background-color: var(--border-default);
-  border: 1px solid var(--border-default);
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-6);
 }
 
-.eventItem {
-  background-color: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  transition: background-color var(--duration-fast) var(--ease-out);
-}
-
-.eventItem:hover {
+.photoFrame {
+  position: relative;
   background-color: var(--surface-card);
-}
-
-.itemLink {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: clamp(1.5rem, 2.5vw, 2.25rem);
-  gap: var(--space-5);
-  text-decoration: none;
-  color: inherit;
+  justify-content: flex-end;
+  transition: border-color var(--duration-fast) var(--ease-out);
 }
 
-.itemTop {
+.photoFrame:hover {
+  border-color: var(--fg-primary);
+}
+
+/* VARIED ASPECT RATIOS */
+.frameHero {
+  grid-column: span 8;
+  aspect-ratio: 16/9;
+}
+
+.framePortrait {
+  grid-column: span 4;
+  aspect-ratio: 4/5;
+}
+
+.frameSquare {
+  grid-column: span 4;
+  aspect-ratio: 1/1;
+}
+
+.frameWide {
+  grid-column: span 8;
+  aspect-ratio: 21/9;
+}
+
+.placeholderVisual {
+  position: absolute;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: var(--space-3);
+  background-image:
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.itemNum {
+.cameraIcon {
+  color: var(--fg-muted);
+  opacity: 0.5;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.photoFrame:hover .cameraIcon {
+  transform: scale(1.08);
+}
+
+.codeText {
   font-family: var(--font-mono);
-  font-size: 1.125rem;
-  font-weight: var(--font-weight-bold);
-  color: var(--fg-primary);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-subtle);
 }
 
-.itemCategory {
+.captionOverlay {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-5);
+  background: linear-gradient(to top, var(--bg-primary) 20%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.captionTag {
   font-family: var(--font-sans);
   font-size: 0.625rem;
   font-weight: var(--font-weight-bold);
@@ -136,119 +178,23 @@
   color: var(--accent);
 }
 
-.imageFrame {
-  position: relative;
-  aspect-ratio: 4/3;
-  width: 100%;
-  background: var(--surface-card);
-  border: 1px solid var(--border-subtle);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.framePattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.5;
-}
-
-.frameCode {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--fg-subtle);
-}
-
-.itemBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  flex: 1;
-}
-
-.metaLine {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.captionTitle {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: var(--fg-muted);
-}
-
-.dateText,
-.venueText {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.itemTitle {
-  font-family: var(--font-sans);
-  font-size: 1.125rem;
+  font-size: 0.9375rem;
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.01em;
   color: var(--fg-primary);
   line-height: var(--line-height-snug);
-  margin-top: var(--space-1);
-}
-
-.itemTagline {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--fg-secondary);
-}
-
-.itemFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border-subtle);
-  margin-top: auto;
-}
-
-.inspectText {
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.itemArrow {
-  color: var(--fg-muted);
-  transform: translateX(0);
-  transition:
-    transform var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
-}
-
-.eventItem:hover .inspectText,
-.eventItem:hover .itemArrow {
-  color: var(--accent);
-  transform: translateX(3px);
 }
 
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */
-@media (max-width: 1200px) {
-  .archiveTrack {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .archiveTrack {
-    grid-template-columns: 1fr;
+@media (max-width: 900px) {
+  .frameHero,
+  .framePortrait,
+  .frameSquare,
+  .frameWide {
+    grid-column: span 12;
+    aspect-ratio: 16/9;
   }
 }

@@ -4,6 +4,7 @@
   gap: var(--space-8);
   max-width: 680px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .searchCard {
@@ -11,6 +12,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
 }
 
 .searchHeader {
@@ -24,10 +28,10 @@
 .iconCircle {
   width: 3.25rem;
   height: 3.25rem;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #34d399;
+  border-radius: var(--radius-xs);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  color: var(--accent-verified);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,14 +40,16 @@
 
 .searchTitle {
   font-size: var(--text-heading-xl);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.02em;
 }
 
 .searchSubtitle {
   font-size: var(--text-body-sm);
   color: var(--fg-secondary);
   max-width: 480px;
+  line-height: var(--line-height-relaxed);
 }
 
 .searchForm {
@@ -76,23 +82,26 @@
 
 .inputField {
   width: 100%;
-  height: 2.5rem;
+  height: 2.75rem;
   padding-left: calc(var(--space-3) + 1.25rem);
   padding-right: var(--space-3);
-  background-color: var(--surface-base);
+  background-color: var(--surface-elevated);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   color: var(--fg-primary);
   font-family: var(--font-mono);
   font-size: var(--text-body-sm);
   letter-spacing: var(--tracking-wide);
-  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease;
 }
 
 .inputField:focus {
-  border-color: var(--accent-primary);
+  border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.inputField::placeholder {
+  color: var(--fg-muted);
 }
 
 .quickFillSection {
@@ -105,7 +114,7 @@
 
 .quickFillLabel {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: var(--tracking-widest);
   color: var(--fg-muted);
 }
@@ -117,20 +126,21 @@
 }
 
 .chipButton {
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-xs);
-  background: var(--surface-base);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-default);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--fg-secondary);
   transition: all var(--duration-fast) ease;
+  cursor: pointer;
 }
 
 .chipButton:hover {
-  background: var(--surface-elevated);
-  border-color: var(--accent-bright);
-  color: #ffffff;
+  background: var(--fg-primary);
+  border-color: var(--fg-primary);
+  color: var(--bg-primary);
 }
 
 /* RESULTS */
@@ -159,10 +169,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-4);
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-6);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-left: 3px solid var(--accent-verified);
+  border-radius: var(--radius-xs);
 }
 
 @media (min-width: 640px) {
@@ -174,13 +185,13 @@
 }
 
 .successIcon {
-  color: #34d399;
+  color: var(--accent-verified);
   flex-shrink: 0;
 }
 
 .successTitle {
-  font-weight: var(--font-weight-semibold);
-  color: #ffffff;
+  font-weight: 600;
+  color: var(--fg-primary);
   font-size: var(--text-body-sm);
   display: block;
 }
@@ -194,15 +205,19 @@
 .badgePreviewWrapper {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .errorResult {
-  padding: var(--space-6);
+  padding: var(--space-8);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: var(--space-2);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
 }
 
 .errorIcon {
@@ -212,12 +227,13 @@
 
 .errorTitle {
   font-size: var(--text-heading-md);
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--fg-primary);
 }
 
 .errorDesc {
   font-size: var(--text-body-sm);
   color: var(--fg-secondary);
   max-width: 480px;
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-relaxed);
 }

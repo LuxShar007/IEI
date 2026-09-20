@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NAVBAR — Minimal editorial navigation
+   NAVBAR — Restrained Editorial Institutional Navigation
    ========================================================================== */
 
 .navbar {
@@ -11,12 +11,13 @@
   height: var(--navbar-height);
   transform: translateY(0);
   opacity: 1;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
   transition:
     transform var(--duration-deliberate) var(--ease-smooth),
     opacity var(--duration-deliberate) var(--ease-smooth),
-    background-color var(--duration-slow) var(--ease-out),
-    border-color var(--duration-slow) var(--ease-out),
-    backdrop-filter var(--duration-slow) var(--ease-out);
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
 }
 
 .navbar.hiddenForIntro {
@@ -28,15 +29,17 @@
 .navbar.scrolled {
   background-color: var(--surface-glass);
   backdrop-filter: blur(var(--blur-md));
-  border-bottom: 1px solid var(--border-subtle);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border-bottom: 1px solid var(--border-default);
 }
 
 .navbar.menuOpen {
   background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-default);
 }
 
 /* ==========================================================================
-   INNER LAYOUT
+   INNER CONTAINER
    ========================================================================== */
 .inner {
   display: flex;
@@ -54,37 +57,37 @@
 .wordmark {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   flex-shrink: 0;
   text-decoration: none;
-  transition: opacity var(--duration-normal) var(--ease-out);
+  transition: opacity var(--duration-fast) var(--ease-out);
 }
 
 .wordmark:hover {
-  opacity: 0.72;
+  opacity: 0.75;
 }
 
 .wordmarkPrimary {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   color: var(--fg-primary);
   line-height: 1;
 }
 
 .wordmarkSub {
   font-family: var(--font-sans);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-wider);
+  letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--fg-muted);
   line-height: 1;
 }
 
 /* ==========================================================================
-   DESKTOP NAV
+   DESKTOP NAVIGATION
    ========================================================================== */
 .desktopNav {
   flex: 1;
@@ -104,12 +107,13 @@
   display: inline-block;
   padding: var(--space-2) var(--space-3);
   font-family: var(--font-sans);
-  font-size: var(--text-body-sm);
-  font-weight: var(--font-weight-regular);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   color: var(--fg-secondary);
-  letter-spacing: var(--tracking-normal);
   text-decoration: none;
-  transition: color var(--duration-normal) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
   white-space: nowrap;
 }
 
@@ -119,25 +123,17 @@
 
 .navLinkActive {
   color: var(--fg-primary);
+  font-weight: var(--font-weight-bold);
 }
 
-.navLinkHighlight {
-  color: var(--accent);
-}
-
-.navLinkHighlight:hover {
-  color: var(--accent-bright);
-}
-
-/* Active underline bar */
+/* Active indicator */
 .activeBar {
   position: absolute;
-  bottom: 2px;
+  bottom: 0;
   left: var(--space-3);
   right: var(--space-3);
-  height: 1px;
+  height: 1.5px;
   background: var(--accent);
-  border-radius: var(--radius-pill);
 }
 
 /* ==========================================================================
@@ -155,24 +151,32 @@
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-sans);
-  font-size: var(--text-body-sm);
-  font-weight: var(--font-weight-regular);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
   color: var(--fg-secondary);
-  letter-spacing: var(--tracking-normal);
   text-decoration: none;
-  transition: color var(--duration-normal) var(--ease-out);
-  padding: var(--space-2) 0;
+  border: 1px solid var(--border-default);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-xs);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
 }
 
 .verifyLink:hover {
   color: var(--fg-primary);
+  border-color: var(--border-strong);
+  background-color: var(--surface-highlight);
 }
 
 .verifyLinkActive {
-  color: var(--status-verified);
+  color: var(--fg-primary);
+  border-color: var(--status-verified);
 }
 
-/* Live status dot */
 .verifyDot {
   width: 5px;
   height: 5px;
@@ -181,10 +185,8 @@
   flex-shrink: 0;
 }
 
-
-
 /* ==========================================================================
-   MOBILE TOGGLE
+   MOBILE TOGGLE & DRAWER
    ========================================================================== */
 .mobileToggle {
   display: none;
@@ -195,7 +197,7 @@
   color: var(--fg-secondary);
   background: none;
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   cursor: pointer;
   transition:
     color var(--duration-fast) var(--ease-out),
@@ -208,9 +210,6 @@
   border-color: var(--border-strong);
 }
 
-/* ==========================================================================
-   MOBILE DRAWER
-   ========================================================================== */
 .mobileDrawer {
   position: fixed;
   top: var(--navbar-height);
@@ -218,7 +217,7 @@
   bottom: 0;
   width: min(320px, 88vw);
   background: var(--bg-primary);
-  border-left: 1px solid var(--border-subtle);
+  border-left: 1px solid var(--border-default);
   transform: translateX(100%);
   transition: transform var(--duration-slow) var(--ease-smooth);
   overflow-y: auto;
@@ -248,12 +247,14 @@
   justify-content: space-between;
   padding: var(--space-4) 0;
   font-family: var(--font-sans);
-  font-size: var(--text-heading-sm);
-  font-weight: var(--font-weight-regular);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
   color: var(--fg-secondary);
   text-decoration: none;
   border-bottom: 1px solid var(--border-subtle);
-  transition: color var(--duration-normal) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .mobileNavLink:hover {
@@ -262,12 +263,13 @@
 
 .mobileNavLinkActive {
   color: var(--fg-primary);
+  font-weight: var(--font-weight-bold);
 }
 
 .mobileNavArrow {
   color: var(--fg-subtle);
   font-size: var(--text-body-sm);
-  transition: transform var(--duration-normal) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .mobileNavLink:hover .mobileNavArrow {
@@ -278,16 +280,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-8) var(--space-6) var(--space-4);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-top: 1px solid var(--border-default);
 }
 
 .mobileThemeToggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: var(--space-2);
+  padding: var(--space-2) 0;
 }
 
 .mobileThemeLabel {
@@ -303,21 +304,22 @@
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-sans);
-  font-size: var(--text-body-sm);
-  color: var(--fg-muted);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
   text-decoration: none;
   padding: var(--space-3) 0;
-  transition: color var(--duration-normal) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .mobileVerifyLink:hover {
   color: var(--fg-primary);
 }
 
-
-
 /* ==========================================================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1024px) {
   .desktopNav {

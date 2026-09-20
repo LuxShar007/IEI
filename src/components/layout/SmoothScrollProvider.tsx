@@ -5,9 +5,15 @@ import Lenis from 'lenis';
 
 interface SmoothScrollContextType {
   lenis: Lenis | null;
+  pauseLenis: () => void;
+  resumeLenis: () => void;
 }
 
-const SmoothScrollContext = createContext<SmoothScrollContextType>({ lenis: null });
+const SmoothScrollContext = createContext<SmoothScrollContextType>({
+  lenis: null,
+  pauseLenis: () => {},
+  resumeLenis: () => {},
+});
 
 export const useSmoothScroll = () => useContext(SmoothScrollContext);
 
@@ -18,15 +24,12 @@ export interface SmoothScrollProviderProps {
 export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ children }) => {
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
   const rafHandleRef = useRef<number | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Check for prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      return;
-    }
+    if (prefersReducedMotion) return;
 
-    // Initialize Lenis with natural, responsive physics
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -38,6 +41,7 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
       infinite: false,
     });
 
+    lenisRef.current = lenis;
     setLenisInstance(lenis);
 
     function raf(time: number) {
@@ -48,16 +52,23 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
     rafHandleRef.current = requestAnimationFrame(raf);
 
     return () => {
-      if (rafHandleRef.current) {
-        cancelAnimationFrame(rafHandleRef.current);
-      }
+      if (rafHandleRef.current) cancelAnimationFrame(rafHandleRef.current);
       lenis.destroy();
+      lenisRef.current = null;
       setLenisInstance(null);
     };
   }, []);
 
+  const pauseLenis = () => {
+    if (lenisRef.current) lenisRef.current.stop();
+  };
+
+  const resumeLenis = () => {
+    if (lenisRef.current) lenisRef.current.start();
+  };
+
   return (
-    <SmoothScrollContext.Provider value={{ lenis: lenisInstance }}>
+    <SmoothScrollContext.Provider value={{ lenis: lenisInstance, pauseLenis, resumeLenis }}>
       {children}
     </SmoothScrollContext.Provider>
   );

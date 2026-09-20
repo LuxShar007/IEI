@@ -1,124 +1,243 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PageHeader } from '@/components/layout/PageHeader/PageHeader';
+import { ArrowRight, BookOpen, Cpu, Shield, Award, Users, MapPin } from 'lucide-react';
 import styles from './about.module.css';
 
 export const metadata: Metadata = {
-  title: 'About — IEI SIES GST Student Chapter',
+  title: 'About the Chapter — Institutional Identity & Mandate',
   description:
-    'Learn about the Institution of Engineers (India) Student Chapter at SIES Graduate School of Technology — our mission, values, and institutional identity.',
+    'The Institution of Engineers (India) Students\' Chapter at SIES Graduate School of Technology — Department of Electronics & Computer Science Engineering.',
 };
 
 export default function AboutPage() {
   return (
     <main className={styles.page}>
-      {/* HERO — editorial about header */}
-      <section className={styles.hero}>
-        <div className={styles.inner}>
-          <div className={styles.heroLabel}>
-            <span className="text-overline">About</span>
-          </div>
-          <h1 className={styles.heroHeadline}>
-            The Chapter
-          </h1>
-          <p className={styles.heroSub}>
-            IEI SIES GST · Student Chapter · MH-04
-          </p>
-        </div>
-      </section>
+      {/* EDITORIAL HEADER */}
+      <PageHeader
+        sectionNumber="01 / 07"
+        eyebrow="Institutional Heritage & Charter"
+        title="About the Chapter"
+        description="The official student chapter of the Institution of Engineers (India) at SIES Graduate School of Technology, anchored within the Department of Electronics & Computer Science Engineering."
+        breadcrumbs={[{ label: 'About' }]}
+        metadataItems={[
+          { label: 'Parent Body Est.', value: '1920' },
+          { label: 'Chapter Code', value: 'MH-04' },
+          { label: 'Location', value: 'Navi Mumbai' },
+        ]}
+      />
 
-      {/* SECTION: IDENTITY */}
-      <section className={styles.section}>
+      {/* 01 — ABOUT IEI (PARENT INSTITUTION) */}
+      <section className={styles.section} id="parent-body" aria-label="About IEI National Body">
         <div className={styles.inner}>
           <div className={styles.editorialGrid}>
-            <div className={styles.gridLeft}>
-              <span className="text-overline">Who We Are</span>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>01</span>
+              <span className={styles.sectionLabel}>National Heritage</span>
             </div>
-            <div className={styles.gridRight}>
-              <p className={styles.largePara}>
-                The IEI SIES GST Student Chapter is the official chapter body of the Institution
-                of Engineers (India) at SIES Graduate School of Technology, Navi Mumbai.
-                Affiliated with the Electronics and Computer Science Engineering Department,
-                the chapter creates a structured environment for technical growth, professional
-                development, and community among engineering students.
-              </p>
-              <p className={styles.para}>
-                Founded as part of a national network of IEI student chapters, MH-04 serves as
-                a bridge between academic education and the real demands of engineering practice.
-                Through organized programs, competitions, workshops, and mentored projects, the
-                chapter prepares its members for the challenges of a technical career.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION: IEI PARENT INSTITUTION */}
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <div className={styles.editorialGrid}>
-            <div className={styles.gridLeft}>
-              <span className="text-overline">Parent Institution</span>
-            </div>
-            <div className={styles.gridRight}>
-              <h2 className={styles.sectionHeading}>
-                Institution of Engineers (India)
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                The Institution of Engineers (India)
               </h2>
-              <p className={styles.para}>
-                Founded in 1920, the Institution of Engineers (India) is one of the oldest and
-                most prestigious professional engineering bodies in the country. It serves
-                engineers across all disciplines and maintains a national network of chapters,
-                student divisions, and professional affiliates.
+              <p className={styles.leadPara}>
+                Established in 1920 and incorporated by Royal Charter in 1935, the Institution of Engineers (India) 
+                is the pioneer multi-disciplinary professional body of engineers in the country. With over a century 
+                of technical eminence, IEI represents the highest standard of engineering governance across India.
               </p>
-              <p className={styles.para}>
-                Membership in IEI is recognized by major engineering employers and academic
-                institutions across India. Student membership through a chapter provides access
-                to national-level events, certifications, and a professional identity within the
-                engineering community.
+              <p className={styles.bodyPara}>
+                Operating across 15 engineering engineering divisions with more than 125 state and local centres, 
+                IEI sets professional standards, accredits collegiate programs, and provides a national platform 
+                for engineering discourse. Student chapters are the vital grassroots foundation of this national network.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION: VALUES (placeholder) */}
-      <section className={styles.section}>
+      {/* 02 — IEI + SIES GST (DEPARTMENTAL ALLIANCE) */}
+      <section className={styles.section} id="department-alliance" aria-label="IEI SIES GST Department Alliance">
         <div className={styles.inner}>
-          <div className={styles.valuesGrid}>
-            {[
-              {
-                num: '01',
-                title: 'Technical Depth',
-                desc: 'We pursue genuine understanding — not surface familiarity. The chapter\'s programs are designed to develop real competence.',
-              },
-              {
-                num: '02',
-                title: 'Collaborative Spirit',
-                desc: 'Engineering is best practiced with others. The chapter deliberately creates opportunities for peer learning and cooperative projects.',
-              },
-              {
-                num: '03',
-                title: 'Institutional Integrity',
-                desc: 'As an official chapter of a national body, we operate with the seriousness, transparency, and accountability that represents good engineering.',
-              },
-            ].map((v) => (
-              <div key={v.num} className={styles.valueItem}>
-                <span className={styles.valueNum}>{v.num}</span>
-                <h3 className={styles.valueTitle}>{v.title}</h3>
-                <p className={styles.valueDesc}>{v.desc}</p>
-              </div>
-            ))}
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>02</span>
+              <span className={styles.sectionLabel}>Department Alliance</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                SIES GST & Electronics and Computer Science Engineering
+              </h2>
+              <p className={styles.leadPara}>
+                SIES Graduate School of Technology, established in 2002 in Navi Mumbai, has developed a reputation 
+                for rigorous technical discipline. The Department of Electronics and Computer Science Engineering 
+                bridges hardware telemetry, firmware kernels, distributed software, and algorithmic intelligence.
+              </p>
+              <p className={styles.bodyPara}>
+                Charter MH-04 connects the academic curriculum directly with institutional engineering practice. 
+                Under faculty leadership, student engineers learn to think beyond syllabus boundaries — mastering real 
+                developer toolchains, laboratory testbenches, and professional documentation standards.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION: LINKS */}
-      <section className={styles.ctaSection}>
+      {/* 03 — CHAPTER PURPOSE */}
+      <section className={styles.section} id="purpose" aria-label="Chapter Purpose">
         <div className={styles.inner}>
-          <div className={styles.ctaLinks}>
-            <Link href="/team" className={styles.ctaLink}>View the Team →</Link>
-            <Link href="/activities" className={styles.ctaLink}>See Activities →</Link>
-            <Link href="/contact" className={styles.ctaPrimary}>Contact the Chapter</Link>
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>03</span>
+              <span className={styles.sectionLabel}>Institutional Mandate</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                We build engineers,<br />not just graduates.
+              </h2>
+              <p className={styles.leadPara}>
+                The chapter exists to resolve a fundamental asymmetry in modern technical education: the gap between 
+                theoretical engineering concepts and the practical demands of high-reliability systems engineering.
+              </p>
+              <div className={styles.statementStrip}>
+                <div className={styles.statementItem}>
+                  <div className={styles.statementNum}>01</div>
+                  <div className={styles.statementTitle}>Technical Depth</div>
+                  <div className={styles.statementDesc}>Hands-on mastery over surface familiarity. Real code, real silicon, real telemetry.</div>
+                </div>
+                <div className={styles.statementItem}>
+                  <div className={styles.statementNum}>02</div>
+                  <div className={styles.statementTitle}>Collaborative Practice</div>
+                  <div className={styles.statementDesc}>Peer code review, multidisciplinary hardware-software teams, and collective ownership.</div>
+                </div>
+                <div className={styles.statementItem}>
+                  <div className={styles.statementNum}>03</div>
+                  <div className={styles.statementTitle}>Institutional Integrity</div>
+                  <div className={styles.statementDesc}>Accountability, verifiable credentials, and professional ethics in every initiative.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 04 — WHAT THE CHAPTER DOES */}
+      <section className={styles.section} id="operations" aria-label="Operational Structure">
+        <div className={styles.inner}>
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>04</span>
+              <span className={styles.sectionLabel}>Execution Framework</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                A Structured Engine for Student Progression
+              </h2>
+              <p className={styles.bodyPara}>
+                The chapter operates 7 specialized domain wings — Technical, Industry Outreach & Admin, Publicity, 
+                Creative, Design, Media, and Editorial. Each wing functions under a strict four-tier hierarchy: 
+                Mentor, Head, Coordinator, and Volunteer.
+              </p>
+              <p className={styles.bodyPara}>
+                This structure ensures that every technical workshop, design deliverable, research review, and 
+                campus event is planned, executed, and archived with professional discipline.
+              </p>
+              <div className={styles.linkRow}>
+                <Link href="/team" className={styles.inlineAction}>
+                  <span>Inspect the 7 Domain Wings</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 05 — COMMUNITY */}
+      <section className={styles.section} id="community" aria-label="Community and Culture">
+        <div className={styles.inner}>
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>05</span>
+              <span className={styles.sectionLabel}>Culture</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                Collegiate Camaraderie & Technical Fellowship
+              </h2>
+              <p className={styles.bodyPara}>
+                Beyond official seminars and technical papers, IEI SIES GST represents an active community of curious minds. 
+                Late-night hackathon war-rooms, peer-led soldering masterclasses, technical debate sessions, and open-source 
+                collaboration forge bonds that endure far beyond graduation.
+              </p>
+              <p className={styles.bodyPara}>
+                Alumni who have progressed to top research institutions and engineering firms regularly return to mentor 
+                the incoming cohort — ensuring continuous institutional knowledge transfer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 06 — ACTIVITIES OVERVIEW */}
+      <section className={styles.section} id="programs" aria-label="Activities Summary">
+        <div className={styles.inner}>
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>06</span>
+              <span className={styles.sectionLabel}>Initiatives</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.sectionHeadline}>
+                Active Programs & Regular Cadences
+              </h2>
+              <p className={styles.bodyPara}>
+                From bi-weekly RTOS hardware labs and distributed ML reading groups to our annual engineering symposium 
+                and collegiate hackathons, our activity calendar is designed for continuous engagement.
+              </p>
+              <div className={styles.linkRow}>
+                <Link href="/activities" className={styles.inlineAction}>
+                  <span>Explore Stage-by-Stage Activities</span>
+                  <ArrowRight size={14} />
+                </Link>
+                <Link href="/events" className={styles.inlineAction}>
+                  <span>View Event Calendar</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 07 — CONTACT & NEXT SECTION */}
+      <section className={styles.ctaClosing} id="next" aria-label="Next Steps">
+        <div className={styles.inner}>
+          <div className={styles.editorialGrid}>
+            <div className={styles.gridMeta}>
+              <span className={styles.sectionIndex}>07</span>
+              <span className={styles.sectionLabel}>Next Action</span>
+            </div>
+            <div className={styles.gridContent}>
+              <h2 className={styles.closingHeadline}>
+                Connect with the Chapter
+              </h2>
+              <p className={styles.bodyPara}>
+                Interested in collaborating on technical symposia, research projects, or institutional verification?
+              </p>
+              <div className={styles.closingActions}>
+                <Link href="/contact" className={styles.primaryBtn}>
+                  <span>Contact Headquarters</span>
+                  <ArrowRight size={15} />
+                </Link>
+                <Link href="/verify" className={styles.secondaryBtn}>
+                  <span>Verify Credentials</span>
+                </Link>
+                <Link href="/team" className={styles.textLink}>
+                  <span>Meet Leadership</span>
+                  <span aria-hidden="true"> →</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

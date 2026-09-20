@@ -2,90 +2,87 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { placeholderEvents } from '@/data/events';
+import { formatDate } from '@/lib/utils/format';
+import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 import styles from './EventsPreview.module.css';
 
 export const EventsPreview: React.FC = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const events = placeholderEvents.slice(0, 5);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const events = placeholderEvents.slice(0, 4);
 
   return (
-    <section className={styles.section} id="events" aria-label="Events Preview">
+    <section className={styles.section} id="events-archive" aria-label="Chapter Events Archive">
       <div className={styles.inner}>
         {/* HEADER */}
         <div className={styles.header}>
-          <motion.span
-            className="text-overline"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Events
-          </motion.span>
-          <motion.h2
-            className={styles.sectionTitle}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            What's happening
-          </motion.h2>
+          <div className={styles.sectionMeta}>
+            <span className={styles.sectionIndex}>06</span>
+            <span className={styles.sectionLabel}>Chronological Archive</span>
+          </div>
+          <div className={styles.headerSplit}>
+            <h2 className={styles.sectionTitle}>Featured Events</h2>
+            <Link href="/events" className={styles.viewAllLink}>
+              <span>View Complete Archive</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
 
-        {/* EVENT LIST */}
-        <ul className={styles.eventList} role="list">
-          {events.map((event, i) => (
-            <motion.li
-              key={event.id}
-              className={`${styles.eventItem} ${hoveredIndex !== null && hoveredIndex !== i ? styles.eventDim : ''}`}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-5%' }}
-              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <Link
-                href={`/events/${event.slug}`}
-                className={styles.eventLink}
-                aria-label={`View event: ${event.title}`}
-              >
-                <div className={styles.eventInner}>
-                  <span className={styles.eventNum} aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+        {/* NUMBERED ARCHIVE PRESENTATION (HORIZONTAL DESKTOP / VERTICAL MOBILE) */}
+        <div className={styles.archiveTrack} role="list">
+          {events.map((event, i) => {
+            const numStr = String(i + 1).padStart(2, '0');
+            const isHovered = hoveredIdx === i;
 
-                  <div className={styles.eventContent}>
-                    <div className={styles.eventMeta}>
-                      <span className={styles.eventCategory}>{event.category}</span>
-                      <span className={styles.eventDate}>{new Date(event.startDate).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}</span>
-                    </div>
-                    <h3 className={styles.eventTitle}>{event.title}</h3>
+            return (
+              <article
+                key={event.id}
+                className={`${styles.eventItem} ${isHovered ? styles.itemActive : ''}`}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+              >
+                <Link
+                  href={`/events/${event.slug}`}
+                  className={styles.itemLink}
+                  aria-label={`View event details: ${event.title}`}
+                >
+                  <div className={styles.itemTop}>
+                    <span className={styles.itemNum}>{numStr}</span>
+                    <span className={styles.itemCategory}>{event.category}</span>
                   </div>
 
-                  <span className={styles.eventArrow} aria-hidden="true">→</span>
-                </div>
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
+                  {/* VISUAL FRAME PLACEHOLDER */}
+                  <div className={styles.imageFrame} aria-hidden="true">
+                    <div className={styles.framePattern} />
+                    <div className={styles.frameCode}>IEI·EVT·{numStr}</div>
+                  </div>
 
-        {/* VIEW ALL */}
-        <motion.div
-          className={styles.viewAll}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <Link href="/events" className={styles.viewAllLink}>
-            View all events
-            <span className={styles.viewAllArrow} aria-hidden="true">→</span>
-          </Link>
-        </motion.div>
+                  <div className={styles.itemBody}>
+                    <div className={styles.metaLine}>
+                      <span className={styles.dateText}>
+                        <Calendar size={12} />
+                        {formatDate(event.startDate)}
+                      </span>
+                      <span className={styles.venueText}>
+                        <MapPin size={12} />
+                        {event.venue}
+                      </span>
+                    </div>
+
+                    <h3 className={styles.itemTitle}>{event.title}</h3>
+                    <p className={styles.itemTagline}>{event.tagline}</p>
+                  </div>
+
+                  <div className={styles.itemFooter}>
+                    <span className={styles.inspectText}>Access Event Detail</span>
+                    <ArrowRight size={14} className={styles.itemArrow} />
+                  </div>
+                </Link>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -18,14 +18,22 @@
   gap: var(--space-4);
 }
 
+.colOverline {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-widest);
+  color: var(--accent-bright);
+}
+
 .infoTitle {
-  font-size: var(--text-heading-xl);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.02em;
 }
 
 .infoLead {
-  font-size: var(--text-body-lg);
+  font-size: var(--text-body-md);
   color: var(--fg-secondary);
   line-height: var(--line-height-relaxed);
 }
@@ -37,19 +45,33 @@
   margin-top: var(--space-4);
 }
 
-.channelCard {
-  padding: var(--space-4) var(--space-6);
+.channelTile {
+  padding: var(--space-5);
   display: flex;
   align-items: flex-start;
   gap: var(--space-4);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.channelTile:hover {
+  border-color: var(--fg-primary);
 }
 
 .channelIcon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.35rem;
+  height: 1.35rem;
   color: var(--accent-bright);
   margin-top: 3px;
   flex-shrink: 0;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .channelLabel {
@@ -64,7 +86,19 @@
   display: block;
   font-size: var(--text-body-sm);
   color: var(--fg-primary);
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-relaxed);
+}
+
+.emailLink {
+  font-size: var(--text-body-sm);
+  color: var(--accent-bright);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.emailLink:hover {
+  color: var(--fg-primary);
 }
 
 /* FORM */
@@ -72,67 +106,81 @@
   width: 100%;
 }
 
-.formCard {
+.formContainer {
   padding: var(--space-8);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
 .formTitle {
-  font-size: var(--text-heading-lg);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  font-size: var(--text-heading-md);
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.01em;
 }
 
 .formSubtitle {
   font-size: var(--text-body-sm);
   color: var(--fg-secondary);
+  line-height: 1.5;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
   margin-top: var(--space-2);
 }
 
 .fieldGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
   color: var(--fg-secondary);
 }
 
 .input {
-  height: 2.5rem;
-  padding: 0 var(--space-3);
-  background-color: var(--surface-base);
+  height: 2.75rem;
+  padding: 0 var(--space-4);
+  background-color: var(--surface-elevated);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  color: var(--fg-primary);
-  font-size: var(--text-body-sm);
-}
-
-.textarea {
-  padding: var(--space-3);
-  background-color: var(--surface-base);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   color: var(--fg-primary);
   font-family: var(--font-sans);
   font-size: var(--text-body-sm);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.textarea {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
   resize: vertical;
+  transition: border-color var(--duration-fast) ease;
 }
 
 .input:focus,
 .textarea:focus {
-  border-color: var(--accent-primary);
+  border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--fg-muted);
 }

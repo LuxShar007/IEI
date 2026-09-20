@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -49,7 +49,7 @@ export const Navbar: React.FC = () => {
         {/* WORDMARK */}
         <Link href="/" className={styles.wordmark} aria-label="IEI SIES GST — Home">
           <span className={styles.wordmarkPrimary}>IEI SIES GST</span>
-          <span className={styles.wordmarkSub}>Student Chapter</span>
+          <span className={styles.wordmarkSub}>Student Chapter · MH-04</span>
         </Link>
 
         {/* DESKTOP NAV */}
@@ -65,8 +65,7 @@ export const Navbar: React.FC = () => {
                     href={item.href}
                     className={cn(
                       styles.navLink,
-                      isActive && styles.navLinkActive,
-                      item.highlight && styles.navLinkHighlight
+                      isActive && styles.navLinkActive
                     )}
                   >
                     {item.title}
@@ -88,13 +87,13 @@ export const Navbar: React.FC = () => {
               styles.verifyLink,
               pathname.startsWith('/verify') && styles.verifyLinkActive
             )}
-            title="Verify a member credential"
+            title="Authenticate member credential"
           >
             <ShieldCheck size={14} aria-hidden="true" />
             <span>Verify Member</span>
             <span
               className={styles.verifyDot}
-              aria-label="System active"
+              aria-label="Registry active"
             />
           </Link>
         </div>
@@ -143,7 +142,7 @@ export const Navbar: React.FC = () => {
 
           <div className={styles.mobileActions}>
             <div className={styles.mobileThemeToggle}>
-              <span className={styles.mobileThemeLabel}>Visual Mode</span>
+              <span className={styles.mobileThemeLabel}>Visual Theme</span>
               <ThemeSwitcher />
             </div>
 
@@ -153,7 +152,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
             >
               <ShieldCheck size={14} />
-              <span>Verify Member</span>
+              <span>Verify Member Registry</span>
             </Link>
           </div>
         </nav>

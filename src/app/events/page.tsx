@@ -1,72 +1,153 @@
-import React from 'react';
-import type { Metadata } from 'next';
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader/PageHeader';
-import { Section } from '@/components/layout/Section/Section';
-import { Card } from '@/components/ui/Card/Card';
-import { Badge } from '@/components/ui/Badge/Badge';
-import { Button } from '@/components/ui/Button/Button';
-import { constructMetadata } from '@/lib/seo/metadata';
 import { placeholderEvents } from '@/data/events';
 import { formatDate } from '@/lib/utils/format';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Tag } from 'lucide-react';
 import styles from './events.module.css';
 
-export const metadata: Metadata = constructMetadata({
-  title: 'Technical Events & Symposiums',
-  description: 'Schedule of technical workshops, guest lectures, hackathons, and engineering competitions at IEI SIES GST.',
-  path: '/events',
-});
-
 export default function EventsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  const categories = [
+    { id: 'all', label: 'All Programs' },
+    { id: 'flagship', label: 'Flagship' },
+    { id: 'technical', label: 'Workshops & Labs' },
+    { id: 'competition', label: 'Competitions' },
+    { id: 'lecture', label: 'Guest Lectures' },
+  ];
+
+  const filteredEvents =
+    selectedCategory === 'all'
+      ? placeholderEvents
+      : placeholderEvents.filter((e) => e.category.toLowerCase() === selectedCategory);
+
+  const featuredEvent = placeholderEvents.find((e) => e.isFeatured) || placeholderEvents[0];
+  const archiveList = filteredEvents;
+
   return (
-    <>
+    <main className={styles.page}>
+      {/* EDITORIAL HEADER */}
       <PageHeader
-        eyebrow="PROGRAM DIRECTORY"
-        title="Technical Events & Workshops"
-        description="Upcoming and archived technical competitions, hands-on masterclasses, and engineering keynotes."
-        badge="EVENT CALENDAR"
+        sectionNumber="04 / 07"
+        eyebrow="Chronological Archive"
+        title="Events & Symposia"
+        description="Official schedule of technical competitions, hands-on masterclasses, and collegiate engineering colloquiums hosted by IEI SIES GST."
         breadcrumbs={[{ label: 'Events' }]}
+        metadataItems={[
+          { label: 'Academic Term', value: '2024–2025' },
+          { label: 'Venue', value: 'SIES GST Navi Mumbai' },
+          { label: 'Chapter Code', value: 'MH-04' },
+        ]}
       />
 
-      <Section
-        id="events-list"
-        eyebrow="SCHEDULE"
-        title="Active & Upcoming Programs"
-        padding="lg"
-        hasGridBackground
-      >
-        <div className={styles.eventsGrid}>
-          {placeholderEvents.map((event) => (
-            <Card key={event.id} variant="default" hasCornerAccents isHoverable className={styles.card}>
-              <div className={styles.cardInner}>
+      <div className={styles.inner}>
+        {/* FEATURED EVENT SPOTLIGHT */}
+        {featuredEvent && (
+          <section className={styles.featuredSection} aria-label="Featured Event">
+            <div className={styles.featuredTagRow}>
+              <span className={styles.featuredLabel}>FEATURED FLAGSHIP</span>
+              <span className={styles.categoryBadge}>{featuredEvent.category}</span>
+            </div>
+
+            <div className={styles.featuredGrid}>
+              <div className={styles.featuredCoverFrame} aria-hidden="true">
+                <div className={styles.blueprintGrid} />
+                <div className={styles.coverCode}>IEI·FLAGSHIP·{featuredEvent.id}</div>
+              </div>
+
+              <div className={styles.featuredDetails}>
                 <div className={styles.metaRow}>
-                  <Badge variant={event.category === 'flagship' ? 'accent' : 'default'} size="sm">
-                    {event.category.toUpperCase()}
-                  </Badge>
-                  <span className={styles.dateText}>
-                    <Calendar size={13} />
-                    {formatDate(event.startDate)}
+                  <span className={styles.dateMeta}>
+                    <Calendar size={14} />
+                    {formatDate(featuredEvent.startDate)}
+                  </span>
+                  <span className={styles.venueMeta}>
+                    <MapPin size={14} />
+                    {featuredEvent.venue}
                   </span>
                 </div>
 
-                <h3 className={styles.eventTitle}>{event.title}</h3>
-                <p className={styles.eventTagline}>{event.tagline}</p>
+                <h2 className={styles.featuredTitle}>{featuredEvent.title}</h2>
+                <p className={styles.featuredTagline}>{featuredEvent.tagline}</p>
+                <p className={styles.featuredSummary}>{featuredEvent.description}</p>
 
-                <div className={styles.venueRow}>
-                  <MapPin size={13} />
-                  <span>{event.venue}</span>
-                </div>
-
-                <div className={styles.cardFooter}>
-                  <Button href={`/events/${event.slug}`} variant="outline" size="sm" fullWidth rightIcon={<ArrowRight size={14} />}>
-                    View Program & Register
-                  </Button>
+                <div className={styles.actionRow}>
+                  <Link href={`/events/${featuredEvent.slug}`} className={styles.primaryAction}>
+                    <span>Access Event Dossier & Schedule</span>
+                    <ArrowRight size={15} />
+                  </Link>
                 </div>
               </div>
-            </Card>
-          ))}
+            </div>
+          </section>
+        )}
+
+        {/* CATEGORY FILTER BAR */}
+        <div className={styles.filterBar} role="tablist" aria-label="Filter events by category">
+          <span className={styles.filterTitle}>Category:</span>
+          <div className={styles.filterList}>
+            {categories.map((cat) => {
+              const isActive = cat.id === selectedCategory;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.filterBtn} ${isActive ? styles.filterActive : ''}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </Section>
-    </>
+
+        {/* NUMBERED HISTORICAL ARCHIVE LIST */}
+        <section className={styles.archiveSection} aria-label="Events Archive List">
+          <div className={styles.archiveList} role="list">
+            {archiveList.map((event, idx) => {
+              const numStr = String(idx + 1).padStart(2, '0');
+              return (
+                <article key={event.id} className={styles.archiveRow} role="listitem">
+                  <span className={styles.rowNum}>{numStr}</span>
+
+                  <div className={styles.rowMain}>
+                    <div className={styles.rowHeader}>
+                      <span className={styles.rowCategory}>{event.category}</span>
+                      <span className={styles.rowDate}>{formatDate(event.startDate)}</span>
+                      <span className={styles.rowVenue}>{event.venue}</span>
+                    </div>
+
+                    <h3 className={styles.rowTitle}>
+                      <Link href={`/events/${event.slug}`} className={styles.rowTitleLink}>
+                        {event.title}
+                      </Link>
+                    </h3>
+
+                    <p className={styles.rowTagline}>{event.tagline}</p>
+                  </div>
+
+                  <div className={styles.rowAction}>
+                    <Link
+                      href={`/events/${event.slug}`}
+                      className={styles.rowInspectLink}
+                      aria-label={`View dossier: ${event.title}`}
+                    >
+                      <span>View Dossier</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

@@ -1,154 +1,193 @@
+/* ==========================================================================
+   FACULTY LEADERSHIP — Distinguished Academic Leadership Composition
+   ========================================================================== */
+
 .sectionWrap {
-  margin-bottom: var(--space-20);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--border-default);
 }
 
 .header {
-  margin-bottom: var(--space-10);
-  max-width: 680px;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sectionIndex {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+
+.sectionLabel {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .heading {
-  font-size: var(--text-heading-xl);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
   color: var(--fg-primary);
-  margin-top: var(--space-2);
-  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
 }
 
 .sub {
-  font-size: var(--text-body-md);
-  line-height: var(--line-height-normal);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
   color: var(--fg-secondary);
 }
 
+/* ==========================================================================
+   FACULTY GRID
+   ========================================================================== */
 .facultyGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
+  gap: clamp(2rem, 4vw, 4rem);
 }
 
 .facultyCard {
   display: flex;
   flex-direction: column;
-  background: var(--surface-card);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  padding: var(--space-8);
-  position: relative;
-  overflow: hidden;
-  transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  background: var(--surface-card);
+  border-radius: var(--radius-xs);
+  padding: clamp(2rem, 4vw, 3rem);
+  gap: var(--space-6);
 }
 
-.facultyCard:hover {
-  border-color: var(--accent-border);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.portraitPlaceholder {
+.portraitFrame {
   position: relative;
-  width: 72px;
-  height: 72px;
-  border-radius: var(--radius-sm);
-  background: var(--surface-highlight);
-  border: 1px solid var(--border-subtle);
+  width: 90px;
+  height: 90px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-base);
+  border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-6);
   overflow: hidden;
 }
 
 .capIcon {
   color: var(--fg-muted);
-  opacity: 0.35;
+  opacity: 0.4;
 }
 
 .initials {
   position: absolute;
-  bottom: 4px;
-  right: 6px;
-  font-family: var(--font-sans);
-  font-size: var(--text-overline);
+  bottom: 6px;
+  right: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-wider);
-  color: var(--accent-primary);
+  color: var(--accent);
 }
 
 .details {
   display: flex;
   flex-direction: column;
+  gap: var(--space-3);
 }
 
-.roleTag {
-  margin-bottom: var(--space-2);
+.roleTagRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .roleBadge {
-  display: inline-block;
   font-family: var(--font-sans);
-  font-size: var(--text-overline);
-  font-weight: var(--font-weight-medium);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--accent-primary);
-  background: var(--accent-subtle);
-  padding: 3px 8px;
+  color: var(--accent);
+  background-color: var(--surface-base);
+  border: 1px solid var(--border-default);
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-xs);
-  border: 1px solid var(--accent-border);
+}
+
+.deptCode {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-subtle);
 }
 
 .name {
-  font-size: var(--text-heading-lg);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
   color: var(--fg-primary);
-  margin-bottom: var(--space-1);
+  line-height: var(--line-height-snug);
 }
 
 .designation {
-  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
   font-weight: var(--font-weight-medium);
   color: var(--fg-secondary);
-  margin-bottom: 2px;
 }
 
 .department {
-  font-size: var(--text-caption);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   color: var(--fg-muted);
-  margin-bottom: var(--space-4);
 }
 
 .bio {
-  font-size: var(--text-body-sm);
-  line-height: var(--line-height-normal);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.65;
   color: var(--fg-secondary);
-  margin-bottom: var(--space-6);
-  flex-grow: 1;
+  padding-top: var(--space-2);
+}
+
+.contactRow {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-2);
 }
 
 .emailLink {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
   color: var(--fg-secondary);
   text-decoration: none;
-  transition: color var(--transition-fast);
-  width: fit-content;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .emailLink:hover {
-  color: var(--accent-primary);
+  color: var(--accent);
 }
 
-@media (max-width: 860px) {
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
   .facultyGrid {
     grid-template-columns: 1fr;
-  }
-  
-  .facultyCard {
-    padding: var(--space-6);
+    gap: var(--space-6);
   }
 }
