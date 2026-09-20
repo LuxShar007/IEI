@@ -88,22 +88,22 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
       else if (progress < 1.00) sceneName = '16 HOMEPAGE FULL TAKEOVER';
       else sceneName = '17 INTRO RELEASE';
 
-      // Computed spatial IEI opacity
+      // Computed spatial IEI opacity (matches IEIPortal.tsx monolithOpacity)
       let ieiOp = 0;
       if (progress >= 0.60 && progress < 0.64) ieiOp = (progress - 0.60) / 0.04;
-      else if (progress >= 0.64 && progress <= 0.88) ieiOp = 1.0;
-      else if (progress > 0.88 && progress <= 0.90) ieiOp = 1.0 - ((progress - 0.88) / 0.02) * 0.18;
-      else if (progress > 0.90 && progress <= 0.93) ieiOp = 0.82 - ((progress - 0.90) / 0.03) * 0.34;
-      else if (progress > 0.93 && progress <= 0.96) ieiOp = 0.48 - ((progress - 0.93) / 0.03) * 0.32;
-      else if (progress > 0.96 && progress <= 0.98) ieiOp = 0.16 - ((progress - 0.96) / 0.02) * 0.13;
-      else if (progress > 0.98 && progress <= 1.00) ieiOp = 0.03 - ((progress - 0.98) / 0.02) * 0.03;
+      else if (progress >= 0.64 && progress <= 0.80) ieiOp = 1.0;
+      else if (progress > 0.80 && progress <= 0.86) ieiOp = 1.0 - ((progress - 0.80) / 0.06) * 0.25;
+      else if (progress > 0.86 && progress <= 0.91) ieiOp = 0.75 - ((progress - 0.86) / 0.05) * 0.37;
+      else if (progress > 0.91 && progress <= 0.95) ieiOp = 0.38 - ((progress - 0.91) / 0.04) * 0.26;
+      else if (progress > 0.95 && progress <= 0.98) ieiOp = 0.12 - ((progress - 0.95) / 0.03) * 0.10;
+      else if (progress > 0.98 && progress <= 1.00) ieiOp = 0.02 - ((progress - 0.98) / 0.02) * 0.02;
 
-      // Computed Homepage reveal opacity
+      // Computed Homepage reveal opacity (matches IEIPortal.tsx homepageOpacity)
       let hpReveal = 0;
-      if (progress >= 0.86 && progress <= 0.88) hpReveal = ((progress - 0.86) / 0.02) * 0.06;
-      else if (progress > 0.88 && progress <= 0.92) hpReveal = 0.06 + ((progress - 0.88) / 0.04) * 0.32;
-      else if (progress > 0.92 && progress <= 0.96) hpReveal = 0.38 + ((progress - 0.92) / 0.04) * 0.40;
-      else if (progress > 0.96 && progress <= 0.99) hpReveal = 0.78 + ((progress - 0.96) / 0.03) * 0.20;
+      if (progress >= 0.78 && progress <= 0.84) hpReveal = ((progress - 0.78) / 0.06) * 0.15;
+      else if (progress > 0.84 && progress <= 0.90) hpReveal = 0.15 + ((progress - 0.84) / 0.06) * 0.40;
+      else if (progress > 0.90 && progress <= 0.95) hpReveal = 0.55 + ((progress - 0.90) / 0.05) * 0.33;
+      else if (progress > 0.95 && progress <= 0.99) hpReveal = 0.88 + ((progress - 0.95) / 0.04) * 0.10;
       else if (progress > 0.99) hpReveal = 1.0;
 
       // Camera progress (0.00 at 0.70 to 1.00 at 0.98)

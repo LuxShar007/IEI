@@ -16,17 +16,17 @@ export const IEIPortal: React.FC<IEIPortalProps> = ({
   children,
 }) => {
   // STAGE 09 -> 16: Monolith I E I Opacity & Spatial Transparency Curve:
-  // 0.60 -> 0.64: Fades in and locks into place (0 -> 1)
-  // 0.64 -> 0.88: HERO HOLD + APPROACH (100% solid, fully opaque: 1)
-  // 0.88 -> 0.90: Begins becoming transparent as portal opens (1.0 -> 0.82)
-  // 0.90 -> 0.93: Translucent, spatial visibility of homepage through letters (0.82 -> 0.48)
-  // 0.93 -> 0.96: Significantly transparent (0.48 -> 0.16)
-  // 0.96 -> 0.98: Faint architectural silhouette edge (0.16 -> 0.03)
-  // 0.98 -> 1.00: Completely transitioned away (0.03 -> 0)
+  // 0.60 -> 0.64: Fades in (0 -> 1)
+  // 0.64 -> 0.80: HERO HOLD + APPROACH (fully opaque: 1)
+  // 0.80 -> 0.86: Begins becoming transparent as camera approaches (1.0 -> 0.75)
+  // 0.86 -> 0.91: Translucent — homepage clearly visible through letters (0.75 -> 0.38)
+  // 0.91 -> 0.95: Significantly transparent (0.38 -> 0.12)
+  // 0.95 -> 0.98: Faint silhouette edge (0.12 -> 0.02)
+  // 0.98 -> 1.00: Completely gone (0.02 -> 0)
   const monolithOpacity = useTransform(
     progress,
-    [0.60, 0.64, 0.88, 0.90, 0.93, 0.96, 0.98, 1.00],
-    [0, 1, 1, 0.82, 0.48, 0.16, 0.03, 0]
+    [0.60, 0.64, 0.80, 0.86, 0.91, 0.95, 0.98, 1.00],
+    [0, 1, 1, 0.75, 0.38, 0.12, 0.02, 0]
   );
 
   // STAGE 10 -> 16: Camera Physics (Scale, TranslateZ, Perspective, Parallax)
@@ -80,17 +80,17 @@ export const IEIPortal: React.FC<IEIPortalProps> = ({
   );
 
   // STAGE 13 -> 16: Background Homepage Reveal
-  // Exists behind and inside the letter before pass-through!
-  // 0.00 -> 0.86: visually suppressed (0)
-  // 0.86 -> 0.88: first subtle visibility behind IEI (0 -> 0.06)
-  // 0.88 -> 0.92: clear visibility through transparent IEI (0.06 -> 0.38)
-  // 0.92 -> 0.96: dominant (0.38 -> 0.78)
-  // 0.96 -> 0.99: almost fully dominant (0.78 -> 0.98)
+  // Exists behind and inside the letters — visible through as IEI becomes transparent.
+  // 0.00 -> 0.78: visually suppressed (0)
+  // 0.78 -> 0.84: subtle glow beginning to show through approaching IEI (0 -> 0.15)
+  // 0.84 -> 0.90: clearly visible through semi-transparent IEI (0.15 -> 0.55)
+  // 0.90 -> 0.95: dominant (0.55 -> 0.88)
+  // 0.95 -> 0.99: almost fully dominant (0.88 -> 0.98)
   // 0.99 -> 1.00: 100% full takeover (0.98 -> 1.00)
   const homepageOpacity = useTransform(
     progress,
-    [0.86, 0.88, 0.92, 0.96, 0.99, 1.00],
-    [0, 0.06, 0.38, 0.78, 0.98, 1.00]
+    [0.78, 0.84, 0.90, 0.95, 0.99, 1.00],
+    [0, 0.15, 0.55, 0.88, 0.98, 1.00]
   );
 
   // Portal atmospheric light glow

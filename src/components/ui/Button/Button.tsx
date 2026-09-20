@@ -45,6 +45,8 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     const content = (
       <>
+        <span className={styles.ambientShadow} aria-hidden="true" />
+        <span className={styles.sheen} aria-hidden="true" />
         {isLoading ? (
           <span className={styles.spinner} aria-hidden="true" />
         ) : (

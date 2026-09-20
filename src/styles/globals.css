@@ -26,6 +26,55 @@ html[data-theme="alternative"] {
   color-scheme: dark;
 }
 
+/* @property definitions for glass button specular lighting rotation */
+@property --angle-1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -75deg;
+}
+
+@property --angle-2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -45deg;
+}
+
+/* ==========================================================================
+   GLOBAL THEME TRANSITION
+   Smooth cross-fade for every element when data-theme toggles.
+   Only the four cheapest GPU-paint properties are transitioned.
+   backdrop-filter and transform are intentionally excluded (handled
+   per-component) so this stays lag-free on low-end devices.
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    color            300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color     300ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow       380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Elements with their own animation and buttons should suppress the global theme transition
+   so motion components and buttons don't inherit unwanted slow timing baggage. */
+[data-no-theme-transition],
+[data-framer-component-type],
+.iei-cinematic,
+.iei-intro,
+button,
+button *,
+button::before,
+button::after,
+a[data-cursor="button"],
+a[data-cursor="button"] *,
+[class*="button"],
+[class*="Button"],
+[class*="filterBtn"],
+[class*="chipBtn"] {
+  transition: none;
+}
+
 /* Ensure default document permits continuous vertical scrolling without conflict */
 html {
   overflow-x: clip;
@@ -43,8 +92,8 @@ body {
   overflow-y: visible;
   position: relative;
   font-feature-settings: 'kern' 1, 'liga' 1, 'tnum' 0;
-  transition: background-color 450ms cubic-bezier(0.16, 1, 0.3, 1),
-              color 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Body inherits the global theme transition from the * rule above.
+     Keep this block only for any body-specific overrides needed. */
 }
 
 /* ==========================================================================
