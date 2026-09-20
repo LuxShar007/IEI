@@ -14,60 +14,61 @@ export const IEI3DStack: React.FC<IEI3DStackProps> = ({
   progress,
   reducedMotion = false,
 }) => {
-  // STAGE 03 & 04 & 05: 0.26 -> 0.58
-  // 0.26 -> 0.30: Fade in from 2D vector
-  // 0.28 -> 0.38: Layer separation along Z-axis & subtle perspective tilt
-  // 0.38 -> 0.48: Convergence into unified 3D emblem with edge highlight & depth
-  // 0.48 -> 0.58: Shift upward gently as Live Helvetica text arrives below
+  // STAGE 03 & 04 & 05: 0.23 -> 0.52
+  // 0.23 -> 0.27: Fade in from 2D vector
+  // 0.24 -> 0.31: Layer separation along Z-axis & subtle perspective tilt
+  // 0.31 -> 0.38: Convergence into unified 3D emblem with edge highlight & depth
+  // 0.38 -> 0.44: Emblem hold
+  // 0.44 -> 0.52: Shift upward gently as Live Helvetica text arrives below, then fade out
   const stackOpacity = useTransform(
     progress,
-    [0.26, 0.30, 0.52, 0.58],
+    [0.23, 0.27, 0.46, 0.52],
     [0, 1, 1, 0]
   );
 
   // Restrained physical rotation showcasing dimensional depth
   const rotateX = useTransform(
     progress,
-    [0.26, 0.34, 0.44, 0.50],
+    [0.23, 0.30, 0.38, 0.44],
     [0, reducedMotion ? 0 : 10, 0, 0]
   );
   const rotateY = useTransform(
     progress,
-    [0.26, 0.34, 0.44, 0.50],
+    [0.23, 0.30, 0.38, 0.44],
     [0, reducedMotion ? 0 : -6, 0, 0]
   );
 
   // True Z-axis physical layer separation & convergence
-  // Peak separation at 0.34, smoothly converging into unified 3D object by 0.44
-  const zL1 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : -45, 0]);
-  const zL2 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : -20, 0]);
-  const zL4 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 25, 0]);
-  const zL5 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 48, 0]);
-  const zL6 = useTransform(progress, [0.28, 0.34, 0.44], [0, reducedMotion ? 0 : 70, 0]);
+  // Peak separation at 0.30, smoothly converging into unified 3D object by 0.38
+  const zL1 = useTransform(progress, [0.24, 0.30, 0.38], [0, reducedMotion ? 0 : -45, 0]);
+  const zL2 = useTransform(progress, [0.24, 0.30, 0.38], [0, reducedMotion ? 0 : -20, 0]);
+  const zL4 = useTransform(progress, [0.24, 0.30, 0.38], [0, reducedMotion ? 0 : 25, 0]);
+  const zL5 = useTransform(progress, [0.24, 0.30, 0.38], [0, reducedMotion ? 0 : 48, 0]);
+  const zL6 = useTransform(progress, [0.24, 0.30, 0.38], [0, reducedMotion ? 0 : 70, 0]);
 
   const layerSeparationAlpha = useTransform(
     progress,
-    [0.28, 0.32, 0.42, 0.48],
+    [0.24, 0.28, 0.36, 0.40],
     [0, 0.85, 0.85, 0]
   );
 
   // Soft ambient depth shadow
   const shadowOpacity = useTransform(
     progress,
-    [0.34, 0.42, 0.52, 0.58],
+    [0.30, 0.38, 0.46, 0.52],
     [0, 0.6, 0.6, 0]
   );
 
   // Upward elevation as Stage 06 Live Typography enters below
   const stackY = useTransform(
     progress,
-    [0.44, 0.52, 0.58],
+    [0.38, 0.45, 0.52],
     [0, -45, -75]
   );
 
   const stackScale = useTransform(
     progress,
-    [0.26, 0.34, 0.44, 0.54],
+    [0.23, 0.30, 0.38, 0.48],
     [0.96, 1, 1, 0.88]
   );
 

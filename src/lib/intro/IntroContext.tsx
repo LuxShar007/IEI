@@ -37,7 +37,7 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setIntroProgressState(1);
     } else {
       if (typeof window !== 'undefined' && window.scrollY > 100) {
-        const introThreshold = window.innerHeight * 3.5;
+        const introThreshold = window.innerHeight * 7.2;
         if (window.scrollY >= introThreshold) {
           setIsIntroActive(false);
           setIsIntroComplete(true);
@@ -56,15 +56,15 @@ export const IntroProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const setIntroProgress = useCallback((progress: number) => {
     setIntroProgressState(progress);
-    const complete = progress >= 0.92;
+    const complete = progress >= 0.98;
     setIsIntroComplete(complete);
     setIsIntroActive(progress < 0.99);
   }, []);
 
   const skipIntro = useCallback(() => {
     if (typeof window !== 'undefined') {
-      // Scroll to the end of the intro track (480vh)
-      const targetScroll = window.innerHeight * 4.85;
+      // Smoothly scroll to the release position of the intro track (7.5 × innerHeight)
+      const targetScroll = window.innerHeight * 7.5;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
       setIsIntroComplete(true);
       setIsIntroActive(false);

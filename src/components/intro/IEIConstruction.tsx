@@ -16,26 +16,26 @@ export const IEIConstruction: React.FC<IEIConstructionProps> = ({
   reducedMotion = false,
   isQAMode = false,
 }) => {
-  // STAGE 01 & 02: 0.00 -> 0.32
-  // Vector line drawing: 0.00 -> 0.22
-  // Full 2D vector lock: 0.22 -> 0.28
-  // Fade out as 3D stack takes over: 0.28 -> 0.32
+  // STAGE 01 & 02: 0.00 -> 0.30
+  // Vector line drawing: 0.00 -> 0.16
+  // Full 2D vector lock: 0.16 -> 0.23
+  // Fade out as 3D stack takes over: 0.23 -> 0.30
   const stageOpacity = useTransform(
     progress,
-    [0, 0.02, 0.26, 0.32],
+    [0, 0.02, 0.23, 0.30],
     [0.1, 1, 1, 0]
   );
 
   const emblemScale = useTransform(
     progress,
-    [0, 0.12, 0.24],
+    [0, 0.10, 0.23],
     [reducedMotion ? 1 : 0.95, 1, 1]
   );
 
   // Concentric engineering drafting guide rings (subtle drafting lines that disappear)
   const draftingOpacity = useTransform(
     progress,
-    [0, 0.03, 0.18, 0.24],
+    [0, 0.02, 0.16, 0.22],
     [0, 0.35, 0.35, 0]
   );
 

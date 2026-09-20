@@ -50,19 +50,31 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
     setCurrentProgress(progress);
     setIntroProgress(progress);
 
-    // Scene labels for debug
-    if (progress < 0.22) setCurrentScene('LINE DRAW');
-    else if (progress < 0.35) setCurrentScene('2D EMBLEM');
-    else if (progress < 0.52) setCurrentScene('3D STACK');
-    else if (progress < 0.70) setCurrentScene('TYPOGRAPHY');
-    else if (progress < 0.96) setCurrentScene('PORTAL');
-    else setCurrentScene('HOMEPAGE');
+    // Exact 18-stage scene detection (00 through 17)
+    if (progress < 0.03) setCurrentScene('00 INITIAL IDENTITY');
+    else if (progress < 0.16) setCurrentScene('01 LINE CONSTRUCTION');
+    else if (progress < 0.23) setCurrentScene('02 FULL 2D EMBLEM');
+    else if (progress < 0.31) setCurrentScene('03 LAYER STACKING');
+    else if (progress < 0.38) setCurrentScene('04 3D IEI EMBLEM');
+    else if (progress < 0.44) setCurrentScene('05 IEI IDENTITY HOLD');
+    else if (progress < 0.50) setCurrentScene('06 THE INSTITUTION');
+    else if (progress < 0.53) setCurrentScene('07 ENGINEERS');
+    else if (progress < 0.55) setCurrentScene('08 INDIA');
+    else if (progress < 0.64) setCurrentScene('09 I / E / I FORMATION');
+    else if (progress < 0.70) setCurrentScene('10 GIANT I / E / I HOLD');
+    else if (progress < 0.80) setCurrentScene('11 CAMERA APPROACH');
+    else if (progress < 0.88) setCurrentScene('12 PORTAL SPACE');
+    else if (progress < 0.92) setCurrentScene('13 HOMEPAGE VISIBLE THROUGH IEI');
+    else if (progress < 0.96) setCurrentScene('14 IEI TRANSPARENCY');
+    else if (progress < 0.98) setCurrentScene('15 IEI DISAPPEARS');
+    else if (progress < 1.00) setCurrentScene('16 HOMEPAGE FULL TAKEOVER');
+    else setCurrentScene('17 INTRO RELEASE');
 
-    // Handoff: re-enable Lenis when scroll exits the intro track
+    // Handoff: re-enable Lenis when scroll exits the intro track (World 2 begin)
     if (progress >= 0.99) {
       resumeLenis();
     } else {
-      // If scrolling back into intro zone, pause Lenis again
+      // If scrolling back into intro zone, pause Lenis so intro remains 1:1 deterministic
       pauseLenis();
     }
   }, [scrollYProgress, setIntroProgress, pauseLenis, resumeLenis]);
@@ -82,9 +94,10 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
   const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
 
   const isPinActive = currentProgress < 0.99;
-  const isReleased = currentProgress >= 0.99;
+  const homepageStatus =
+    currentProgress < 0.88 ? 'HIDDEN' : currentProgress < 0.98 ? 'BACKDROP' : 'RELEASED';
   const headerState =
-    currentProgress < 0.80 ? 'HIDDEN' : currentProgress < 0.96 ? 'ENTERING' : 'REVEALED';
+    currentProgress < 0.88 ? 'HIDDEN' : currentProgress < 0.98 ? 'ENTERING' : 'NORMAL';
 
   return (
     <section
@@ -147,9 +160,10 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
 
         {isDev && (
           <div className={styles.debugOverlay} aria-label="Development Debug Overlay">
+            <div className={styles.debugHeader}>INTRO</div>
             <div className={styles.debugRow}>
-              <span className={styles.debugLabel}>introProgress:</span>
-              <span>{currentProgress.toFixed(3)}</span>
+              <span className={styles.debugLabel}>progress:</span>
+              <span>{currentProgress.toFixed(2)}</span>
             </div>
             <div className={styles.debugRow}>
               <span className={styles.debugLabel}>scene:</span>
@@ -161,17 +175,7 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
             </div>
             <div className={styles.debugRow}>
               <span className={styles.debugLabel}>homepage:</span>
-              <span>
-                {currentProgress < 0.72
-                  ? 'HIDDEN'
-                  : currentProgress < 0.98
-                  ? 'BACKDROP'
-                  : 'RELEASED'}
-              </span>
-            </div>
-            <div className={styles.debugRow}>
-              <span className={styles.debugLabel}>release:</span>
-              <span>{isReleased ? 'TRUE' : 'FALSE'}</span>
+              <span>{homepageStatus}</span>
             </div>
             <div className={styles.debugRow}>
               <span className={styles.debugLabel}>header:</span>

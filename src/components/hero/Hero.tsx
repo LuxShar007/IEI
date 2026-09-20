@@ -31,22 +31,25 @@ const fadeVariant = {
 };
 
 interface HeroProps {
-  mode?: 'normal' | 'backdrop';
+  mode?: 'normal' | 'backdrop' | 'auto';
 }
 
-export const Hero: React.FC<HeroProps> = ({ mode = 'normal' }) => {
+export const Hero: React.FC<HeroProps> = ({ mode = 'auto' }) => {
   const { theme } = useTheme();
-  const { isIntroActive } = useIntro();
+  const { isIntroActive, introProgress } = useIntro();
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  // In auto mode, behave as backdrop when intro is active, normal when released
+  const isBackdrop = mode === 'backdrop' || (mode === 'auto' && isIntroActive && introProgress < 0.98);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  // Decoupled: remain in pristine resting state during intro or in backdrop mode!
-  const isLockedResting = isIntroActive || mode === 'backdrop' || shouldReduceMotion;
+  // Decoupled: remain in pristine resting state during intro or in backdrop mode
+  const isLockedResting = isBackdrop || shouldReduceMotion;
 
   const textY = useTransform(scrollYProgress, (p) => {
     if (isLockedResting) return 0;
@@ -68,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({ mode = 'normal' }) => {
   return (
     <section
       ref={sectionRef}
-      className={`${styles.hero} ${mode === 'backdrop' ? styles.backdropMode : ''}`}
+      className={`${styles.hero} ${isBackdrop ? styles.backdropMode : ''}`}
       aria-label="IEI SIES GST — Hero"
     >
       <div className={styles.layout}>

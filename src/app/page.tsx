@@ -14,16 +14,13 @@ import { FinalCTA } from '@/components/home/FinalCTA/FinalCTA';
 export default function HomePage() {
   return (
     <>
-      {/* 00-14 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) - STRICTLY FROZEN */}
+      {/* 00-17 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) with Single Authoritative Hero */}
       <IEIIdentityIntro>
-        <Hero mode="backdrop" />
+        <Hero mode="auto" />
       </IEIIdentityIntro>
 
-      {/* 01-10 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow) */}
+      {/* 01-09 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow after Intro Release) */}
       <main id="homepage-main">
-        {/* 01 — IDENTITY / STATEMENT (Oversized Helvetica Statement & Negative Space) */}
-        <Hero mode="normal" />
-
         {/* 02 — ABOUT IEI SIES GST (Asymmetrical Editorial Split) */}
         <AboutComposition />
 

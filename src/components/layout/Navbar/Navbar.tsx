@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const showNavbar = pathname !== '/' || isIntroComplete || introProgress >= 0.88;
+  const showNavbar = pathname !== '/' || isIntroComplete || introProgress >= 0.94;
 
   useEffect(() => {
     const handleScroll = () => {

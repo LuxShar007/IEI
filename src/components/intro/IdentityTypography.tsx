@@ -13,46 +13,47 @@ export const IdentityTypography: React.FC<IdentityTypographyProps> = ({
   progress,
   reducedMotion = false,
 }) => {
-  // Stage 06 Full Title appearance (0.43 -> 0.54)
+  // Stage 06 Full Title appearance (0.44 -> 0.53) with stable reading hold (0.47 -> 0.50)
   const fullTitleOpacity = useTransform(
     progress,
-    [0.43, 0.47, 0.51, 0.55],
+    [0.44, 0.47, 0.50, 0.53],
     [0, 1, 1, 0]
   );
   const fullTitleY = useTransform(
     progress,
-    [0.43, 0.48, 0.55],
+    [0.44, 0.47, 0.53],
     [reducedMotion ? 0 : 25, 0, reducedMotion ? 0 : -20]
   );
 
-  // Stage 07 Decomposition Appearance (0.52 -> 0.65)
+  // Stage 07 Decomposition Appearance (0.50 -> 0.65)
   const decompOpacity = useTransform(
     progress,
-    [0.51, 0.55, 0.64, 0.68],
+    [0.50, 0.53, 0.61, 0.65],
     [0, 1, 1, 0]
   );
 
-  // Trailing letters fade out: INSTITUTION -> I, ENGINEERS -> E, INDIA -> I
+  // Trailing letters: INSTITUTION -> I, ENGINEERS -> E, INDIA -> I
+  // Hold full words readable (0.53 -> 0.56), then progressively contract trailing letters (0.56 -> 0.61)
   const trailingOpacity = useTransform(
     progress,
-    [0.53, 0.60],
+    [0.56, 0.61],
     [1, 0]
   );
   const trailingMaxWidth = useTransform(
     progress,
-    [0.54, 0.61],
+    [0.56, 0.61],
     ['200px', '0px']
   );
 
-  // Triad letters drift scale and centering
+  // Triad letters drift scale and centering into I E I formation
   const triadScale = useTransform(
     progress,
-    [0.54, 0.62, 0.68],
-    [0.9, 1.05, reducedMotion ? 1.05 : 1.35]
+    [0.56, 0.64, 0.66],
+    [0.9, 1.05, reducedMotion ? 1.05 : 1.15]
   );
   const triadGap = useTransform(
     progress,
-    [0.54, 0.62],
+    [0.56, 0.64],
     ['clamp(0.5rem, 2vw, 2rem)', 'clamp(2rem, 6vw, 6rem)']
   );
 
