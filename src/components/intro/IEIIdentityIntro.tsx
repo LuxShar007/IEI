@@ -137,9 +137,16 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
     };
   }, [handleScroll]);
 
-  // Derived opacity values for UI chrome
-  const skipBtnOpacity = useTransform(scrollYProgress, [0, 0.05, 0.78, 0.88], [0, 1, 1, 0]);
-  const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
+  // Initial identity card (visible at progress 0, smoothly dissolves on first scroll)
+  const initialCardOpacity = useTransform(scrollYProgress, [0, 0.035], [1, 0]);
+  const initialCardY = useTransform(scrollYProgress, [0, 0.035], [0, -12]);
+
+  // "SCROLL TO ENTER" orientation cue (visible at progress 0, dissolves as scrolling begins)
+  const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.025], [1, 0]);
+  const scrollCueY = useTransform(scrollYProgress, [0, 0.025], [0, 8]);
+
+  // Derived opacity for skip button (hidden on initial title card, emerges as intro progresses)
+  const skipBtnOpacity = useTransform(scrollYProgress, [0.03, 0.08, 0.78, 0.88], [0, 1, 1, 0]);
 
   return (
     <section
@@ -157,6 +164,34 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
       <div className={styles.stickyStage}>
         <div className={styles.ambientVignette} />
 
+        {/* Minimal Initial Identity State — visible immediately on first load at progress 0 */}
+        <motion.div
+          className={styles.initialIdentityCard}
+          style={{
+            opacity: initialCardOpacity,
+            y: initialCardY,
+          }}
+          aria-label="IEI SIES GST — Student Chapter"
+        >
+          <div className={styles.initialPrimaryTitle}>IEI SIES GST</div>
+          <div className={styles.initialSecondaryTitle}>STUDENT CHAPTER</div>
+        </motion.div>
+
+        {/* Dedicated "SCROLL TO ENTER" Orientation Cue */}
+        <motion.div
+          className={styles.scrollCueWrapper}
+          style={{
+            opacity: scrollCueOpacity,
+            y: scrollCueY,
+          }}
+          aria-hidden="true"
+        >
+          <div className={styles.scrollCuePulse}>
+            <span className={styles.scrollCueText}>SCROLL TO ENTER</span>
+            <span className={styles.scrollCueArrow} aria-hidden="true">↓</span>
+          </div>
+        </motion.div>
+
         <motion.button
           className={styles.skipIntroBtn}
           style={{ opacity: skipBtnOpacity }}
@@ -165,17 +200,6 @@ export const IEIIdentityIntro: React.FC<IEIIdentityIntroProps> = ({ children }) 
         >
           Skip Intro [↓]
         </motion.button>
-
-        <motion.div
-          className={styles.scrollPrompt}
-          style={{ opacity: scrollCueOpacity }}
-          aria-hidden="true"
-        >
-          <span className={styles.scrollPromptText}>Scroll to Enter</span>
-          <div className={styles.scrollLineTrack}>
-            <div className={styles.scrollLineActive} />
-          </div>
-        </motion.div>
 
         <IEIConstruction
           progress={scrollYProgress}

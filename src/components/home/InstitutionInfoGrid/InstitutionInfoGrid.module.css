@@ -1,0 +1,122 @@
+/* ==========================================================================
+   INSTITUTION INFO GRID — Shared Institutional Information Strip
+   Strict cross-theme alignment: 4 equal columns, uniform dividers,
+   shared vertical baselines for labels and values, responsive stacking.
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* 4 equal columns desktop grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Uniform column geometry across themes */
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--space-6) var(--space-5);
+  border-right: 1px solid var(--border-subtle);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.column:last-child {
+  border-right: none;
+}
+
+/* Identical label baseline across all columns */
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  line-height: var(--line-height-normal);
+  min-height: 1.25rem;
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+/* Identical value baseline across all columns */
+.value {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--fg-primary);
+  margin: 0;
+  display: block;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUTS
+   ========================================================================== */
+
+/* Tablet: 2x2 grid */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .column {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .column:nth-child(1),
+  .column:nth-child(2) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .column:nth-child(2) {
+    border-right: none;
+  }
+
+  .column:nth-child(3) {
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .column:nth-child(4) {
+    border-right: none;
+  }
+}
+
+/* Mobile: 1 column vertical stack (tested for 430px, 390px, 375px) */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .column {
+    padding: var(--space-4) 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .column:last-child {
+    border-bottom: none;
+  }
+
+  .label {
+    min-height: auto;
+    margin-bottom: var(--space-1);
+  }
+}

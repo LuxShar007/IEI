@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { InstitutionInfoGrid } from '../InstitutionInfoGrid';
 import styles from './AboutComposition.module.css';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -70,25 +71,14 @@ export const AboutComposition: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* BOTTOM: Metadata strip */}
+        {/* BOTTOM: Shared Institutional Information Grid */}
         <motion.div
-          className={styles.metadataStrip}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-5%' }}
           variants={makeFadeUp(0.3)}
         >
-          {[
-            { label: 'Institution', value: 'SIES Graduate School of Technology' },
-            { label: 'Department', value: 'Electronics & Computer Science Engineering' },
-            { label: 'Chapter Body', value: 'Institution of Engineers (India)' },
-            { label: 'Collegiate Session', value: '2024–2025' },
-          ].map((item) => (
-            <div key={item.label} className={styles.metaItem}>
-              <span className={styles.metaLabel}>{item.label}</span>
-              <span className={styles.metaValue}>{item.value}</span>
-            </div>
-          ))}
+          <InstitutionInfoGrid />
         </motion.div>
       </div>
     </section>

@@ -23,7 +23,7 @@ export const IEIConstruction: React.FC<IEIConstructionProps> = ({
   const stageOpacity = useTransform(
     progress,
     [0, 0.02, 0.23, 0.30],
-    [0.1, 1, 1, 0]
+    [0, 1, 1, 0]
   );
 
   const emblemScale = useTransform(
