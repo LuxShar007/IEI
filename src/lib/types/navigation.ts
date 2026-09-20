@@ -9,7 +9,6 @@ export interface NavItem {
 
 export interface NavigationConfig {
   mainNav: NavItem[];
-  verificationNav: NavItem;
   footerNav: {
     title: string;
     items: NavItem[];

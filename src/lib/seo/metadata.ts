@@ -27,6 +27,11 @@ export function constructMetadata({
     title: pageTitle,
     description,
     metadataBase: new URL(SITE_URL),
+    icons: {
+      icon: '/assets/iei-logo.ico',
+      shortcut: '/assets/iei-logo.ico',
+      apple: '/assets/iei-logo.ico',
+    },
     alternates: {
       canonical: canonicalUrl,
     },

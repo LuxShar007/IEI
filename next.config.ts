@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/verify',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
 };

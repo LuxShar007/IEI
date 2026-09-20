@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
@@ -15,7 +14,7 @@ export const Footer: React.FC = () => {
         <div className={styles.headlineFrame}>
           <div className={styles.largeWordmark}>IEI SIES GST</div>
           <div className={styles.subHeadline}>
-            Official Students' Chapter · Department of Electronics & Computer Science Engineering · MH-04
+            Official Student Chapter · Department of Electronics & Computer Science Engineering
           </div>
         </div>
 
@@ -55,17 +54,10 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* COL 4: CREDENTIALS & CONTACT */}
+          {/* COL 4: CAMPUS & CONTACT */}
           <div className={styles.col}>
-            <div className={styles.colHeader}>Authentication & Contact</div>
+            <div className={styles.colHeader}>Campus & Contact</div>
             <ul className={styles.linkList}>
-              <li>
-                <Link href="/verify" className={styles.verifyBadgeLink}>
-                  <ShieldCheck size={14} className={styles.verifyIcon} />
-                  <span>Verify Member Registry</span>
-                  <span className={styles.statusDot} />
-                </Link>
-              </li>
               <li><Link href="/contact" className={styles.footerLink}>Campus Headquarters</Link></li>
               <li><a href="mailto:iei@siesgst.ac.in" className={styles.footerLink}>iei@siesgst.ac.in</a></li>
             </ul>
@@ -80,9 +72,7 @@ export const Footer: React.FC = () => {
           <div className={styles.bottomMetaLinks}>
             <span className={styles.legalText}>Institutional Non-Profit Student Body</span>
             <span className={styles.dotSep} aria-hidden="true">·</span>
-            <Link href="/verify" className={styles.legalLink}>Registry Protocol</Link>
-            <span className={styles.dotSep} aria-hidden="true">·</span>
-            <Link href="/contact" className={styles.legalLink}>Contact</Link>
+            <Link href="/contact" className={styles.legalLink}>Contact Chapter Office</Link>
           </div>
         </div>
       </div>

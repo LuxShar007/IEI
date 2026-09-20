@@ -1,62 +1,85 @@
-.switcherContainer {
+/* ==========================================================================
+   THEME SWITCHER — Compact Editorial Identity Switch
+   ========================================================================== */
+
+.themeSwitch {
   display: inline-flex;
   align-items: center;
-  position: relative;
-  background-color: var(--surface-card);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-pill);
-  padding: 3px;
-  gap: 2px;
+  gap: 5px;
+  padding: 3px 7px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  background-color: transparent;
   user-select: none;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color var(--duration-fast) var(--ease-out);
 }
 
-.switchBtn {
+.themeSwitch:hover {
+  border-color: var(--border-default);
+}
+
+.switchOption {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 10px;
-  background: transparent;
+  background: none;
   border: none;
-  border-radius: var(--radius-pill);
+  padding: 3px 4px;
   cursor: pointer;
-  z-index: 1;
+  font-family: var(--font-sans);
+  line-height: 1;
+  border-radius: 2px;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.btnLabel {
-  font-family: var(--font-sans);
-  font-size: var(--text-overline);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wider);
+.switchOption:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.optionLabel {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  transition: color 0.25s ease;
-  position: relative;
-  z-index: 2;
+  transition: color var(--duration-fast) var(--ease-out), font-weight var(--duration-fast) var(--ease-out);
+  display: block;
 }
 
-.switchBtn.active .btnLabel {
+.switchOption:hover .optionLabel {
+  color: var(--fg-primary);
+}
+
+.switchOption.active .optionLabel {
   color: var(--fg-primary);
   font-weight: var(--font-weight-bold);
 }
 
-.activePill {
+.switchOption.active::after {
+  content: '';
   position: absolute;
-  inset: 0;
-  background-color: var(--surface-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
-  z-index: 1;
+  bottom: 0;
+  left: 4px;
+  right: 4px;
+  height: 1.5px;
+  background-color: var(--accent);
+}
+
+.divider {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: var(--border-strong);
+  user-select: none;
+  line-height: 1;
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {
-  .switchBtn {
-    padding: 3px 8px;
+  .themeSwitch {
+    padding: 2px 5px;
+    gap: 4px;
   }
 
-  .btnLabel {
-    font-size: var(--text-micro);
+  .optionLabel {
+    font-size: 0.625rem;
   }
 }

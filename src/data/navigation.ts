@@ -11,12 +11,6 @@ export const navigationConfig: NavigationConfig = {
     { title: 'Resources', href: '/resources' },
     { title: 'Contact', href: '/contact' },
   ],
-  verificationNav: {
-    title: 'Verify Member',
-    href: '/verify',
-    badge: 'VERIFIED',
-    description: 'Digital credential validation & physical badge verification',
-  },
   footerNav: [
     {
       title: 'Chapter',
@@ -36,11 +30,11 @@ export const navigationConfig: NavigationConfig = {
       ],
     },
     {
-      title: 'Digital Identity',
+      title: 'Institutional',
       items: [
-        { title: 'Credential Verification', href: '/verify' },
-        { title: 'Sample Digital Badge', href: '/m/IEI-GST-2025-001' },
-        { title: 'Admin Access', href: '/admin' },
+        { title: 'Executive Council', href: '/team' },
+        { title: 'Domain Wings', href: '/team' },
+        { title: 'Campus Headquarters', href: '/contact' },
       ],
     },
   ],

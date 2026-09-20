@@ -7,7 +7,7 @@ import { MemberProfile } from '@/components/members/MemberProfile';
 import { Card } from '@/components/ui/Card/Card';
 import { Button } from '@/components/ui/Button/Button';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { ShieldAlert, Search, ShieldCheck } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
 import styles from './memberQr.module.css';
 
 interface MemberQrPageProps {
@@ -55,7 +55,7 @@ export default async function MemberQrDestinationPage({ params }: MemberQrPagePr
           badge="AUTHENTICATION FAILED"
           badgeVariant="warning"
           breadcrumbs={[
-            { label: 'Verification', href: '/verify' },
+            { label: 'Team', href: '/team' },
             { label: memberId },
           ]}
         />
@@ -78,8 +78,8 @@ export default async function MemberQrDestinationPage({ params }: MemberQrPagePr
               </p>
 
               <div className={styles.errorActions}>
-                <Button href="/verify" variant="primary" size="md" leftIcon={<Search size={16} />}>
-                  Search Verification Registry
+                <Button href="/team" variant="primary" size="md">
+                  View Team Directory
                 </Button>
                 <Button href="/contact" variant="outline" size="md">
                   Contact Chapter Office
@@ -101,12 +101,12 @@ export default async function MemberQrDestinationPage({ params }: MemberQrPagePr
         badge="AUTHENTICATED"
         badgeVariant="verified"
         breadcrumbs={[
-          { label: 'Verification', href: '/verify' },
+          { label: 'Team', href: '/team' },
           { label: member.memberId },
         ]}
         actions={
-          <Button href="/verify" variant="outline" size="sm" leftIcon={<ShieldCheck size={14} />}>
-            Verification Portal
+          <Button href="/team" variant="outline" size="sm">
+            Team Directory
           </Button>
         }
       />

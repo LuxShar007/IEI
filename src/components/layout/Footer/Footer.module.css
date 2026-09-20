@@ -106,39 +106,6 @@
   color: var(--fg-primary);
 }
 
-.verifyBadgeLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--fg-primary);
-  text-decoration: none;
-  border: 1px solid var(--border-default);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-xs);
-  transition:
-    border-color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
-}
-
-.verifyBadgeLink:hover {
-  border-color: var(--status-verified);
-  background-color: var(--surface-highlight);
-}
-
-.verifyIcon {
-  color: var(--status-verified);
-}
-
-.statusDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--status-verified);
-}
-
 /* ==========================================================================
    BOTTOM BAR
    ========================================================================== */

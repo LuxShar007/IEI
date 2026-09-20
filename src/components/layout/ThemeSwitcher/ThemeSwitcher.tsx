@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import styles from './ThemeSwitcher.module.css';
 
@@ -10,40 +9,28 @@ export const ThemeSwitcher: React.FC = () => {
 
   return (
     <div
-      className={styles.switcherContainer}
+      className={styles.themeSwitch}
       role="group"
       aria-label="Visual identity theme toggle"
     >
       <button
         type="button"
         onClick={() => setTheme('default')}
-        className={`${styles.switchBtn} ${theme === 'default' ? styles.active : ''}`}
+        className={`${styles.switchOption} ${theme === 'default' ? styles.active : ''}`}
         aria-pressed={theme === 'default'}
       >
-        {theme === 'default' && (
-          <motion.span
-            layoutId="themeSwitcherIndicator"
-            className={styles.activePill}
-            transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-          />
-        )}
-        <span className={styles.btnLabel}>DEFAULT</span>
+        <span className={styles.optionLabel}>DEFAULT</span>
       </button>
+
+      <span className={styles.divider} aria-hidden="true">/</span>
 
       <button
         type="button"
         onClick={() => setTheme('alternative')}
-        className={`${styles.switchBtn} ${theme === 'alternative' ? styles.active : ''}`}
+        className={`${styles.switchOption} ${theme === 'alternative' ? styles.active : ''}`}
         aria-pressed={theme === 'alternative'}
       >
-        {theme === 'alternative' && (
-          <motion.span
-            layoutId="themeSwitcherIndicator"
-            className={styles.activePill}
-            transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-          />
-        )}
-        <span className={styles.btnLabel}>SIGNATURE</span>
+        <span className={styles.optionLabel}>SIGNATURE</span>
       </button>
     </div>
   );

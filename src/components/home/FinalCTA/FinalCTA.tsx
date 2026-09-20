@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import styles from './FinalCTA.module.css';
 
 export const FinalCTA: React.FC = () => {
@@ -26,7 +26,7 @@ export const FinalCTA: React.FC = () => {
             School of Technology — cultivating technical competence, rigorous research, and collegiate collaboration.
           </p>
 
-          {/* INFORMATIONAL CTAs (NO JOIN BUTTONS) */}
+          {/* INFORMATIONAL CTAs (NO JOIN BUTTONS, NO VERIFY BUTTONS) */}
           <div className={styles.actionGrid}>
             <Link href="/events" className={styles.ctaButton}>
               <span>Explore Events</span>
@@ -36,11 +36,6 @@ export const FinalCTA: React.FC = () => {
             <Link href="/team" className={styles.ctaButton}>
               <span>Meet the Team</span>
               <ArrowRight size={15} />
-            </Link>
-
-            <Link href="/verify" className={styles.ctaButton}>
-              <ShieldCheck size={15} className={styles.verifyIcon} />
-              <span>Verify Member</span>
             </Link>
 
             <Link href="/contact" className={styles.ctaButtonSecondary}>
