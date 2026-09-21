@@ -1,0 +1,187 @@
+.sectionWrap {
+  width: 100%;
+  padding: var(--space-12) clamp(var(--space-4), 4vw, var(--space-12));
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-4);
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.sectionBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--accent);
+}
+
+.headerDivider {
+  color: var(--border-strong);
+}
+
+.headerDept {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-muted);
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+/* NARRATIVE GRID */
+.narrativeGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.statementCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.primaryStatement {
+  font-family: var(--font-sans);
+  font-size: clamp(var(--text-body-lg), 1.6vw, var(--text-heading-md));
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--fg-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.primaryStatement strong {
+  color: var(--accent);
+  font-weight: var(--font-weight-semibold);
+}
+
+.secondaryStatement {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--fg-secondary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.aboutActionRow {
+  margin-top: var(--space-2);
+}
+
+/* DOMAINS COLUMN */
+.domainsCol {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-8);
+}
+
+.domainsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.domainsTitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-primary);
+}
+
+.domainsHint {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-style: italic;
+  color: var(--fg-muted);
+}
+
+.domainsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.domainPill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 14px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--fg-primary);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.domainPill:hover {
+  border-color: var(--accent);
+  background: var(--surface-elevated);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.pillCode {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-bold);
+  color: var(--accent);
+}
+
+.pillName {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-tight);
+}
+
+.pillArrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  color: var(--fg-muted);
+  transition: transform var(--duration-fast) var(--ease-smooth), color var(--duration-fast) var(--ease-smooth);
+}
+
+.domainPill:hover .pillArrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .narrativeGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}

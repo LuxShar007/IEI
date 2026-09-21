@@ -1,0 +1,158 @@
+.carouselContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 520px;
+  height: 600px;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+@media (min-width: 640px) {
+  .carouselContainer {
+    height: 650px;
+  }
+}
+
+/* Center card view */
+.centerViewWrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.12));
+  background: var(--surface-card, #111116);
+  padding: 0.75rem;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .centerCard {
+    border-radius: 42px;
+    padding: 1rem;
+  }
+}
+
+.centerCard:hover {
+  transform: scale(1.02);
+  border-color: var(--accent, #664eea);
+  box-shadow: 0 30px 70px -12px rgba(102, 78, 234, 0.25);
+}
+
+.centerCardImage {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .centerCardImage {
+    border-radius: 34px;
+  }
+}
+
+.centerOverlayHint {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-family: var(--font-sans), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.centerCard:hover .centerOverlayHint {
+  opacity: 1;
+}
+
+/* Radial expanded view */
+.radialViewWrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+.radialViewWrapper:active {
+  cursor: grabbing;
+}
+
+.touchNone {
+  touch-action: none;
+}
+
+.touchPanY {
+  touch-action: pan-y;
+}
+
+/* Individual orbiting thumbnail */
+.itemWrapper {
+  position: absolute;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.itemCard {
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.15));
+  background: var(--surface-card, #111116);
+  padding: 0.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .itemCard {
+    border-radius: 24px;
+    padding: 0.35rem;
+  }
+}
+
+.itemCard:hover {
+  border-color: var(--accent, #664eea);
+  box-shadow: 0 14px 35px rgba(102, 78, 234, 0.4);
+}
+
+.itemImage {
+  height: 100%;
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .itemImage {
+    border-radius: 18px;
+  }
+}

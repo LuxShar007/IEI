@@ -1,57 +1,36 @@
 import React from 'react';
-import { IEIIdentityIntro } from '@/components/intro/IEIIdentityIntro';
-import { Hero } from '@/components/hero/Hero';
-import { AboutComposition } from '@/components/home/AboutComposition/AboutComposition';
-import { ChapterPhilosophy } from '@/components/home/ChapterPhilosophy/ChapterPhilosophy';
-import { WhatWeDo } from '@/components/home/WhatWeDo/WhatWeDo';
-import { ChapterJourney } from '@/components/home/ChapterJourney';
-import { ActivitiesSummary } from '@/components/home/ActivitiesSummary/ActivitiesSummary';
-import { EventsPreview } from '@/components/home/EventsPreview/EventsPreview';
-import { ThePeoplePreview } from '@/components/home/ThePeoplePreview/ThePeoplePreview';
-import { ChapterArchivePreview } from '@/components/home/ChapterArchivePreview/ChapterArchivePreview';
-import { ResourcesPreview } from '@/components/home/ResourcesPreview/ResourcesPreview';
-import { FinalCTA } from '@/components/home/FinalCTA/FinalCTA';
+import type { Metadata } from 'next';
+import { DirectHero } from '@/components/home/DirectHero/DirectHero';
+import { HomeAbout } from '@/components/home/HomeAbout/HomeAbout';
+import { FlagshipEventsAndAwards } from '@/components/home/FlagshipEventsAndAwards/FlagshipEventsAndAwards';
+import { HomeGallery } from '@/components/home/HomeGallery/HomeGallery';
+import { HomeFAQ } from '@/components/home/HomeFAQ/HomeFAQ';
+import { constructMetadata } from '@/lib/seo/metadata';
+
+export const metadata: Metadata = constructMetadata({
+  title: 'IEI SIES GST — The Institution of Engineers (India) Student Chapter',
+  description:
+    'Official collegiate student chapter under the Department of Electronics and Computer Science at SIES Graduate School of Technology. Discover technical symposia, domain wings, awards, and cryptographic member credentials.',
+  path: '/',
+});
 
 export default function HomePage() {
   return (
-    <>
-      {/* 00-17 — CINEMATIC IDENTITY INTRO (World 1: Pinned Scroll Region) with Single Authoritative Hero */}
-      <IEIIdentityIntro>
-        <Hero mode="auto" />
-      </IEIIdentityIntro>
+    <main id="homepage-main">
+      {/* 01 — DIRECT HERO (Unpinned, Bold Brand Display, Direct Actions) */}
+      <DirectHero />
 
-      {/* 01-09 — NORMAL HOMEPAGE CONTENT (World 2: Normal Document Flow after Intro Release) */}
-      <div id="homepage-main">
-        {/* 02 — ABOUT IEI SIES GST (Asymmetrical Editorial Split) */}
-        <AboutComposition />
+      {/* 02 — ABOUT US & SPECIALIZED DOMAINS (Narrative + Domain Pills) */}
+      <HomeAbout />
 
-        {/* 03 — CHAPTER PRINCIPLES (01 LEARN, 02 BUILD, 03 LEAD) */}
-        <ChapterPhilosophy />
+      {/* 03 — FLAGSHIP EVENTS & CHAPTER AWARDS (Initiatives + Institutional Honors) */}
+      <FlagshipEventsAndAwards />
 
-        {/* 04 — WHAT WE DO (Interactive Editorial List & Dynamic Detail Panel) */}
-        <WhatWeDo />
+      {/* 04 — RECENT PROCEEDINGS & GALLERY HIGHLIGHTS */}
+      <HomeGallery />
 
-        {/* 05 — IEI CHAPTER JOURNEY (LinusBio Platform-Style Pinned Sequential Showcase) */}
-        <ChapterJourney />
-
-        {/* 06 — FEATURED ACTIVITIES (Large Visual Summary & Program Tracks) */}
-        <ActivitiesSummary />
-
-        {/* 06 — FEATURED EVENTS (Numbered Chronological Archive Grid) */}
-        <EventsPreview />
-
-        {/* 07 — THE PEOPLE (Governance Preview with Links to Council & Domains) */}
-        <ThePeoplePreview />
-
-        {/* 08 — CHAPTER ARCHIVE / GALLERY (Asymmetric Photographic Grid) */}
-        <ChapterArchivePreview />
-
-        {/* 09 — RESOURCES (Restrained Link-Based Document Directory) */}
-        <ResourcesPreview />
-
-        {/* 10 — FINAL CTA / CONTACT (Institutional Statement & 4 Informational CTAs) */}
-        <FinalCTA />
-      </div>
-    </>
+      {/* 05 — FREQUENTLY ASKED QUESTIONS (Accordion Directory & Contact) */}
+      <HomeFAQ />
+    </main>
   );
 }
