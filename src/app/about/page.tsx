@@ -99,23 +99,6 @@ export default function AboutPage() {
                 The chapter exists to resolve a fundamental asymmetry in modern technical education: the gap between 
                 theoretical engineering concepts and the practical demands of high-reliability systems engineering.
               </p>
-              <div className={styles.statementStrip}>
-                <div className={styles.statementItem}>
-                  <div className={styles.statementNum}>01</div>
-                  <div className={styles.statementTitle}>Technical Depth</div>
-                  <div className={styles.statementDesc}>Hands-on mastery over surface familiarity. Real code, real silicon, real telemetry.</div>
-                </div>
-                <div className={styles.statementItem}>
-                  <div className={styles.statementNum}>02</div>
-                  <div className={styles.statementTitle}>Collaborative Practice</div>
-                  <div className={styles.statementDesc}>Peer code review, multidisciplinary hardware-software teams, and collective ownership.</div>
-                </div>
-                <div className={styles.statementItem}>
-                  <div className={styles.statementNum}>03</div>
-                  <div className={styles.statementTitle}>Institutional Integrity</div>
-                  <div className={styles.statementDesc}>Accountability, verifiable credentials, and professional ethics in every initiative.</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
