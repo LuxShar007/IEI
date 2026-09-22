@@ -13,18 +13,6 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.ambientMesh {
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(800px, 90vw);
-  height: 400px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  filter: blur(60px);
-  pointer-events: none;
-  opacity: 0.8;
-}
 
 .container {
   width: 100%;
@@ -166,16 +154,7 @@
 }
 
 .scrollArrow {
-  animation: bounce 2s infinite ease-in-out;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(5px);
-  }
+  opacity: 0.8;
 }
 
 /* RESPONSIVE DESIGN */

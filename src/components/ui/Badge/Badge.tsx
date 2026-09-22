@@ -23,7 +23,6 @@ export const Badge: React.FC<BadgeProps> = ({
     >
       {showPing && (
         <span className={styles.pingWrapper} aria-hidden="true">
-          <span className={styles.pingRing} />
           <span className={styles.pingDot} />
         </span>
       )}

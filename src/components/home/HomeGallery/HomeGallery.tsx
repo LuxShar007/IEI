@@ -48,7 +48,7 @@ export const HomeGallery: React.FC = () => {
         </div>
 
         {/* RADIAL CAROUSEL CONTAINER */}
-        <div className={styles.carouselWrapper} style={{ minHeight: '650px' }}>
+        <div className={styles.carouselWrapper}>
           <RadialCarousel
             items={DEMO_IMAGES}
             radius={250}

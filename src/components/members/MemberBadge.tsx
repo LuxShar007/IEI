@@ -73,7 +73,6 @@ export const MemberBadge: React.FC<MemberBadgeProps> = ({ member, className }) =
             className={styles.copyButton}
             title="Copy Member ID"
             aria-label="Copy Member ID"
-            data-cursor="button"
           >
             {copied ? <Check size={13} className={styles.checkIcon} /> : <Copy size={13} />}
           </button>

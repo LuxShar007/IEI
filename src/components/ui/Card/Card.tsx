@@ -30,7 +30,6 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           isHoverable && styles.hoverable,
           className
         )}
-        data-cursor={isHoverable ? 'hover' : undefined}
         {...props}
       >
         {hasCornerAccents && (

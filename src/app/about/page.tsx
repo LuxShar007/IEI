@@ -47,7 +47,7 @@ export default function AboutPage() {
                 of technical eminence, IEI represents the highest standard of engineering governance across India.
               </p>
               <p className={styles.bodyPara}>
-                Operating across 15 engineering engineering divisions with more than 125 state and local centres, 
+                Operating across 15 engineering divisions with more than 125 state and local centres, 
                 IEI sets professional standards, accredits collegiate programs, and provides a national platform 
                 for engineering discourse. Student chapters are the vital grassroots foundation of this national network.
               </p>

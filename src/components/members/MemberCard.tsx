@@ -14,7 +14,7 @@ export interface MemberCardProps {
 export const MemberCard: React.FC<MemberCardProps> = ({ member, compact }) => {
   return (
     <Card variant="default" hasCornerAccents isHoverable className={styles.card}>
-      <Link href={`/team/${member.memberId}`} className={styles.cardLink} data-cursor="view">
+      <Link href={`/team/${member.memberId}`} className={styles.cardLink}>
         <div className={styles.header}>
           <div className={styles.avatar}>
             <span className={styles.initials}>

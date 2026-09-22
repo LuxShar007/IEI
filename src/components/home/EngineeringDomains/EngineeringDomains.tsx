@@ -195,7 +195,6 @@ export const EngineeringDomains: React.FC = () => {
                   key={domain.id}
                   onClick={() => setActiveDomainIndex(idx)}
                   className={`${styles.domainTab} ${isActive ? styles.activeTab : ''}`}
-                  data-cursor="button"
                 >
                   <span className={styles.tabNum}>{domain.num}</span>
                   <span className={styles.tabTitle}>{domain.title}</span>

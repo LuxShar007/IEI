@@ -17,9 +17,6 @@ export const DirectHero: React.FC = () => {
 
   return (
     <section className={styles.heroSection} aria-label="IEI SIES GST Chapter Introduction">
-      {/* BACKGROUND ACCENT MESH */}
-      <div className={styles.ambientMesh} aria-hidden="true" />
-
       <div className={styles.container}>
         {/* TOP STATUS BAR */}
         <motion.div
