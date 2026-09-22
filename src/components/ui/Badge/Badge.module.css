@@ -79,7 +79,6 @@
 }
 
 .pingDot {
-  position: relative;
   display: inline-flex;
   border-radius: 50%;
   width: 6px;
@@ -87,26 +86,3 @@
   background-color: currentColor;
 }
 
-.pingRing {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: currentColor;
-  opacity: 0.75;
-  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pingRing {
-    animation: none;
-    display: none;
-  }
-}

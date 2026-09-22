@@ -34,7 +34,7 @@ export const RadialCarousel: React.FC<RadialCarouselProps> = ({
   radius = 260,
   thumbnailSize = 110,
   centerSize = 400,
-  autoRotate = true,
+  autoRotate = false,
   autoRotateSpeed = 0.25,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -85,19 +85,10 @@ export const RadialCarousel: React.FC<RadialCarouselProps> = ({
     duration: 0.1,
   });
 
-  // Continuous auto-rotation loop when radial view is active and not being dragged
+  // Autonomous motion disabled during design freeze. Carousel rotates only on user touch/pan or item selection.
   useEffect(() => {
     if (!autoRotate) return;
-    let animId: number;
-    const tick = () => {
-      if (!isPanning) {
-        rotation.set(rotation.get() + autoRotateSpeed);
-      }
-      animId = requestAnimationFrame(tick);
-    };
-    animId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animId);
-  }, [autoRotate, isPanning, autoRotateSpeed, rotation]);
+  }, [autoRotate]);
 
   const toggleExpand = useCallback(() => {
     setIsExpanded((prev) => !prev);

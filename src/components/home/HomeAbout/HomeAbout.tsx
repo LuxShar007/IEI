@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { domainDefinitions } from '@/data/team';
 import { Button } from '@/components/ui/Button/Button';
-import { ArrowRight, Sparkles, Building2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import styles from './HomeAbout.module.css';
 
 export const HomeAbout: React.FC = () => {

@@ -7,17 +7,13 @@ import { usePathname } from 'next/navigation';
 import { navigationConfig } from '@/data/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
-import { useIntro } from '@/lib/intro/IntroContext';
 import { ThemeSwitcher } from '@/components/layout/ThemeSwitcher/ThemeSwitcher';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const { isIntroComplete, isNavbarVisible } = useIntro();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const showNavbar = pathname !== '/' || isIntroComplete || isNavbarVisible;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +49,6 @@ export const Navbar: React.FC = () => {
     <header
       className={cn(
         styles.navbar,
-        !showNavbar && styles.hiddenForIntro,
         isScrolled && styles.scrolled,
         mobileMenuOpen && styles.menuOpen
       )}

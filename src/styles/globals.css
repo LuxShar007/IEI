@@ -26,19 +26,6 @@ html[data-theme="alternative"] {
   color-scheme: dark;
 }
 
-/* @property definitions for glass button specular lighting rotation */
-@property --angle-1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: -75deg;
-}
-
-@property --angle-2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: -45deg;
-}
-
 /* ==========================================================================
    GLOBAL THEME TRANSITION
    Smooth cross-fade for every element when data-theme toggles.

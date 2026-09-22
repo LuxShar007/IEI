@@ -20,13 +20,6 @@
     border-color var(--duration-normal) var(--ease-out);
 }
 
-/* Hidden during cinematic IEI intro until release handoff */
-.navbar.hiddenForIntro {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
-
 /* Scrolled state: light translucent editorial surface */
 .navbar.scrolled {
   background-color: var(--surface-glass);

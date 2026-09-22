@@ -33,7 +33,7 @@
   border: 1px solid var(--border-default, rgba(255, 255, 255, 0.12));
   background: var(--surface-card, #111116);
   padding: 0.75rem;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
@@ -48,7 +48,7 @@
 .centerCard:hover {
   transform: scale(1.02);
   border-color: var(--accent, #664eea);
-  box-shadow: 0 30px 70px -12px rgba(102, 78, 234, 0.25);
+  box-shadow: var(--shadow-lg);
 }
 
 .centerCardImage {

@@ -45,8 +45,6 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     const content = (
       <>
-        <span className={styles.ambientShadow} aria-hidden="true" />
-        <span className={styles.sheen} aria-hidden="true" />
         {isLoading ? (
           <span className={styles.spinner} aria-hidden="true" />
         ) : (
@@ -65,7 +63,6 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
             target="_blank"
             rel="noopener noreferrer"
             className={classNames}
-            data-cursor="button"
             ref={ref as React.Ref<HTMLAnchorElement>}
             {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
           >
@@ -77,7 +74,6 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
         <Link
           href={href}
           className={classNames}
-          data-cursor="button"
           ref={ref as React.Ref<HTMLAnchorElement>}
           {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
@@ -91,7 +87,6 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
         ref={ref as React.Ref<HTMLButtonElement>}
         className={classNames}
         disabled={disabled || isLoading}
-        data-cursor="button"
         {...props}
       >
         {content}

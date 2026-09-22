@@ -3,7 +3,6 @@ import '@/styles/globals.css';
 import { Navbar } from '@/components/layout/Navbar/Navbar';
 import { Footer } from '@/components/layout/Footer/Footer';
 import { SkipLink } from '@/components/layout/SkipLink/SkipLink';
-import { CustomCursor } from '@/components/ui/Cursor/CustomCursor';
 import { GlobalBackground } from '@/components/ui/Background/GlobalBackground';
 import { SmoothScrollProvider } from '@/components/layout/SmoothScrollProvider';
 import { constructMetadata } from '@/lib/seo/metadata';
@@ -41,7 +40,6 @@ export default function RootLayout({
             <IntroProvider>
               <StartupOverlay />
               <SkipLink />
-              <CustomCursor />
               <GlobalBackground />
               <Navbar />
               <main id="main-content">
