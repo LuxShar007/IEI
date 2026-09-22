@@ -1,0 +1,381 @@
+/* ==========================================================================
+   STARTUP OVERLAY — 2.8s Premium 3D Micro Identity Animation
+   Strictly Helvetica · Layered 3D Extrusion · Micro Camera Tilt
+   ========================================================================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: auto;
+  animation: overlayHandoff 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.3s forwards;
+  will-change: opacity, visibility;
+}
+
+/* Content Container */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 90vw;
+}
+
+/* 3D Scene Wrapper (Spatial Canvas & Micro Camera Motion) */
+.scene3D {
+  position: relative;
+  width: clamp(96px, 14vw, 130px);
+  height: clamp(96px, 14vw, 130px);
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  perspective: 1200px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+  animation: microCameraMotion 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
+/* Common Emblem Layer Container */
+.emblemLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.emblemSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+
+/* Layer 0: Ambient Contact Depth Shadow */
+.ambientShadow {
+  position: absolute;
+  inset: -5%;
+  z-index: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 43, 127, 0.35) 0%, rgba(0, 43, 127, 0.08) 50%, transparent 75%);
+  filter: blur(14px);
+  opacity: 0;
+  transform: translateZ(-25px) translate(2px, 6px) scale(0.92);
+  animation: shadowBloom 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Layer 1: Rear Depth Extrusion (Z = -15px) */
+.depthLayer3 {
+  z-index: 4;
+  color: #000c22;
+  opacity: 0;
+  transform: translateZ(0);
+  animation: extrudeLayer3 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Layer 2: Mid-Depth Extrusion (Z = -10px) */
+.depthLayer2 {
+  z-index: 6;
+  color: #001233;
+  opacity: 0;
+  transform: translateZ(0);
+  animation: extrudeLayer2 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Layer 3: Near-Depth Extrusion (Z = -5px) */
+.depthLayer1 {
+  z-index: 8;
+  color: #001a4d;
+  opacity: 0;
+  transform: translateZ(0);
+  animation: extrudeLayer1 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Layer 4: Front Primary Seal (Datum Baseline Z = 0) */
+.frontLayer {
+  z-index: 12;
+  color: #002b7f;
+  opacity: 0;
+  transform: translateZ(0) scale(0.94);
+  animation: frontEmblemConstruct 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Text Container */
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Primary Title: "IEI SIES GST" (Phase 5: 1.45s) */
+.title {
+  margin: 0;
+  font-family: var(--font-sans, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0a0a0a;
+  text-transform: uppercase;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: titleReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1.45s forwards;
+  will-change: opacity, transform;
+}
+
+/* Secondary Subtitle: "STUDENT CHAPTER" (Phase 5: 1.65s) */
+.subtitle {
+  margin: 0;
+  font-family: var(--font-sans, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: #666666;
+  text-transform: uppercase;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: subtitleReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.65s forwards;
+  will-change: opacity, transform;
+}
+
+/* ==========================================================================
+   7-PHASE KEYFRAME ANIMATIONS
+   ========================================================================== */
+
+/* Phase 2: Emblem Construction & Phase 7 Handoff */
+@keyframes frontEmblemConstruct {
+  0% {
+    opacity: 0;
+    transform: translateZ(0) scale(0.94);
+    filter: blur(3px);
+  }
+  7.14% { /* 0.20s */
+    opacity: 0;
+    transform: translateZ(0) scale(0.94);
+    filter: blur(3px);
+  }
+  26.78% { /* 0.75s */
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+    filter: blur(0px);
+  }
+  82.14% { /* 2.30s (Hold) */
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+    filter: blur(0px);
+  }
+  100% { /* 2.80s (Handoff) */
+    opacity: 1;
+    transform: translateZ(10px) scale(1.03);
+    filter: blur(0px);
+  }
+}
+
+/* Phase 3: Depth Extrusion Layer 1 (-5px) */
+@keyframes extrudeLayer1 {
+  0%, 25% { /* 0.0s -> 0.70s */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  41% { /* 1.15s (Peak Extrusion) */
+    opacity: 0.85;
+    transform: translateZ(-5px) translate(-0.8px, 0.8px);
+  }
+  82.14% { /* 2.30s */
+    opacity: 0.85;
+    transform: translateZ(-5px) translate(-0.8px, 0.8px);
+  }
+  98% { /* 2.75s (Collapse) */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+}
+
+/* Phase 3: Depth Extrusion Layer 2 (-10px) */
+@keyframes extrudeLayer2 {
+  0%, 26.78% { /* 0.0s -> 0.75s */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  43% { /* 1.20s (Peak Extrusion) */
+    opacity: 0.65;
+    transform: translateZ(-10px) translate(-1.6px, 1.6px);
+  }
+  82.14% { /* 2.30s */
+    opacity: 0.65;
+    transform: translateZ(-10px) translate(-1.6px, 1.6px);
+  }
+  98% { /* 2.75s (Collapse) */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+}
+
+/* Phase 3: Depth Extrusion Layer 3 (-15px) */
+@keyframes extrudeLayer3 {
+  0%, 28.57% { /* 0.0s -> 0.80s */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  45% { /* 1.26s (Peak Extrusion) */
+    opacity: 0.45;
+    transform: translateZ(-15px) translate(-2.4px, 2.4px);
+  }
+  82.14% { /* 2.30s */
+    opacity: 0.45;
+    transform: translateZ(-15px) translate(-2.4px, 2.4px);
+  }
+  98% { /* 2.75s (Collapse) */
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateZ(0) translate(0px, 0px);
+  }
+}
+
+/* Ambient Shadow Bloom */
+@keyframes shadowBloom {
+  0%, 25% { /* 0.0s -> 0.70s */
+    opacity: 0;
+    transform: translateZ(-25px) translate(0px, 0px) scale(0.85);
+  }
+  43% { /* 1.20s */
+    opacity: 0.4;
+    transform: translateZ(-25px) translate(2px, 6px) scale(0.94);
+  }
+  82.14% { /* 2.30s */
+    opacity: 0.4;
+    transform: translateZ(-25px) translate(2px, 6px) scale(0.94);
+  }
+  100% { /* 2.80s */
+    opacity: 0;
+    transform: translateZ(-25px) translate(0px, 0px) scale(0.85);
+  }
+}
+
+/* Phase 4: Micro Camera Motion (1.20s -> 1.65s) */
+@keyframes microCameraMotion {
+  0%, 42.85% { /* 0.0s -> 1.20s (Facing front) */
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  50% { /* 1.40s (Dimensional Tilt) */
+    transform: rotateX(8deg) rotateY(-6deg) scale(1.025);
+  }
+  58.9% { /* 1.65s (Smooth Settling) */
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  82.14% { /* 2.30s (Hold) */
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  100% { /* 2.80s (Handoff forward approach) */
+    transform: rotateX(0deg) rotateY(0deg) scale(1.03);
+  }
+}
+
+/* Phase 5: Text Reveals */
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes subtitleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Phase 7: Overlay Handoff (2.30s -> 2.80s) */
+@keyframes overlayHandoff {
+  0% {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+  99% {
+    opacity: 0;
+    pointer-events: none;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+/* ==========================================================================
+   SESSION-SKIPPED / REDUCED MOTION GUARDS
+   ========================================================================== */
+
+:global(html[data-startup="done"]) .overlay {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: overlayFadeOutQuick 0.25s ease forwards 0.35s;
+  }
+
+  .scene3D,
+  .frontLayer,
+  .title,
+  .subtitle {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .depthLayer1,
+  .depthLayer2,
+  .depthLayer3,
+  .ambientShadow {
+    display: none !important;
+  }
+
+  @keyframes overlayFadeOutQuick {
+    0% {
+      opacity: 1;
+      visibility: visible;
+    }
+    100% {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
+}
