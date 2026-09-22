@@ -1,158 +1,369 @@
-.carouselContainer {
+/* =============================================================================
+   HORIZONTAL 3D CYLINDRICAL IMAGE CAROUSEL
+   Vertical-axis rotation (Y-axis), 5-card depth hierarchy, and Lightbox Modal
+   ============================================================================= */
+
+.cylinderContainer {
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 520px;
-  height: 600px;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
+  height: 580px;
+  overflow: hidden;
   user-select: none;
   touch-action: pan-y;
+  outline: none;
 }
 
-@media (min-width: 640px) {
-  .carouselContainer {
-    height: 650px;
+.cylinderContainer:focus-visible {
+  outline: 2px solid var(--accent, #664eea);
+  outline-offset: -2px;
+}
+
+@media (min-width: 768px) {
+  .cylinderContainer {
+    height: 620px;
+    min-height: 560px;
   }
 }
 
-/* Center card view */
-.centerViewWrapper {
+/* 3D CYLINDRICAL PERSPECTIVE STAGE */
+.cylinderStage {
   position: relative;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 440px;
+  perspective: 1200px;
+  cursor: grab;
 }
 
-.centerCard {
+.cylinderStage:active {
+  cursor: grabbing;
+}
+
+@media (min-width: 768px) {
+  .cylinderStage {
+    height: 480px;
+  }
+}
+
+/* INDIVIDUAL 3D CYLINDER CARD */
+.cylinderCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 270px;
+  height: 360px;
+  cursor: pointer;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (min-width: 640px) {
+  .cylinderCard {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cylinderCard {
+    width: 320px;
+    height: 420px;
+  }
+}
+
+/* CARD INNER CONTAINER — PRESERVES APPROVED CARD STYLING */
+.cardInner {
   position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
   overflow: hidden;
-  border-radius: 32px;
   border: 1px solid var(--border-default, rgba(255, 255, 255, 0.12));
   background: var(--surface-card, #111116);
-  padding: 0.75rem;
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 @media (min-width: 640px) {
-  .centerCard {
-    border-radius: 42px;
-    padding: 1rem;
+  .cardInner {
+    border-radius: 32px;
   }
 }
 
-.centerCard:hover {
-  transform: scale(1.02);
+/* ACTIVE CENTER CARD ELEVATION */
+.centerCardActive .cardInner {
   border-color: var(--accent, #664eea);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
 }
 
-.centerCardImage {
-  height: 100%;
+.centerCardActive:hover .cardInner {
+  transform: scale(1.02);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.45);
+}
+
+/* CARD IMAGE */
+.cardImage {
   width: 100%;
-  border-radius: 24px;
+  height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 
-@media (min-width: 640px) {
-  .centerCardImage {
-    border-radius: 34px;
-  }
-}
-
-.centerOverlayHint {
+/* CENTER CARD CUE BADGE BUTTON */
+.cardCenterCue {
   position: absolute;
   bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(10, 10, 14, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
   font-family: var(--font-sans), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  padding: 0.4rem 1rem;
+  letter-spacing: 0.08em;
+  padding: 0.45rem 1rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
   white-space: nowrap;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  z-index: 35;
 }
 
-.centerCard:hover .centerOverlayHint {
-  opacity: 1;
+.cueIcon {
+  color: var(--accent, #664eea);
 }
 
-/* Radial expanded view */
-.radialViewWrapper {
+.cardCenterCue:hover {
+  background: rgba(10, 10, 14, 0.95);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* DISCRETE NAVIGATION ROW */
+.navigationRow {
   position: relative;
+  z-index: 25;
   display: flex;
-  height: 100%;
-  width: 100%;
   align-items: center;
   justify-content: center;
-  cursor: grab;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  width: 100%;
 }
 
-.radialViewWrapper:active {
-  cursor: grabbing;
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.14));
+  background: var(--surface-card, #ffffff);
+  color: var(--fg-primary, #0a0a0a);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.touchNone {
-  touch-action: none;
+.navButton:hover {
+  border-color: var(--accent, #664eea);
+  background: var(--surface-highlight, rgba(0, 0, 0, 0.05));
+  transform: scale(1.06);
 }
 
-.touchPanY {
+.navButton:active {
+  transform: scale(0.96);
+}
+
+.indicatorTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 180px;
+}
+
+.counterText {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted, #6a6a75);
+}
+
+.titleText {
+  font-family: var(--font-sans), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--fg-primary, #0a0a0a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+  text-align: center;
+}
+
+/* =============================================================================
+   FULL-VIEWPORT IMAGE LIGHTBOX MODAL
+   ============================================================================= */
+
+.lightboxOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(3, 4, 7, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxFadeIn 0.2s ease-out;
   touch-action: pan-y;
 }
 
-/* Individual orbiting thumbnail */
-.itemWrapper {
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightboxCloseBtn {
   position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
   cursor: pointer;
-  z-index: 5;
+  transition: all 0.2s ease;
 }
 
-.itemCard {
-  overflow: hidden;
-  border-radius: 18px;
-  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.15));
-  background: var(--surface-card, #111116);
-  padding: 0.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+.lightboxCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.06);
 }
 
-@media (min-width: 640px) {
-  .itemCard {
-    border-radius: 24px;
-    padding: 0.35rem;
+.lightboxNavBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(20, 20, 26, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lightboxNavBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.lightboxPrev {
+  left: 1.5rem;
+}
+
+.lightboxNext {
+  right: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .lightboxNavBtn {
+    width: 42px;
+    height: 42px;
+  }
+  .lightboxPrev {
+    left: 0.75rem;
+  }
+  .lightboxNext {
+    right: 0.75rem;
   }
 }
 
-.itemCard:hover {
-  border-color: var(--accent, #664eea);
-  box-shadow: 0 14px 35px rgba(102, 78, 234, 0.4);
+.lightboxImageContainer {
+  position: relative;
+  width: 88vw;
+  height: 78vh;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.itemImage {
-  height: 100%;
-  width: 100%;
-  border-radius: 14px;
-  object-fit: cover;
-  display: block;
+.lightboxImg {
+  object-fit: contain !important;
+  border-radius: 8px;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.65));
 }
 
-@media (min-width: 640px) {
-  .itemImage {
-    border-radius: 18px;
-  }
+.lightboxCaptionBar {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000001;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(20, 20, 26, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.lightboxCounter {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lightboxTitle {
+  font-family: var(--font-sans), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
 }
