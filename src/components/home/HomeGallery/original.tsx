@@ -158,8 +158,12 @@ export const RadialCarousel: React.FC<RadialCarouselProps> = ({
   const isMobile = windowWidth < 640;
   const isTablet = windowWidth >= 640 && windowWidth < 1024;
 
+  // Card dimensions (must match CSS .cylinderCard sizes)
+  const cardW = isMobile ? 310 : isTablet ? 340 : 380;
+  const cardH = isMobile ? 420 : isTablet ? 460 : 510;
+
   // Responsive cylinder geometry
-  const cylinderRadius = isMobile ? 320 : isTablet ? 400 : 480;
+  const cylinderRadius = isMobile ? 360 : isTablet ? 450 : 540;
   const angleStep = isMobile ? 32 : isTablet ? 29 : 27; // degrees per card position
   const visibleCardRange = isMobile ? 1 : 2; // Mobile shows 3 cards total, Desktop shows 5
 
@@ -226,10 +230,13 @@ export const RadialCarousel: React.FC<RadialCarouselProps> = ({
           // Card rotation tangent to cylinder arc (facing towards center/viewer)
           const rotateY = angleDeg * 0.82;
 
-          // Mathematically correct transform: object-space center translate(-50%, -50%) first,
-          // then scale and rotate symmetrically around the card's vertical center,
-          // then translate3d to cylindrical arc coordinate
-          const cardTransform = `translate3d(${translateX}px, 0px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale}) translate(-50%, -50%)`;
+          // Absolute-pixel centering: encode half-card offset directly in translate3d
+          // so the card's geometric center sits exactly at the stage's center point.
+          // CSS transform order: outermost = 3D arc position, then rotateY, then scale.
+          // Cards are positioned at left:0; top:0 (removed from CSS), so we shift by half dims.
+          const cx = translateX - cardW / 2;
+          const cy = -cardH / 2;
+          const cardTransform = `translate3d(${cx}px, ${cy}px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
 
           return (
             <div
