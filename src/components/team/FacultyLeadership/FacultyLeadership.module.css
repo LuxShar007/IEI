@@ -1,193 +1,321 @@
-/* ==========================================================================
-   FACULTY LEADERSHIP — Distinguished Academic Leadership Composition
-   ========================================================================== */
-
 .sectionWrap {
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-  border-bottom: 1px solid var(--border-default);
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-12) clamp(var(--space-4), 4vw, var(--space-12));
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .header {
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  max-width: 720px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-6);
 }
 
-.metaRow {
+.headerMeta {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
-.sectionIndex {
+.sectionBadge {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fg-muted);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--accent);
 }
 
-.sectionLabel {
+.headerDivider {
+  color: var(--border-strong);
+}
+
+.headerDept {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--accent);
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-muted);
 }
 
 .heading {
   font-family: var(--font-sans);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--text-display-md);
   font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-tight);
+  letter-spacing: var(--tracking-tighter);
   color: var(--fg-primary);
-  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-2) 0;
 }
 
-.sub {
+.lead {
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: var(--text-body-md);
+  line-height: var(--line-height-normal);
   color: var(--fg-secondary);
+  max-width: 680px;
+  margin: 0;
 }
 
-/* ==========================================================================
-   FACULTY GRID
-   ========================================================================== */
-.facultyGrid {
+/* ASYMMETRIC GRID */
+.compositionGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-8);
+  align-items: stretch;
 }
 
-.facultyCard {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border-default);
-  background: var(--surface-card);
-  border-radius: var(--radius-xs);
-  padding: clamp(2rem, 4vw, 3rem);
+/* HOD CARD (PRIMARY) */
+.hodCard {
+  display: grid;
+  grid-template-columns: 240px 1fr;
   gap: var(--space-6);
-}
-
-.portraitFrame {
-  position: relative;
-  width: 90px;
-  height: 90px;
+  background: var(--surface-card);
   border: 1px solid var(--border-default);
-  background: var(--surface-base);
-  border-radius: var(--radius-xs);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.hodCard:hover {
+  border-color: var(--border-strong);
+}
+
+.portraitColumn {
+  position: relative;
+  width: 100%;
+}
+
+.portraitCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  border: 1px solid var(--border-subtle);
 }
 
-.capIcon {
-  color: var(--fg-muted);
-  opacity: 0.4;
+.monolithSvgWrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-.initials {
+.monolithSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.portraitBadge {
   position: absolute;
-  bottom: 6px;
-  right: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: var(--font-weight-bold);
-  color: var(--accent);
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.roleTagRow {
+  bottom: var(--space-3);
+  left: var(--space-3);
+  right: var(--space-3);
   display: flex;
   align-items: center;
   gap: var(--space-2);
-}
-
-.roleBadge {
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--accent);
-  background-color: var(--surface-base);
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-default);
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-xs);
-}
-
-.deptCode {
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-wider);
-  color: var(--fg-subtle);
-}
-
-.name {
-  font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-tight);
   color: var(--fg-primary);
-  line-height: var(--line-height-snug);
 }
 
-.designation {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--fg-secondary);
+.badgeIcon {
+  color: var(--accent);
 }
 
-.department {
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.roleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.roleTag {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--accent);
+}
+
+.tenureTag {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-bold);
   color: var(--fg-muted);
 }
 
-.bio {
+.facultyName {
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  line-height: 1.65;
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.facultyDesignation {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--fg-primary);
+  margin-bottom: 2px;
+}
+
+.facultyDept {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+  margin-bottom: var(--space-4);
+}
+
+.facultyBio {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-normal);
   color: var(--fg-secondary);
-  padding-top: var(--space-2);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.academicMandate {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-4);
+}
+
+.mandateLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-muted);
+  margin-bottom: var(--space-2);
+}
+
+.mandateList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+.mandateList li {
+  position: relative;
+  padding-left: var(--space-3);
+}
+
+.mandateList li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
 }
 
 .contactRow {
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border-subtle);
   margin-top: var(--space-2);
 }
 
-.emailLink {
+.emailPill {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--fg-secondary);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.emailLink:hover {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
   color: var(--accent);
+  padding: 6px 14px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-smooth);
 }
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-@media (max-width: 900px) {
-  .facultyGrid {
+.emailPill:hover {
+  background: var(--surface-elevated);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.arrowIcon {
+  opacity: 0.6;
+}
+
+/* COORDINATOR CARD */
+.coordinatorCard {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-6);
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.coordinatorCard:hover {
+  border-color: var(--border-strong);
+}
+
+.coordPortraitColumn {
+  position: relative;
+  width: 100%;
+}
+
+.coordPortraitCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.coordInfoColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1100px) {
+  .compositionGrid {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 640px) {
+  .hodCard,
+  .coordinatorCard {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitCanvas,
+  .coordPortraitCanvas {
+    height: 220px;
+    min-height: auto;
   }
 }

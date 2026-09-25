@@ -75,6 +75,7 @@ export const domainDefinitions: DomainDefinition[] = [
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 50, y: 14 },
   },
   {
     id: 'industry_outreach_admin',
@@ -94,6 +95,7 @@ export const domainDefinitions: DomainDefinition[] = [
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 18, y: 84 },
   },
   {
     id: 'publicity',
@@ -109,10 +111,11 @@ export const domainDefinitions: DomainDefinition[] = [
     ],
     members: {
       mentors: [],
-      heads: [],
+      heads: [placeholderMembers.find((m) => m.memberId === 'IEI-GST-2025-010') || placeholderMembers[0]],
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 82, y: 64 },
   },
   {
     id: 'creative',
@@ -128,10 +131,11 @@ export const domainDefinitions: DomainDefinition[] = [
     ],
     members: {
       mentors: [],
-      heads: [],
+      heads: [placeholderMembers.find((m) => m.memberId === 'IEI-GST-2025-015') || placeholderMembers[0]],
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 26, y: 60 },
   },
   {
     id: 'design',
@@ -147,10 +151,11 @@ export const domainDefinitions: DomainDefinition[] = [
     ],
     members: {
       mentors: [],
-      heads: [],
+      heads: [placeholderMembers.find((m) => m.memberId === 'IEI-GST-2025-021') || placeholderMembers[0]],
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 78, y: 34 },
   },
   {
     id: 'media',
@@ -166,10 +171,11 @@ export const domainDefinitions: DomainDefinition[] = [
     ],
     members: {
       mentors: [],
-      heads: [],
+      heads: [placeholderMembers.find((m) => m.memberId === 'IEI-GST-2025-028') || placeholderMembers[0]],
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 22, y: 34 },
   },
   {
     id: 'editorial',
@@ -189,6 +195,7 @@ export const domainDefinitions: DomainDefinition[] = [
       coordinators: [],
       volunteers: [],
     },
+    nodeCoords: { x: 50, y: 84 },
   },
 ];
 
@@ -202,4 +209,8 @@ export function getAllDomains(): DomainDefinition[] {
 
 export function getDomainById(id: DomainId): DomainDefinition | undefined {
   return domainDefinitions.find((d) => d.id === id);
+}
+
+export function getMembersForSession(sessionId: string) {
+  return placeholderMembers.filter((m) => m.session === sessionId || (!m.session && sessionId === '2024-2025'));
 }

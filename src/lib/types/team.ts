@@ -40,6 +40,10 @@ export interface DomainDefinition {
     coordinators: Member[];
     volunteers: Member[];
   };
+  nodeCoords?: {
+    x: number; // percentage (0-100)
+    y: number; // percentage (0-100)
+  };
 }
 
 export interface CoreCouncilPlaceholder {
