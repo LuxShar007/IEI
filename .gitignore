@@ -32,3 +32,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI / agent tooling (local only — not part of the project)
+GEMINI.md
+AGENTS.md
+CLAUDE.md
+.agent/
+.agents/
+.planning/
+.claude/
+.cursor/
+.codex/
